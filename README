@@ -1,0 +1,2 @@
+Make sure to change the dir path contained within sys/system.php to match your folder structure,
+otherwise you won't be able to login.
