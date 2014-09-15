@@ -249,7 +249,7 @@ class Users extends System {
 			- User is logged in
 
 	 */
-	public function GetUserIDFromHash($cookieHash){
+	public function GetUserIDFromHash($cookieHash) {
 
 		$sql = "SELECT `userID` FROM `users_loggedin` WHERE `cookieHash` = :hash";
 		$params = array(
@@ -257,7 +257,7 @@ class Users extends System {
 		);
 
 		$result = $this->DatabaseSystem->dbQuery($sql,$params);
-		
+
 		if($result){
 			return $result[0]["userID"];	
 		}
@@ -271,7 +271,7 @@ class Users extends System {
 		Pre:
 			- the ID is a valid userID
 	 */
-	public function GetUserProfile($userID){
+	public function GetUserProfile($userID) {
 
 		$sql = "SELECT * FROM `profiles` WHERE `userID` = :userID";
 		$params = array(
@@ -289,6 +289,43 @@ class Users extends System {
 		}
 
 	} // End GetUserProfile
+
+
+	/*
+		Returns a list of user information for all currently logged in users
+
+		Pre:
+			- the users are all presumably sitting idle, completely oblivious to the fact they are logged in
+	 */
+	public function GetLoggedInUserList() {
+
+		$sql = "SELECT `userID` FROM `users_loggedin`";
+		$params = null;
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		$loggedInUsers = array();
+
+		$i = 0;
+		foreach ($result as $key => $value) {
+			$loggedInUsers[$i] = self::GetUserProfile($value["userID"]);
+			$i++;
+		}
+		
+		return $loggedInUsers;
+
+
+		/*
+		if($result){
+
+			// profile picture is nullable, so if it is, set the value to the default
+			$result[0]["profilePicture"] = ($result[0]["profilePicture"] == null) ? "default_profile.png" : $result[0]["profilePicture"];
+
+			return $result[0];		
+		}
+		*/
+
+	} // end GetLoggedInUserList
 
 } // End Class Users
 

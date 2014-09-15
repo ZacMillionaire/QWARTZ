@@ -58,12 +58,17 @@
 
 
             <article id="currently-logged"><h2>Currently Online</h2>
-                <ul><li>Chris Loranger</li>
-                    <li>Jason Chan</li>
-                    <li>Tim Cook</li>
-                    <li>Kevin Rudd</li>
-                    <li>Thomas McCarthy</li>
+                <ul>
+	            	<?php
+	            		$userList = $Users->GetLoggedInUserList();
+
+						foreach ($userList as $key => $value) {
+							echo "<li>$value[firstName] $value[lastName]</li>";
+						}
+
+	            	?>
                 </ul>
+            </article>
                             </div>
             <article><br /><a class="button">Button</a></article>
 
