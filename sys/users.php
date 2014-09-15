@@ -31,29 +31,29 @@ class Users extends System {
 		// Validation should be client side for this, but server side
 		// validation is just as important
 		if(!$username){
-			return array("error" => "No username given.");
+			return array("error" => "No username given");
 		}
 		if(!$password){
-			return array("error" => "No password given.");
+			return array("error" => "No password given");
 		}
 
 		// Again, we shouldn't reach this point, but just incase a user is
 		// trying to be clever, stop them from logging in again from
 		// the same machine
 		if(self::CheckIsLoggedIn()){
-			return array("error" => "You are already logged in.");
+			return array("error" => "You are already logged in");
 		}
 
 		if(self::UsernameExists($username)) {
 			if(self::ValidatePassword($username, $password)) {
 				if(!self::GenerateUserCookie($username)) {
-					return array("error" => "System Error: A rogue wizard has entered the system.");
+					return array("error" => "System Error: A rogue wizard has entered the system");
 				} // End if(GenerateUserCookie)
 			} else {
-				return array("error" => "Incorrect username or password.");
+				return array("error" => "Incorrect username or password");
 			} // End if(ValidatePassword)
 		} else {
-			return array("error" => "Incorrect username or password.");
+			return array("error" => "Incorrect username or password");
 		} // End if(UsernameExists)
 
 		return true;
@@ -239,6 +239,56 @@ class Users extends System {
 		} // End if(successful query)
 
 	} // End GenerateUserCookie
+
+
+	/*
+	
+		Gets the corresponding userID given the cookieHash from a cookie
+
+		Pre:
+			- User is logged in
+
+	 */
+	public function GetUserIDFromHash($cookieHash){
+
+		$sql = "SELECT `userID` FROM `users_loggedin` WHERE `cookieHash` = :hash";
+		$params = array(
+			"hash" => $cookieHash
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+		
+		if($result){
+			return $result[0]["userID"];	
+		}
+
+	} // End GetUserIDFromHash
+
+
+	/*
+		Gets the profile data given an ID
+
+		Pre:
+			- the ID is a valid userID
+	 */
+	public function GetUserProfile($userID){
+
+		$sql = "SELECT * FROM `profiles` WHERE `userID` = :userID";
+		$params = array(
+			"userID" => $userID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		if($result){
+
+			// profile picture is nullable, so if it is, set the value to the default
+			$result[0]["profilePicture"] = ($result[0]["profilePicture"] == null) ? "default_profile.png" : $result[0]["profilePicture"];
+
+			return $result[0];		
+		}
+
+	} // End GetUserProfile
 
 } // End Class Users
 

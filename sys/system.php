@@ -2,7 +2,7 @@
 
 	require_once "database.php";
 	require_once "users.php";
-
+	
 	class System {
 
 		private static $databaseDetails = array(
