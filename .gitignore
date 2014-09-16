@@ -1,4 +1,10 @@
 
+_*
+_*.*
+
+#sass fix hopefully
+!_*.sass
+!sass/_*.*
 
 redirector.php
 helper.php
