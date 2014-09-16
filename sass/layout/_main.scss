@@ -1,0 +1,127 @@
+@import 'modules/tables';
+@import 'modules/buttons';
+@import 'modules/icons';
+
+body {
+	background: $main-bg-colour url(images/bg.jpg);
+	background-attachment:fixed;
+	background-position: top center;
+}
+
+#container {
+	width: 100%;
+	max-width: 1200px;
+	position: relative;
+	box-shadow: 0 0 6px #444;
+	margin: 50px auto 0 auto;
+	background: $container-bg-colour;
+	@include clearfix();
+}
+
+article {
+	margin: 20px; // TEST VALUE ONLY
+}
+
+#content {
+	float: left;
+	padding-left: 10px;
+	max-width: 880px;
+}
+
+#top-header {
+	width: 100%;
+	height: 75px;
+	background: #e7e7e7;
+	border-bottom: 2px solid #ccc;
+
+	#profile {
+		float: right;
+		padding-right: 30px;
+		padding-top: 15px;
+		font-size: 1.5rem;
+
+		img {
+			border-radius: 6px;
+			width: 45px;
+			margin-right: 10px;
+			float: left;
+		}
+	}
+
+
+	#logo {
+		float: left;
+		background: white;
+		height: 75px;
+		width: 200px;
+	border-bottom: 2px solid #ccc;
+		border-right: 1px solid #ccc;
+		text-align: center;
+
+		img {
+			width: 80px;
+		}
+	}
+
+	#search {
+		float: left;
+		padding: 15px 0 0 30px;
+	}
+
+
+	input {
+		padding: 10px;
+		width: 400px;
+		font-size: 1.4rem;
+		font-family: 'Open Sans', Arial, sans-serif;
+	}
+}
+
+#main-nav {
+	float: left;
+	width: 200px;
+	height: 1100px;
+	background-color: $dark-blue-bg;
+
+	a {
+		color: lighten($dark-blue-bg, 30%);
+		text-transform: uppercase;
+		text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+		font-size: 1.5rem;
+		font-weight: bold;
+		display: block;
+	 	padding: 16px 30px 16px 65px;
+	 	@include transition(all 80ms ease-in-out);
+	}
+
+	a:hover {
+		color: lighten($dark-blue-bg, 60%);
+		background: darken($dark-blue-bg, 4%);
+	}
+
+	 li {
+	 	position: relative;
+	 }
+}
+
+#dashboard-2 {
+	height: 350px;
+	clear: both;
+}
+#currently-logged {
+	float: left;
+	width: 290px;
+}
+
+#currently-logged ul {
+	padding-top: 10px;
+}
+#currently-logged li {
+	display: inline-block;
+	font-size: 1.4rem;
+	color: lighten($dark-blue-bg, 45%);
+	padding: 6px 12px 6px 12px;
+	border-radius: 2px;
+	margin: 6px;
+	background-color: $dark-blue-bg;
+}
