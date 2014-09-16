@@ -1,0 +1,17 @@
+@import 'compass/css3/transition';
+@import "compass/utilities/general/clearfix";
+@import 'helpers/mixins';
+@import 'helpers/variables';
+
+// configure the style from settings
+@import 'base/reset';
+@import 'base/typography';
+
+
+// feel free to add any new files you want; if you add them this list they'll be included
+@import 'layout/main';
+@import 'layout/login';
+@import 'layout/header';
+@import 'layout/footer';
+
+
