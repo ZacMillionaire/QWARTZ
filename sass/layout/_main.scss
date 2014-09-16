@@ -8,15 +8,18 @@ body {
 	background-position: top center;
 }
 
-#container {
+#main {
 	width: 100%;
 	max-width: 1200px;
 	position: relative;
+	min-height: 1200px;
 	box-shadow: 0 0 6px #444;
 	margin: 50px auto 0 auto;
 	background: $container-bg-colour;
 	@include clearfix();
 }
+
+
 
 article {
 	margin: 20px; // TEST VALUE ONLY
@@ -80,7 +83,7 @@ article {
 #main-nav {
 	float: left;
 	width: 200px;
-	height: 1100px;
+	min-height: 1200px;
 	background-color: $dark-blue-bg;
 
 	a {
