@@ -1,4 +1,3 @@
 css_dir = "/"
 sass_dir = "sass"
-output_style = :expanded
-cache = :false
+output_style = :compressed
