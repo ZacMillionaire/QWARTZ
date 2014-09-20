@@ -42,7 +42,7 @@
 
 			$settings = array(
 				"host" => $_SERVER["HTTP_HOST"],
-				"dir" => "/INB302/QWARTZ"
+				"dir" => "/INB302/QWARTZ/"
 			);
 
 			return $settings;

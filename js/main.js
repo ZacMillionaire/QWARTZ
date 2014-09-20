@@ -1,7 +1,10 @@
-(function(){
+'use strict';
 
+(function($){
 
-	document.getElementById("login-action").addEventListener("click",ClientLogin);
+	if(document.getElementById("login-action") != null){
+		document.getElementById("login-action").addEventListener("click",ClientLogin);	
+	}
 
 	function ClientLogin(e){
 
@@ -43,11 +46,6 @@
 
 	}
 
-})();
-
-// Contents of functions.js
-;(function($) {
-  'use strict';
   var $body = $('html, body'),
       content = $('#main').smoothState({
         // Runs when a link has been activated
@@ -65,4 +63,5 @@
         }
       }).data('smoothState');
       //.data('smoothState') makes public methods available
+
 })(jQuery);

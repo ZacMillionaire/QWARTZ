@@ -1,19 +1,19 @@
-<?php
+<?php 
+	
+    $pageTitle = "Logout";
+	ob_start();
+	
+    require "inc/header.php";
 
-	require "inc/header.php";
+    if(!$userLoggedIn){
+        header("Location: index.php");
+        die();
+    }
 
-	if(!$userLoggedIn){
-		header("Location: index.php");
-		die();
-	}
+    ob_end_flush();
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Home &bull; QWARTZ</title>
-</head>
-<body>
+
 	<?php
 
 		if($userLoggedIn){
@@ -37,5 +37,8 @@
 
 	?>
 	
-</body>
-</html>
+<?php 
+
+    include "inc/footer.php";
+    
+?>
