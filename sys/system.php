@@ -2,6 +2,7 @@
 
 	require_once "database.php";
 	require_once "users.php";
+	require_once "data.php";
 	
 	class System {
 
@@ -36,6 +37,22 @@
 			$User = new Users();
 
 			return new Users();
+		}
+
+		public function GetFitnessTestSystem() {
+
+			$FitnessTest = new FitnessTests();
+
+			return $FitnessTest;
+
+		}
+
+		public function GetDataCollectionSystem() {
+
+			$DataCollection = new DataCollection();
+
+			return $DataCollection;
+
 		}
 
 		public function GetSystemSettings() {

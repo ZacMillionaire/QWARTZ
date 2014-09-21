@@ -2,7 +2,7 @@
 
 <form action="sys/exec/submit_test_results.php" method="POST">
 
-	<input type="text" name="testDate" placeholder="Testing Date" />
+	<input type="date" name="testDate" placeholder="Testing Date" required/>
 
 	<button id="add-row">
 		Add Player
@@ -22,7 +22,7 @@
 			</div>
 			<div class="test-fauxtable-tablerow">
 				<div class="test-fauxtable-tablecell" colspan="5">
-					<input style="width: 100%" type="text" id="category-input" name="categoryName[default]" placeholder="Category Name" data-category-set="default" />
+					<input style="width: 100%" type="text" id="category-input" name="categoryName[default]" placeholder="Category Name" data-category-set="default" required/>
 				</div>
 			</div>
 			<div class="test-fauxtable-tablerow">
@@ -34,7 +34,24 @@
 			</div>
 			<div class="test-fauxtable-tablerow" data-template-row>
 				<div class="test-fauxtable-tablecell">
-					<input type="text" id="player-name-entry" data-input-index="0" name="player[default][]" placeholder="Player Search" data-category-set="default"/>
+					<!-- <input type="text" id="player-name-entry" data-input-index="0" name="player[default][]" placeholder="Player Search" data-category-set="default" required/> -->
+					<select name="player[default][]" data-input-index="0"  data-category-set="default" id="player-name-entry">
+						<?php
+
+							$players = $System->GetDataCollectionSystem()->GetPlayerList();
+
+							foreach ($players as $key => $value) {
+
+								printf(
+									"<option value=\"%s\">%s</option>",
+									$value["PlayerID"],
+									$value["FirstName"]." ".$value["LastName"]
+								);
+
+							}
+
+						?>
+					</select>
 				</div>
 				<div class="test-fauxtable-tablecell">
 					<select name="exercise[default][]" data-input-index="0" id="exercise-dropdown" data-category-set="default">
@@ -47,10 +64,10 @@
 					<input type="text" name="weight[default][]" data-input-index="0" placeholder="Weight" data-category-set="default"/>
 				</div>
 				<div class="test-fauxtable-tablecell">
-					<input type="number" min="1" max="10" step="1" name="reps[default][]" data-input-index="0" id="reps-input" placeholder="reps" data-category-set="default"/>
+					<input type="number" value="1" min="1" max="10" step="1" name="reps[default][]" data-input-index="0" id="reps-input" placeholder="reps" data-category-set="default" required/>
 				</div>
 				<div class="test-fauxtable-tablecell">
-					<input type="text" name="est1rm[default][]" data-input-index="0" id="est1rm" placeholder="Estimated 1RM" data-category-set="default"/>
+					<input type="text" value="1" name="est1rm[default][]" data-input-index="0" id="est1rm" placeholder="Estimated 1RM" data-category-set="default" disabled/>
 				</div>
 			</div>
 		</div>
@@ -63,16 +80,27 @@
 
 <script type="text/javascript">
 	
-
+document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById("add-row").addEventListener("click",addTableRow);
 	document.getElementById("add-category").addEventListener("click",addTableCategory);
 
-	document.getElementById("player-name-entry").addEventListener("keyup",addPlayerName);
+	document.getElementById("player-name-entry").addEventListener("change",addPlayerName);
 	document.getElementById("reps-input").addEventListener("change",update1RM);
 
 	document.querySelectorAll("input#category-input")[0].addEventListener("keyup",categoryChange);
 
-	var typingEvent, inputIndex = 1;
+	var playerJSON;
+
+	$.get("data/player_data.php", function(data){
+
+		playerJSON = data;
+
+		console.log(playerJSON);
+
+	});
+
+	var typingEvent;
+	var inputIndex = 1;
 	
 	function updateInputNames(parentElem, oldValue, newValue){
 
@@ -111,7 +139,9 @@
 		for(var index in lookUpTable){
 			if(e.target.value === index){
 				var inputIndexID = e.target.attributes["data-input-index"].value;
-				document.querySelectorAll("input#est1rm[data-input-index='"+inputIndexID+"']")[0].value = lookUpTable[index];
+				var categoryID = e.target.attributes["data-category-set"].value;
+				var domToAffect = document.querySelectorAll("input#est1rm[data-input-index='"+inputIndexID+"'][data-category-set='"+categoryID+"']")[0];
+				domToAffect.value = lookUpTable[index];
 			}
 		}
 
@@ -122,8 +152,8 @@
 		var self = e.target;
 		var parentElem = document.querySelectorAll("div[data-category-set='"+self.attributes["data-category-set"].value+"']")[0];
 
-
-		setTimeout(function(){
+		clearTimeout(typingEvent);
+		typingEvent = setTimeout(function(){
 
 			var oldValue = parentElem.attributes["data-category-set"].value;
 			var newValue = self.value;
@@ -138,20 +168,20 @@
 
 	function addPlayerName(e){
 
-		clearTimeout(typingEvent);
-		typingEvent = setTimeout(function(){
+		//clearTimeout(typingEvent);
+		//typingEvent = setTimeout(function(){
 
 			//console.log(e.target);
 
 			var playerInputIndex = parseInt(e.target.attributes["data-input-index"].value);
 
-			var inputsToAffect = document.querySelectorAll("input#player-name-entry[data-input-index='"+playerInputIndex+"']");
+			var inputsToAffect = document.querySelectorAll("#player-name-entry[data-input-index='"+playerInputIndex+"']");
 
 			for (var i = 0; i < inputsToAffect.length; i++) {
 				inputsToAffect[i].value = e.target.value;
 			};
 
-		},250);
+		//},250);
 
 	}
 
@@ -177,7 +207,7 @@
 			// [screams internally]
 			for(var j = 0; j < appendRow.querySelectorAll("input, select").length; j++){
 				
-				console.log(appendRow.querySelectorAll("input, select")[j].name)
+				//console.log(appendRow.querySelectorAll("input, select")[j].name)
 				appendRow.querySelectorAll("input, select")[j].attributes["data-category-set"].value = tablesInUse[i].attributes["data-category-set"].value;
 				appendRow.querySelectorAll("input, select")[j].name = appendRow.querySelectorAll("input, select")[j].name.replace(re,"$1["+tablesInUse[i].attributes["data-category-set"].value+"]$3");
 				appendRow.querySelectorAll("input, select")[j].attributes["data-input-index"].value = inputIndex;
@@ -186,12 +216,13 @@
 			tablesInUse[i].appendChild(appendRow);
 		}
 
-		for (var i = 0; i < document.querySelectorAll("#player-name-entry, input#reps-input").length; i++) {
-			document.querySelectorAll("#player-name-entry")[i].addEventListener("keyup",addPlayerName);
-			document.querySelectorAll("input#reps-input")[i].addEventListener("change",update1RM);
+		inputIndex += 1;
+
+		for (var i = 0; i < document.querySelectorAll("#player-name-entry, #reps-input").length; i++) {
+			document.querySelectorAll("#player-name-entry")[i].addEventListener("change",addPlayerName);
+			document.querySelectorAll("#reps-input")[i].addEventListener("change",update1RM);
 		};
 
-		inputIndex += 1;
 
 	}
 
@@ -237,12 +268,15 @@
 
 		document.getElementById("table-container").appendChild(tableClone);
 
-		document.querySelectorAll("input#category-input[data-category-set='"+newTableIdentifier+"']")[0].addEventListener("keydown",categoryChange);
-		for (var i = 0; i < document.querySelectorAll("#player-name-entry").length; i++) {
-			document.querySelectorAll("#player-name-entry")[i].addEventListener("keyup",addPlayerName);
+		document.querySelectorAll("#category-input[data-category-set='"+newTableIdentifier+"']")[0].addEventListener("keydown",categoryChange);
+
+		for (var i = 0; i < document.querySelectorAll("#player-name-entry, #reps-input").length; i++) {
+			document.querySelectorAll("#player-name-entry")[i].addEventListener("change",addPlayerName);
+			document.querySelectorAll("#reps-input")[i].addEventListener("change",update1RM);
 		};
 		
 
 	}
 
+});
 </script>
