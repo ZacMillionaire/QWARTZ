@@ -12,7 +12,12 @@ class DataCollection extends System {
 
 	public function GetExerciseList() {
 
-		$sql = "";
+		$sql = "SELECT * FROM `exercises`";
+		$params = null;
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
 
 	} // End GetExerciseList
 

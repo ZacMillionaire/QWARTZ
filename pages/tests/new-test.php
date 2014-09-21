@@ -2,7 +2,7 @@
 
 <form action="sys/exec/submit_test_results.php" method="POST">
 
-	<input type="date" name="testDate" placeholder="Testing Date" required/>
+	<input type="date" id="date-picker" name="testDate" placeholder="Testing Date" required/>
 
 	<button id="add-row">
 		Add Player
@@ -32,20 +32,53 @@
 				<div class="test-fauxtable-header">reps</div>
 				<div class="test-fauxtable-header">Estimated 1RM</div>
 			</div>
+		<?php
+
+			$players = $System->GetDataCollectionSystem()->GetPlayerList();
+
+			$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
+
+			foreach ($players as $gkey => $gvalue) {
+
+				?>
 			<div class="test-fauxtable-tablerow" data-template-row>
 				<div class="test-fauxtable-tablecell">
 					<!-- <input type="text" id="player-name-entry" data-input-index="0" name="player[default][]" placeholder="Player Search" data-category-set="default" required/> -->
-					<select name="player[default][]" data-input-index="0"  data-category-set="default" id="player-name-entry">
+					<select name="players[default][]" data-input-index="<?php echo $gkey; ?>"  data-category-set="default" id="player-name-entry">
+						<option value=""> --- Ignore this row --- </option>
 						<?php
-
-							$players = $System->GetDataCollectionSystem()->GetPlayerList();
-
+						
 							foreach ($players as $key => $value) {
+
+								if($key == $gkey){
+									printf(
+										"<option value=\"%s\" selected=\"selected\">%s</option>",
+										$value["PlayerID"],
+										$value["FirstName"]." ".$value["LastName"]
+									);
+								} else {
+									printf(
+										"<option value=\"%s\">%s</option>",
+										$value["PlayerID"],
+										$value["FirstName"]." ".$value["LastName"]
+									);
+								}
+
+							}
+
+						?>
+					</select>
+				</div>
+				<div class="test-fauxtable-tablecell">
+					<select name="exercise[default][]" data-input-index="<?php echo $gkey; ?>" id="exercise-dropdown" data-category-set="default">
+						<?php
+						
+							foreach ($exercises as $ekey => $evalue) {
 
 								printf(
 									"<option value=\"%s\">%s</option>",
-									$value["PlayerID"],
-									$value["FirstName"]." ".$value["LastName"]
+									$evalue["ExerciseID"],
+									$evalue["ExerciseName"]
 								);
 
 							}
@@ -54,22 +87,18 @@
 					</select>
 				</div>
 				<div class="test-fauxtable-tablecell">
-					<select name="exercise[default][]" data-input-index="0" id="exercise-dropdown" data-category-set="default">
-						<option value="0">Thing 1</option>
-						<option value="1">Thing 2</option>
-						<option value="2">Thing 3</option>
-					</select>
+					<input type="text" name="weight[default][]" id="weight-input" data-input-index="<?php echo $gkey; ?>" placeholder="Weight" data-category-set="default"/>
 				</div>
 				<div class="test-fauxtable-tablecell">
-					<input type="text" name="weight[default][]" data-input-index="0" placeholder="Weight" data-category-set="default"/>
+					<input type="number" value="1" min="1" max="10" step="1" name="reps[default][]" data-input-index="<?php echo $gkey; ?>" id="reps-input" placeholder="reps" data-category-set="default" required/>
 				</div>
 				<div class="test-fauxtable-tablecell">
-					<input type="number" value="1" min="1" max="10" step="1" name="reps[default][]" data-input-index="0" id="reps-input" placeholder="reps" data-category-set="default" required/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input type="text" value="1" name="est1rm[default][]" data-input-index="0" id="est1rm" placeholder="Estimated 1RM" data-category-set="default" disabled/>
+					<input type="text" value="1" name="est1rm[default][]" data-input-index="<?php echo $gkey; ?>" id="est1rm" placeholder="Estimated 1RM" data-category-set="default"/>
 				</div>
 			</div>
+		<?php
+			}
+			?>
 		</div>
 
 	</div>
@@ -81,16 +110,11 @@
 <script type="text/javascript">
 	
 document.addEventListener("DOMContentLoaded", function(event) {
-	document.getElementById("add-row").addEventListener("click",addTableRow);
-	document.getElementById("add-category").addEventListener("click",addTableCategory);
-
-	document.getElementById("player-name-entry").addEventListener("change",addPlayerName);
-	document.getElementById("reps-input").addEventListener("change",update1RM);
-
-	document.querySelectorAll("input#category-input")[0].addEventListener("keyup",categoryChange);
 
 	var playerJSON;
 
+	$("#date-picker").datepicker();
+	
 	$.get("data/player_data.php", function(data){
 
 		playerJSON = data;
@@ -100,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 
 	var typingEvent;
-	var inputIndex = 1;
+	var inputIndex = <?php echo count($players); ?>
 	
 	function updateInputNames(parentElem, oldValue, newValue){
 
@@ -168,24 +192,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	function addPlayerName(e){
 
-		//clearTimeout(typingEvent);
-		//typingEvent = setTimeout(function(){
+		var playerInputIndex = parseInt(e.target.attributes["data-input-index"].value);
 
-			//console.log(e.target);
+		var inputsToAffect = document.querySelectorAll("#player-name-entry[data-input-index='"+playerInputIndex+"']");
 
-			var playerInputIndex = parseInt(e.target.attributes["data-input-index"].value);
-
-			var inputsToAffect = document.querySelectorAll("#player-name-entry[data-input-index='"+playerInputIndex+"']");
-
-			for (var i = 0; i < inputsToAffect.length; i++) {
-				inputsToAffect[i].value = e.target.value;
-			};
-
-		//},250);
+		for (var i = 0; i < inputsToAffect.length; i++) {
+			inputsToAffect[i].value = e.target.value;
+		};
 
 	}
 
-	function addTableRow(e){
+	function addPlayerRow(e){
 
 		// Prevents the form from submitting
 		e.preventDefault();
@@ -196,7 +213,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		// loop over all children and reset their values to null
 		for(var i = 0; i < templateRow.children.length; i++){
-			templateRow.children[i].children[0].value = null;
+			if(templateRow.children[i].children[0].attributes["id"]){
+				if(
+					templateRow.children[i].children[0].attributes["id"].value == "reps-input" ||
+					templateRow.children[i].children[0].attributes["id"].value == "est1rm"
+				  ) {
+					templateRow.children[i].children[0].value = 1;				
+				} else {
+					templateRow.children[i].children[0].value = null;
+				}			
+
+			}
 		}
 
 		// append the fresh row to all tables
@@ -256,10 +283,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		for(var i = 0; i < tableInputs.length; i++){
 
 			var inputSelf = tableInputs[i].children[0];
+			//console.log(inputSelf.attributes["id"].value == "player-name-entry");
 
-			if(!inputSelf.name.match(/(player)/)){
-				inputSelf.value = null;
+			if(inputSelf.attributes["id"]){
+
+				if(
+					inputSelf.attributes["id"].value == "reps-input" ||
+					inputSelf.attributes["id"].value == "est1rm"
+				  ) {
+					inputSelf.value = 1;				
+				} else if(inputSelf.attributes["id"].value != "player-name-entry"){
+
+					// fuck you clonenode for not being able to copy selectedIndex
+					//inputSelf.disabled = true;
+					inputSelf.value = null;
+				}			
+
 			}
+
 
 			inputSelf.attributes["data-category-set"].value = newTableIdentifier;
 			var re = /(.*?)\[(.*?)\](\[\])?/;
@@ -277,6 +318,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		
 
 	}
+
+	document.getElementById("add-row").addEventListener("click",addPlayerRow);
+	document.getElementById("add-category").addEventListener("click",addTableCategory);
+
+	for (var i = 0; i < document.querySelectorAll("#player-name-entry").length; i++) {
+		document.querySelectorAll("#player-name-entry")[i].addEventListener("change",addPlayerName);
+	};
+	for (var i = 0; i < document.querySelectorAll("#reps-input").length; i++) {
+		document.querySelectorAll("#reps-input")[i].addEventListener("change",update1RM);
+	};
+
+	document.querySelectorAll("input#category-input")[0].addEventListener("keyup",categoryChange);
 
 });
 </script>

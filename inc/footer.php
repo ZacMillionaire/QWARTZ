@@ -2,6 +2,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 
         <script src="js/jQuery.smoothState.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

@@ -65,7 +65,11 @@
                         include "pages/tests/new-test.php";
                         break;
                     case "view":
-                        include "pages/tests/previous-tests.php";
+                        if(isset($_GET["id"])){
+                            include "pages/tests/view-test.php";                           
+                        } else {
+                            include "pages/tests/previous-tests.php";                           
+                        }
                         break;
                     default:
                         include "pages/tests/overview.php";

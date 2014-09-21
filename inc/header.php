@@ -18,7 +18,8 @@
         <base href="/INB302/QWARTZ/"></base>
         <link href='http://fonts.googleapis.com/css?family=Questrial|Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://i.icomoon.io/public/temp/c475fbc8ef/UntitledProject1/style.css">
-        <link rel="stylesheet" href="/INB302/QWARTZ/style.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="jquery-ui.min.css">
 
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
