@@ -1,7 +1,7 @@
 <?php 
 	
 	ob_start();
-	$isLogin = true;
+	
     require "inc/header.php";
 
     if($userLoggedIn){
@@ -11,11 +11,7 @@
 
     function GetError($displayError){
 
-		$status = session_status();
-        if($status == PHP_SESSION_NONE){
-            //There is no active session
-            session_start();
-        }
+		session_start();
 
     	// This function basically returns the error set in the session
     	if($displayError && isset($_SESSION["error"])){
