@@ -24,7 +24,7 @@ you are viewing a test :V
         <th>Exercise</th>
         <th>Weight</th>
         <th>Reps</th>
-        <th>EST1RM</th>
+        <th>Est 1RM</th>
     </tr>
     <?php
     		foreach ($value as $skey => $svalue) {

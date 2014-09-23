@@ -36,9 +36,8 @@
         </nav>
         <div id="content">
 
-            <article>
+            <article id="page-header">
                 <h1>Tests</h1>
-            </article>
 
             <!--
 
@@ -48,11 +47,15 @@
 
             <nav id="sub-nav">
                 <ul>
-                    <li><a href="tests.php?a=new">Create New</a></li>
-                    <li><a href="tests.php?a=view">View Previous</a></li>
-                </ul>               
+                    <li <?php if (@$_GET["a"] == null) echo 'class="active"'; ?>><a href="tests.php">Overview</a></li>
+                    <li <?php if (@$_GET["a"] == "view" && !isset($_GET["id"]) ) echo 'class="active"'; ?>><a href="tests.php?a=view">Previous Tests</a></li>
+                </ul>  
+                         
             </nav>
-            
+
+        </article>
+        <article>
+                        <div id="button-area"><a href="tests.php?a=new" class="button">Add Test</a></div>  
             <?php
 
                 // I really miss angular...
@@ -78,7 +81,7 @@
                 }
 
             ?>
-        
+        </article>
         </div>
     </div>
 <?php 
