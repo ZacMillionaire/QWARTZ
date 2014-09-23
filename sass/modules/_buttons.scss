@@ -9,5 +9,24 @@
 	letter-spacing: 1px;
 	font-family: 'Questrial', Arial, sans-serif;
 	box-shadow: 0 1px 1px #444;
+	border: none;
 	text-shadow: 0 1px 0 darken($reds, 10%);
+}
+
+
+.button-small {
+	display: inline-block;
+	text-align: center;
+	width:120px;
+	height: 28px;
+	border-radius: 4px;
+	background: $reds;
+	font-size: 1.2rem;
+	border: none;
+	color: white;
+	text-transform: uppercase;
+	font-family: 'Questrial', Arial, sans-serif;
+	box-shadow: 0 1px 1px #444;
+	text-shadow: 0 1px 0 darken($reds, 10%);
+	margin: 0 5px;	
 }

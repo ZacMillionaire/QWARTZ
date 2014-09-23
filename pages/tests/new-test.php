@@ -1,30 +1,23 @@
-<h3>Create New Test</h3>
+<h2>Creating New Test</h2>
 
 <form action="sys/exec/submit_test_results.php" method="POST">
-
+	<div id="new-test-sticky">
 	<input type="date" id="date-picker" name="testDate" placeholder="Testing Date" required/>
 
-	<button id="add-row">
+	<button id="add-row" class="button-small">
 		Add Player
 	</button>
 
-	<button id="add-category">
+	<button id="add-category" class="button-small">
 		Add Category
 	</button>
-
+	</div>
 	<div id="table-container">
-
-		<div class="test-fauxtable" data-template-table data-category-set="default">
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-header">
-					New Category Name
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-tablecell" colspan="5">
+				<div class="table-title">
 					<input style="width: 100%" type="text" id="category-input" name="categoryName[default]" placeholder="Category Name" data-category-set="default" required/>
 				</div>
-			</div>
+		<div class="test-fauxtable" data-template-table data-category-set="default">
+
 			<div class="test-fauxtable-tablerow">
 				<div class="test-fauxtable-header">Player</div>
 				<div class="test-fauxtable-header">Exercise</div>
@@ -108,7 +101,7 @@
 </form>
 
 <script type="text/javascript">
-	
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
 	var playerJSON;
@@ -166,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				var categoryID = e.target.attributes["data-category-set"].value;
 				var domToAffect = document.querySelectorAll("input#est1rm[data-input-index='"+inputIndexID+"'][data-category-set='"+categoryID+"']")[0];
 				domToAffect.value = lookUpTable[index];
+				alert($(e.target).closest('#weight-input').val());
 			}
 		}
 

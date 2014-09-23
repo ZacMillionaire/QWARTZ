@@ -1,5 +1,14 @@
 'use strict';
 
+
+
+$(document).ready(function(){
+    $("#new-test-sticky").sticky({topSpacing:0});
+
+    $("#test-table").stupidtable();
+  });
+
+
 (function($){
 
 	if(document.getElementById("login-action") != null){

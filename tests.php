@@ -55,7 +55,7 @@
 
         </article>
         <article>
-                        <div id="button-area"><a href="tests.php?a=new" class="button">Add Test</a></div>  
+                        <div id="button-area"><a href="tests.php?a=new" class="button">New Test</a></div>  
             <?php
 
                 // I really miss angular...
