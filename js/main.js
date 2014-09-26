@@ -2,6 +2,10 @@
 
 (function($){
 
+	$("#new-test-sticky").sticky({topSpacing:0});
+	
+	$("#test-table").stupidtable();
+
 	if(document.getElementById("login-action") != null){
 		document.getElementById("login-action").addEventListener("click",ClientLogin);	
 	}
