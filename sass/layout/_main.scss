@@ -9,23 +9,24 @@ body {
 }
 
 #container {
-	width: 100%;
-	max-width: 1200px;
+	width: 95%;
 	position: relative;
 	box-shadow: 0 0 6px #444;
-	margin: 50px auto 0 auto;
+	margin: 2.5% auto 0 auto;
 	background: $container-bg-colour;
 	@include clearfix();
 }
 
 article {
-	margin: 20px; // TEST VALUE ONLY
+	padding: 30px; // TEST VALUE ONLY
 }
 
 #content {
 	float: left;
-	padding-left: 10px;
-	max-width: 880px;
+	width: 100%;
+	margin-left: 200px;
+	max-width: 1000px;
+	min-height: 700px;
 }
 
 #top-header {
@@ -78,9 +79,9 @@ article {
 }
 
 #main-nav {
-	float: left;
+	position: absolute;
 	width: 200px;
-	height: 1100px;
+	height: 100%;
 	background-color: $dark-blue-bg;
 
 	a {
@@ -104,6 +105,54 @@ article {
 	 }
 }
 
+
+#sub-nav {
+	li {
+		display: inline-block;
+		margin-right: 8px;
+		
+		a {
+			font-size: 1.4rem;
+			text-transform: uppercase;
+			padding: 10px 20px 10px 20px;
+			background-color: #cacdd1;
+			color: $dark-blue-bg;
+			border-radius: 4px 4px 0 0;
+			-webkit-transition: all 100ms ease-in-out;
+			-moz-transition: all 100ms ease-in-out;
+			-ms-transition: all 100ms ease-in-out;
+			-o-transition: all 100ms ease-in-out;
+			transition: all 100ms ease-in-out;
+		}
+
+	}
+
+
+	.active a, a:hover {
+		background-color: $container-bg-colour;
+	}
+
+
+
+	margin-top: 27px;
+	margin-bottom: -20px;
+}
+
+#button-area {
+		margin: 0 0 20px 0;
+		width: 100%;
+		padding: 10px;
+		border: 1px solid white;
+
+		background: #e7e7e7;
+	}
+
+
+#page-header {
+	background-color: #e7e7e7;
+	width: 999%;
+
+}
 #dashboard-2 {
 	height: 350px;
 	clear: both;

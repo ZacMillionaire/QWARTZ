@@ -2,6 +2,8 @@
 
 	require_once "database.php";
 	require_once "users.php";
+	require_once "data.php";
+	require_once "FitnessTests.php";
 	
 	class System {
 
@@ -38,11 +40,27 @@
 			return new Users();
 		}
 
+		public function GetFitnessTestSystem() {
+
+			$FitnessTest = new FitnessTests();
+
+			return $FitnessTest;
+
+		}
+
+		public function GetDataCollectionSystem() {
+
+			$DataCollection = new DataCollection();
+
+			return $DataCollection;
+
+		}
+
 		public function GetSystemSettings() {
 
 			$settings = array(
 				"host" => $_SERVER["HTTP_HOST"],
-				"dir" => "/INB302/QWARTZ"
+				"dir" => "/INB302/QWARTZ/"
 			);
 
 			return $settings;
