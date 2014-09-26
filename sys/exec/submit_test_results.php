@@ -114,8 +114,9 @@ TODO: rewrite this shit
 			$Database->dbInsert($sql,$params);
 
 		}
-
 	}
+
+	//print_r($fuck);
 
 	header("Location: ../../tests.php");
 
