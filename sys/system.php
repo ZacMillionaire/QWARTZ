@@ -3,7 +3,7 @@
 	require_once "database.php";
 	require_once "users.php";
 	require_once "data.php";
-	require_once "FitnessTests.php";
+	require_once "fitnessTests.php";
 	
 	class System {
 
