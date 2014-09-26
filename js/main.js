@@ -1,14 +1,5 @@
 'use strict';
 
-
-
-$(document).ready(function(){
-    $("#new-test-sticky").sticky({topSpacing:0});
-
-    $("#test-table").stupidtable();
-  });
-
-
 (function($){
 
 	if(document.getElementById("login-action") != null){
@@ -55,7 +46,6 @@ $(document).ready(function(){
 
 	}
 
-<<<<<<< HEAD
   var $body = $('html, body'),
       content = $('#main').smoothState({
         // Runs when a link has been activated
@@ -75,6 +65,3 @@ $(document).ready(function(){
       //.data('smoothState') makes public methods available
 
 })(jQuery);
-=======
-})();
->>>>>>> origin/master
