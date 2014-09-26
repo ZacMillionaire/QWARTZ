@@ -55,6 +55,7 @@ $(document).ready(function(){
 
 	}
 
+<<<<<<< HEAD
   var $body = $('html, body'),
       content = $('#main').smoothState({
         // Runs when a link has been activated
@@ -74,3 +75,6 @@ $(document).ready(function(){
       //.data('smoothState') makes public methods available
 
 })(jQuery);
+=======
+})();
+>>>>>>> origin/master
