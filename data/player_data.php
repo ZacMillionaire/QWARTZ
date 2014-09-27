@@ -7,7 +7,11 @@
 	$Data = $System->GetDataCollectionSystem();
 
 
-	switch($_GET['a']){
+	switch(@$_GET['a']){
+
+		case "getPlayer":
+			$players = $Data->GetPlayerDetailsByID(@$_GET["id"]);
+			break;
 
 		case "searchPlayer":
 			$players = $Data->SearchPlayerList($_GET["s"]);
