@@ -50,269 +50,7 @@ the user can use later on.
 	</div>
 
 	<div id="table-container">
-		<div class="test-fauxtable" data-template-table data-category-set="default">
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">
-					dummied player stuff
- 					<select name="players[default]" data-category-set="default" id="player-name-entry">
-						<option value=""> --- Select Player --- </option>
-						<?php
-						
-							foreach ($players as $key => $value) {
-
-								if($key == $gkey){
-									printf(
-										"<option value=\"%s\" selected=\"selected\">%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								} else {
-									printf(
-										"<option value=\"%s\">%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								}
-
-							}
-
-						?>
-					</select>
- 				</div>
-			</div>
-<!-- REPEATING AREA START -->
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">
-					<!--
-
-					when changed get last test data from `playertestinginfo` where playerID and
-					exerciseID match.
-
-					make this input disabled until the player has been selected.
-
-					if data exists, populate the Reps and 1RM fields with the corresponding data,
-					the %1RM is to indicate the percent of their 1RM that the trainer wants them to
-					do for each rep in the set (The %1RM column specifies what percent of the 1 rep
-					maximum (taken from the first page) they want that player to perform for each
-					repetition. This is specified by the user.)
-
-
-					-->
-					<select
-						style="width: 100%"
-						name="exercise[default]"
-						id="exercise-dropdown"
-						data-category-set="default"
-						required
-					>
-						<option value=""> --- Select Exercise --- </option>
-						<?php
-						
-							foreach ($exercises as $ekey => $evalue) {
-
-								printf(
-									"<option value=\"%s\">%s</option>",
-									$evalue["ExerciseID"],
-									$evalue["ExerciseName"]
-								);
-
-							}
-
-						?>
-					</select>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">
-					Rest (mins)
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-tablecell">
-					<input
-						style="width: 100%"
-						type="text"
-						id="rest-time-input"
-						name="restTime[default]"
-						placeholder="Rest (mins)"
-						data-category-set="default"
-						required
-					/>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">Row and Column Data</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<!--
-
-				[?] tooltip stuff to explain what they do
-
-				-->
-				<div class="test-fauxtable-header">Sets [?]</div>
-				<div class="test-fauxtable-header">Sessions [?]</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						name="sets[default]"
-						value="1"
-						id="sets-input"
-						placeholder="Sets"
-						data-category-set="default"
-					/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						name="sessions[default]"
-						value="1"
-						id="sessions-input"
-						placeholder="Sessions"
-						data-category-set="default"
-					/>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">Set Data</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-header">Reps</div>
-				<div class="test-fauxtable-header">%1RM</div>
-				<div class="test-fauxtable-header">1 RM</div>
-			</div>
-			<div class="test-fauxtable-tablerow" data-template-row data-input-index="0">
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="number"
-						value="1"
-						min="1"
-						max="10"
-						step="1"
-						name="reps[default][]"
-						id="reps-input"
-						placeholder="reps"
-						data-category-set="default"
-						required
-					/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						value="1"
-						name="1RMPercent[default][]"
-						id="1RMPercent-input"
-						placeholder="%1RM"
-						data-category-set="default"
-					/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						value="1"
-						name="1RM[default][]"
-						id="1RM-input"
-						placeholder="1RM"
-						data-category-set="default"
-					/>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">Session Data</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-header">Estimated</div>
-				<div class="test-fauxtable-header">Target</div>
-				<div class="test-fauxtable-header">Reps</div>
-			</div>
-			<div class="test-fauxtable-tablerow" data-template-row data-input-index="0">
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						name="sessionEstimated[default][]"
-						id="estimated-session-input"
-						placeholder="Est"
-						data-category-set="default"
-					/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						value="(inherit from highest rep range in populated data)"
-						name="sessionTarget[default][]"
-						id="target-session-input"
-						placeholder="target"
-						data-category-set="default"
-					/>
-				</div>
-				<div class="test-fauxtable-tablecell">
-					<input
-						type="text"
-						value="1"
-						name="sessionReps[default][]"
-						id="reps-session-input"
-						placeholder="reps"
-						data-category-set="default"
-					/>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">
-					<input
-						type="checkbox"
-						id="mark-superset"
-						name="superset[default][]"
-						data-input-index="0"
-						data-category-set="default"
-					/>
-					Exercise is superset [?]
-				</div>
-			</div>
-<!-- REPEATING AREA END -->
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-header">
-					Notes
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-tablecell">
-					<textarea
-						style="width:100%"
-						type="text"
-						id="notes-input"
-						name="exerciseNotes[default]"
-						data-category-set="default"
-						></textarea>
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="table-title test-fauxtable-tablecell">
-					Extras
-				</div>
-			</div>
-			<div class="test-fauxtable-tablerow">
-				<div class="test-fauxtable-tablecell">
-					<textarea
-						style="width:100%"
-						id="extra-notes"
-						name="extraNotes[default]"
-						data-category-set="default"
-						></textarea>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<button type="submit">Preview Generated Template</button>
-
-</form>
-
-<!--
-
-	!! won't really work with no easy way to repeat a group
-
-			<table>
+		<table>
 			<tr>
 				<th class="table-title" colspan="3">
  					Player
@@ -352,7 +90,10 @@ the user can use later on.
 					</select>
 				</td>
 			</tr>
-<!-- REPEATING AREA START --/>
+		</table>
+		<br/>
+		<table id="exercise-table">
+<!-- REPEATING AREA START -->
 			<tr>
 				<th class="table-title" colspan="3">
  					Exercise
@@ -374,7 +115,7 @@ the user can use later on.
 					repetition. This is specified by the user.)
 
 
-					--/>
+					-->
 					<select
 						style="width: 100%"
 						name="exercise[default]"
@@ -425,7 +166,7 @@ the user can use later on.
 
 				[?] tooltip stuff to explain what they do
 
-				--/>
+				-->
 				<th>Sets [?]</th>
 				<th colspan="2">Sessions [?]</th>
 			</tr>
@@ -546,7 +287,6 @@ the user can use later on.
 					Exercise is superset [?]
 				</th>
 			</tr>
-<!-- REPEATING AREA END --/>
 			<tr>
 				<th class="table-title" colspan="3">
 					Notes
@@ -563,6 +303,10 @@ the user can use later on.
 						></textarea>
 				</td>
 			</tr>
+<!-- REPEATING AREA END -->
+		</table>
+		<br/>
+		<table>
 			<tr>
 				<th class="table-title" colspan="3">
 					Extras
@@ -579,5 +323,8 @@ the user can use later on.
 				</td>
 			</tr>
 		</table>
+	</div>
 
--->
+	<button type="submit">Preview Generated Template</button>
+
+</form>
