@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		// });
 
 		$("select[id=player-name-selection]").each(function(){
-			$(this).on("change",unlockInputs);
+			$(this).on("change",updatePlayerData);
 		});
 		$("select[id=exercise-dropdown]").each(function(){
 			$(this).on("change",fetchPlayersRecentData);
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	}
 
-	function unlockInputs(e) {
+	function updatePlayerData(e) {
 
 		e.preventDefault();
 
@@ -112,6 +112,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			$("#preview-template-button")[0].disabled = false;
 
+			$("#table-container #exercise-table").each(function(){
+				
+				var thisCategoryID = $(this).find("#exercise-dropdown")[0].attributes["data-category-set"].value;
+				var thisExerciseID = $(this).find("#exercise-dropdown")[0].selectedIndex;
+
+				var repsInput = $("#reps-input[data-category-set=\""+thisCategoryID+"\"]")[0];
+				var input1RM = $("#oneRM-input[data-category-set=\""+thisCategoryID+"\"]")[0];
+				var sessionTarget = $("#target-session-input[data-category-set=\""+thisCategoryID+"\"]")[0];
+
+				$.get(
+					"data/player_data.php",
+					{
+						"a" : "playerLatestTestData",
+						"exerciseID" : thisExerciseID,
+						"playerID" : playerID
+					},
+					function(data){
+
+						if(data[0]){
+							repsInput.value = data[0].Reps;
+							sessionTarget.value = data[0].Reps;
+							input1RM.value = data[0].EST1RM;		
+						} else {
+							repsInput.value = null;
+							sessionTarget.value = null;
+							input1RM.value = null;		
+						}
+
+					}
+				);
+				
+			});
+
 		} else {
 
 			$("table").each(function(){
@@ -129,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			$("#preview-template-button")[0].disabled = true;
 
 		}
+
 
 
 	}

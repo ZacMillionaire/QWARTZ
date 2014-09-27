@@ -60,7 +60,7 @@ the user can use later on.
 				<td colspan="3">
  					<select
 	 					style="width: 100%"
-	 					name="players"
+	 					name="playerID"
 	 					id="player-name-selection"
 	 					required
 	 				>
@@ -300,6 +300,11 @@ the user can use later on.
 						data-category-set="default"
 						disabled
 						></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					need to add padding around these exercise tables, they're too hard to distinguish apart currently
 				</td>
 			</tr>
 		</table>
