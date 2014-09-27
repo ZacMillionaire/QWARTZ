@@ -1,5 +1,11 @@
 <?php
 
+/*
+
+	TODO : tidy this shit up
+
+ */
+
 // print_r($_POST);
 
 include "../system.php";
@@ -38,16 +44,51 @@ foreach ($_POST as $key => $value) {
 
 //print_r($templateArray);
 
+// Hey, who remembers that data structure I proposed for strength data?
+// This is how it was going to work originally
+$templateDataString = json_encode($_POST);
+
+$sql = "INSERT INTO `fitnesstemplates`
+		(
+			`dateAdded`,
+			`playerID`,
+			`title`,
+			`templateDataString`
+		)
+		VALUES
+		(
+			NOW(),
+			:playerID,
+			:title,
+			:templateDataString
+		);";
+$params = array(
+	"playerID" => $templateArray["playerID"],
+	"title" => null,
+	"templateDataString" => $templateDataString
+);
+
+$Database->dbInsert($sql,$params);
+
+
+header("Location: ../../templates.php?a=saved");
+
+die();
+
+// 'un'magic numbers for column counts
+$numberOfColumnsForExercise = 7;
+$numberOfColumnsInSet = 3;
+
 // This is fucking terrifying
 
 ?>
 
-<table>
+<table border="1">
 	<tr class="header-columns">
 		<th>Player name</th>
 		<th colspan="6"><?php echo $playerData["FirstName"]." ".$playerData["LastName"]; ?></th>
 	<?php
-		for($i = 0; $i < $templateArray["sessions"] + 1; $i++){
+		for($i = 0; $i < $templateArray["sessions"]; $i++){
 	?>
 		<th colspan="3"><?php echo "S".($i+1); ?></th>
 	<?php
@@ -63,7 +104,7 @@ foreach ($_POST as $key => $value) {
 		<th>% 1RM</th>
 		<th>1 RM</th>
 	<?php
-		for($i = 0; $i < $templateArray["sessions"] + 1; $i++){
+		for($i = 0; $i < $templateArray["sessions"]; $i++){
 	?>
 		<th>Est</th>
 		<th>Target</th>
@@ -116,7 +157,7 @@ foreach ($_POST as $key => $value) {
 		<td><?php echo $value["oneRM"]; ?></td>
 	<?php
 
-		for($k = 0; $k < $templateArray["sessions"] + 1; $k++){
+		for($k = 0; $k < $templateArray["sessions"]; $k++){
 
 	?>
 		<td><?php echo ($value["sessionEstimated"] == null) ? "&nbsp;" : $value["sessionEstimated"]; ?></td>
@@ -141,12 +182,18 @@ foreach ($_POST as $key => $value) {
 		} // end if(is_array($value))
 	} // end foreach($templateArray value)
 ?>
+	<tr>
+		<th colspan="<?php echo $numberOfColumnsForExercise + ($numberOfColumnsInSet * $templateArray["sessions"]); ?>">Extra Notes</th>
+	</tr>
+	<tr>
+		<td colspan="<?php echo $numberOfColumnsForExercise + ($numberOfColumnsInSet * $templateArray["sessions"]); ?>"><?php echo $templateArray["extraNotes"]; ?></td>
+	</tr>
 </table>
 
 <?php
-/*
-print_r($templateArray);
 
-print_r($_POST);
-*/
+// print_r($templateArray);
+
+// print_r($_POST);
+
 ?>

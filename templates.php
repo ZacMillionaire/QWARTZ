@@ -94,7 +94,7 @@
                         break;
 
                     case "print":
-                        echo "NYI: I am going to do naughty things here";
+                        include "pages/templates/view-template.php";                           
                         break;
 
                     default:

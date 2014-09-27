@@ -30,55 +30,34 @@ if(isset($error)){
 <?php
 }
 */
+
+	$savedTemplates = $System->GetFitnessTemplateSystem()->GetSavedTemplatesList();
+
 ?>
 
 saved template list
 <div class="template-list-container">
 
+<?php
+    foreach($savedTemplates as $key => $value) {
+?>
 	<div class="saved-template-item">
 
 		<div class="saved-template-details">
-			<div class="template-name">Template Name</div>
-			<div class="template-date">Template Date</div>
+			<div class="template-name">Template Name (COMING SOON!)</div>
+			<div class="template-date"><?php echo $value["dateAdded"]; ?></div>
 		</div>
 
 		<div class="saved-template-actions">
-			<a href="templates.php?a=print">Print this template</a>
-			<a href="templates.php?a=edit">Edit this template (no ID)</a>
-			<a href="templates.php?a=edit&amp;id=abcd1234">Edit this template (with ID)</a>
-			<a href="templates.php?a=edit&amp;id=abcd1234xx">Edit this template (bad ID)</a>
+			<ul>
+				<li><a href="templates.php?a=print&amp;id=<?php echo $value["templateID"]; ?>">(partial NYI) Print this template</a></li>
+				<li><a href="templates.php?a=edit&amp;id=<?php echo $value["templateID"]; ?>">(partial NYI) Edit this template (with ID)</a></li>
+			</ul>
 		</div>
 
 	</div>
-
-	<div class="saved-template-item">
-
-		<div class="saved-template-details">
-			<div class="template-name">Template Name</div>
-			<div class="template-date">Template Date</div>
-		</div>
-
-		<div class="saved-template-actions">
-			<a href="templates.php?a=print">Print this template</a>
-			<a href="templates.php?a=edit">Edit this template (no ID)</a>
-			<a href="templates.php?a=edit&amp;id=abcd1234">Edit this template (with ID)</a>
-		</div>
-
-	</div>
-
-	<div class="saved-template-item">
-
-		<div class="saved-template-details">
-			<div class="template-name">Template Name</div>
-			<div class="template-date">Template Date</div>
-		</div>
-
-		<div class="saved-template-actions">
-			<a href="templates.php?a=print">Print this template</a>
-			<a href="templates.php?a=edit">Edit this template (no ID)</a>
-			<a href="templates.php?a=edit&amp;id=abcd1234">Edit this template (with ID)</a>
-		</div>
-
-	</div>
+<?php
+	}
+?>
 
 </div>
