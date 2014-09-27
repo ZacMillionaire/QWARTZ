@@ -60,9 +60,8 @@ the user can use later on.
 				<td colspan="3">
  					<select
 	 					style="width: 100%"
-	 					name="players[default]"
-	 					data-category-set="default"
-	 					id="player-name-entry"
+	 					name="players"
+	 					id="player-name-selection"
 	 					required
 	 				>
 						<option value=""> --- Select Player --- </option>
@@ -70,19 +69,11 @@ the user can use later on.
 						
 							foreach ($players as $key => $value) {
 
-								if($key == $gkey){
-									printf(
-										"<option value=\"%s\" selected=\"selected\">%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								} else {
-									printf(
-										"<option value=\"%s\">%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								}
+								printf(
+									"<option value=\"%s\">%s</option>",
+									$value["PlayerID"],
+									$value["FirstName"]." ".$value["LastName"]
+								);
 
 							}
 
@@ -90,10 +81,25 @@ the user can use later on.
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<th class="table-title" colspan="3">Sessions [?]</th>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input
+						type="text"
+						name="sessions"
+						value="1"
+						id="sessions-input"
+						placeholder="Sessions"
+						disabled
+					/>
+				</td>
+			</tr>
 		</table>
 		<br/>
-		<table id="exercise-table">
 <!-- REPEATING AREA START -->
+		<table id="exercise-table">
 			<tr>
 				<th class="table-title" colspan="3">
  					Exercise
@@ -122,6 +128,7 @@ the user can use later on.
 						id="exercise-dropdown"
 						data-category-set="default"
 						required
+						disabled
 					>
 						<option value=""> --- Select Exercise --- </option>
 						<?php
@@ -141,6 +148,19 @@ the user can use later on.
 				</td>
 			</tr>
 			<tr>
+				<th colspan="3">
+					<input
+						type="checkbox"
+						id="mark-superset"
+						name="superset[default]"
+						data-input-index="0"
+						data-category-set="default"
+						disabled
+					/>
+					Exercise is superset [?] (this could look better)
+				</th>
+			</tr>
+			<tr>
 				<th class="table-title" colspan="3">
 					Rest (mins)
 				</th>
@@ -155,11 +175,9 @@ the user can use later on.
 						placeholder="Rest (mins)"
 						data-category-set="default"
 						required
+						disabled
 					/>
 				</td>
-			</tr>
-			<tr>
-				<th class="table-title" colspan="3">Row and Column Data</th>
 			</tr>
 			<tr>
 				<!--
@@ -167,11 +185,10 @@ the user can use later on.
 				[?] tooltip stuff to explain what they do
 
 				-->
-				<th>Sets [?]</th>
-				<th colspan="2">Sessions [?]</th>
+				<th class="table-title" colspan="3">Sets [?]</th>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="3">
 					<input
 						type="text"
 						name="sets[default]"
@@ -179,16 +196,7 @@ the user can use later on.
 						id="sets-input"
 						placeholder="Sets"
 						data-category-set="default"
-					/>
-				</td>
-				<td colspan="2">
-					<input
-						type="text"
-						name="sessions[default]"
-						value="1"
-						id="sessions-input"
-						placeholder="Sessions"
-						data-category-set="default"
+						disabled
 					/>
 				</td>
 			</tr>
@@ -197,42 +205,42 @@ the user can use later on.
 			</tr>
 			<tr>
 				<th>Reps</th>
-				<th>%1RM</th>
 				<th>1 RM</th>
+				<th>%1RM</th>
 			</tr>
-			<tr data-template-row data-input-index="0">
+			<tr>
 				<td>
 					<input
 						type="number"
-						value="1"
 						min="1"
 						max="10"
 						step="1"
-						name="reps[default][]"
+						name="reps[default]"
 						id="reps-input"
 						placeholder="reps"
 						data-category-set="default"
 						required
+						disabled
 					/>
 				</td>
 				<td>
 					<input
 						type="text"
-						value="1"
-						name="1RMPercent[default][]"
-						id="1RMPercent-input"
-						placeholder="%1RM"
-						data-category-set="default"
-					/>
-				</td>
-				<td>
-					<input
-						type="text"
-						value="1"
-						name="1RM[default][]"
-						id="1RM-input"
+						name="oneRM[default]"
+						id="oneRM-input"
 						placeholder="1RM"
 						data-category-set="default"
+						disabled
+					/>
+				</td>
+				<td>
+					<input
+						type="text"
+						name="oneRMPercent[default]"
+						id="oneRMPercent-input"
+						placeholder="%1RM"
+						data-category-set="default"
+						disabled
 					/>
 				</td>
 			</tr>
@@ -244,48 +252,38 @@ the user can use later on.
 				<th>Target</th>
 				<th>Reps</th>
 			</tr>
-			<tr data-template-row data-input-index="0">
+			<tr>
 				<td>
 					<input
 						type="text"
-						name="sessionEstimated[default][]"
+						name="sessionEstimated[default]"
 						id="estimated-session-input"
 						placeholder="Est"
 						data-category-set="default"
+						disabled
 					/>
 				</td>
 				<td>
 					<input
 						type="text"
-						value="(inherit from highest rep range in populated data)"
-						name="sessionTarget[default][]"
+						value="Target"
+						name="sessionTarget[default]"
 						id="target-session-input"
 						placeholder="target"
 						data-category-set="default"
+						disabled
 					/>
 				</td>
 				<td>
 					<input
 						type="text"
-						value="1"
-						name="sessionReps[default][]"
+						name="sessionReps[default]"
 						id="reps-session-input"
-						placeholder="reps"
+						placeholder="Reps"
 						data-category-set="default"
+						disabled
 					/>
 				</td>
-			</tr>
-			<tr>
-				<th class="table-title" colspan="3">
-					<input
-						type="checkbox"
-						id="mark-superset"
-						name="superset[default][]"
-						data-input-index="0"
-						data-category-set="default"
-					/>
-					Exercise is superset [?]
-				</th>
 			</tr>
 			<tr>
 				<th class="table-title" colspan="3">
@@ -300,11 +298,12 @@ the user can use later on.
 						id="notes-input"
 						name="exerciseNotes[default]"
 						data-category-set="default"
+						disabled
 						></textarea>
 				</td>
 			</tr>
-<!-- REPEATING AREA END -->
 		</table>
+<!-- REPEATING AREA END -->
 		<br/>
 		<table>
 			<tr>
@@ -317,14 +316,16 @@ the user can use later on.
 					<textarea
 						style="width:100%"
 						id="extra-notes"
-						name="extraNotes[default]"
-						data-category-set="default"
+						name="extraNotes"
+						disabled
 						></textarea>
 				</td>
 			</tr>
 		</table>
 	</div>
 
-	<button type="submit">Preview Generated Template</button>
+	<button id="preview-template-button" type="submit" disabled>Preview Generated Template</button>
 
 </form>
+
+<script src="js/fitnessTemplates.js"></script>

@@ -13,6 +13,10 @@
 			$players = $Data->SearchPlayerList($_GET["s"]);
 			break;
 
+		case "playerLatestTestData":
+			$players = $Data->GetRecentPlayerTestData($_GET['exerciseID'],$_GET['playerID']);
+			break;
+
 		default:
 			$players = $Data->GetPlayerList();
 			break;

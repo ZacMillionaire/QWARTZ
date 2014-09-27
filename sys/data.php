@@ -52,6 +52,20 @@ class DataCollection extends System {
 
 	}
 
+	public function GetRecentPlayerTestData($exerciseID, $playerID) {
+
+		$sql = "SELECT * FROM `playertestinginfo` WHERE `PlayerID` = :playerID AND `ExerciseID` = :exerciseID;";
+		$params = array(
+			"playerID" => $playerID,
+			"exerciseID" => $exerciseID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+		
+		return $result;
+
+	}
+
 }
 
 ?>
