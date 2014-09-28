@@ -1,51 +1,26 @@
 <?php
 
-/*
-
-	TODO : tidy this shit up
-
- */
-
 $Database = $System->GetDatabaseSystem();
 $Data = $System->GetDataCollectionSystem();
+$FitnessTemplateSystem = $System->GetFitnessTemplateSystem();
 
-$baseTemplateData = $System->GetFitnessTemplateSystem()->GetSavedTemplatesByID($_GET['id']);
-
-$baseTemplateData = json_decode($baseTemplateData["templateDataString"],true);
+$baseTemplateData = $FitnessTemplateSystem->GetSavedTemplatesByID($_GET['id']);
 
 $playerData = $Data->GetPlayerDetailsByID($baseTemplateData["playerID"]);
 $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
-$templateArray = array();
-
-$templateArray["playerID"] = $baseTemplateData["playerID"];
-$templateArray["sessions"] = $baseTemplateData["sessions"];
-$templateArray["extraNotes"] = $baseTemplateData["extraNotes"];
-
-foreach ($baseTemplateData as $key => $value) {
-
-	if(is_array($value)){
-		// echo "[$key]";
-		// echo "\n";
-		foreach ($value as $skey => $svalue) {
-			// echo $skey;	
-			// echo " > ";
-			// echo $svalue;	
-			// echo "\n";
-			$templateArray[$skey][$key] = $svalue;
-		}
-		// echo "\n";
-	}
-}
+$templateArray = $FitnessTemplateSystem->DecodeTemplateDataString($baseTemplateData["templateDataString"]);
 
 $numberOfColumnsForExercise = 7;
 $numberOfColumnsInSet = 3;
 
-// This is fucking terrifying
 
+echo $FitnessTemplateSystem->GenerateTableFromData($templateArray,$playerData,$exercises);
+
+/*
 ?>
 
-<table border="1">
+<table>
 	<tr class="header-columns">
 		<th>Player name</th>
 		<th colspan="6"><?php echo $playerData["FirstName"]." ".$playerData["LastName"]; ?></th>
@@ -59,7 +34,7 @@ $numberOfColumnsInSet = 3;
 	</tr>
 	<tr class="sub-columns">
 		<th>Exercise</th>
-		<th >Notes</th>
+		<th>Notes</th>
 		<th>Rest (mins)</th>
 		<th>Sets</th>
 		<th>Reps</th>
@@ -78,7 +53,7 @@ $numberOfColumnsInSet = 3;
 <?php
 	
 	// prepare for superset detection
-	$superSetClass = false;
+	$supressNextCell = false;
 
 	foreach ($templateArray as $key => $value) {
 		if(is_array($value)) {
@@ -93,25 +68,33 @@ $numberOfColumnsInSet = 3;
 			// and superSetClass has not yet been altered, enable the superset class
 			// this will persist as set until the end of the loop where there is a post check to see
 			// if superset is -not- set, and $superSetClass -is- true
-			if(isset($value["superset"]) && !$superSetClass) {
-				$superSetClass = "superSet";
+			if(isset($value["superset"])) {
+				$supressNextCell = true;
 			}
 
 			for($j = 0; $j < $value["sets"]; $j++){
 
 ?>	
-	<tr class="exercise-row <?php echo $superSetClass; ?>">
+	<tr class="exercise-row">
 		<?php
-			// rowspan=val won't work here due to the way the table is generated.
-			// See if you can't bluff with some styling with border-collapse trickery,
-			// I believe in you Tom!
-			if($j == 0) { 
+		if($j == 0) { 
 		?>
 		<td rowspan="<?php echo $value["sets"]; ?>"><?php echo $exerciseName; ?></td>
 		<td rowspan="<?php echo $value["sets"]; ?>"><?php echo $value["exerciseNotes"]; ?></td>
+		<?php 
+			if(!$supressNextCell){
+		?>
 		<td rowspan="<?php echo $value["sets"]; ?>"><?php echo $value["restTime"]; ?></td>
 		<?php
-			}
+			} else {
+				if(isset($value["superset"])){
+		?>
+		<td rowspan="<?php echo $value["sets"]*2; ?>"><?php echo $value["restTime"]; ?></td>
+		<?php
+				$supressNextCell = true;
+				} // end if($value[superset])
+			} // end if(!$supressNextCell)
+		} // end if($j == 0)
 		?>
 		<td><?php echo $j+1; ?></td>
 		<td><?php echo $value["reps"]; ?></td>
@@ -137,8 +120,8 @@ $numberOfColumnsInSet = 3;
 
 			// post check to see if superset is -not- set, and $superSetClass -is- true
 			// unsets the class for the next loop if so. or not so. I'm confused.
-			if(!isset($value["superset"]) && $superSetClass) {
-				$superSetClass = false;
+			if(!isset($value["superset"]) && $supressNextCell) {
+				$supressNextCell = false;
 			}
 
 		} // end if(is_array($value))
@@ -153,7 +136,7 @@ $numberOfColumnsInSet = 3;
 </table>
 
 <?php
-
+*/
 // print_r($templateArray);
 
 // print_r($_POST);
