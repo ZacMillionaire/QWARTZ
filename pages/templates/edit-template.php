@@ -17,17 +17,37 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 ?>
 
 <form action="sys/exec/update-template.php" method="POST">
-	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateID" />
+	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateUID" />
 	<div id="new-test-sticky">
 
 		<button id="add-exercise" class="button-small">
 			Add Exercise
 		</button>
 
+		<button id="submit-template-button" type="submit">
+			Update Template
+		</button>
+
 	</div>
 
 	<div id="table-container">
 		<table>
+			<tr>
+				<th class="table-title" colspan="3">Template Title</th>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input
+						type="text"
+						name="templateName"
+						id="template-title-input"
+						placeholder="Template Name"
+						value="<?php echo $templateDataString["templateName"]; ?>"
+	 					style="width: 100%"
+						required
+					/>
+				</td>
+			</tr>
 			<tr>
 				<th class="table-title" colspan="3">
  					Player
@@ -338,9 +358,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			</tr>
 		</table>
 	</div>
-
-	<button id="preview-template-button" type="submit">Preview Generated Template</button>
-
 </form>
 
 <script src="js/fitnessTemplates.js"></script>

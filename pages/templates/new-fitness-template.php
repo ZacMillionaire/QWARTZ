@@ -38,9 +38,9 @@ the user can use later on.
 
 	$players = $System->GetDataCollectionSystem()->GetPlayerList();
 	$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
-			
+
 ?>
-<form action="sys/exec/preview-new-template.php" method="POST">
+<form action="sys/exec/create-template.php" method="POST">
 
 	<div id="new-test-sticky">
 
@@ -48,10 +48,29 @@ the user can use later on.
 			Add Exercise
 		</button>
 
+		<button id="submit-template-button" type="submit" disabled>
+			Create Template
+		</button>
+
 	</div>
 
 	<div id="table-container">
 		<table>
+			<tr>
+				<th class="table-title" colspan="3">Template Title</th>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input
+						type="text"
+						name="templateName"
+						id="template-title-input"
+						placeholder="Template Name"
+	 					style="width: 100%"
+						required
+					/>
+				</td>
+			</tr>
 			<tr>
 				<th class="table-title" colspan="3">
  					Player
@@ -329,9 +348,6 @@ the user can use later on.
 			</tr>
 		</table>
 	</div>
-
-	<button id="preview-template-button" type="submit" disabled>Preview Generated Template</button>
-
 </form>
 
 <script src="js/fitnessTemplates.js"></script>

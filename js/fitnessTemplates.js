@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			});
 
-			$("#preview-template-button")[0].disabled = false;
+			$("#submit-template-button")[0].disabled = false;
 
 			$("#table-container #exercise-table").each(function(){
 				
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			});
 
-			$("#preview-template-button")[0].disabled = true;
+			$("#submit-template-button")[0].disabled = true;
 
 		}
 

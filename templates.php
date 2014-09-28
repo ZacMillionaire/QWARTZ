@@ -56,7 +56,7 @@
         </article>
         <article>
             
-            <?php if(@$_GET["a"] != "new") { ?>
+            <?php if(@$_GET["a"] == "saved" || !isset($_GET["a"])) { ?>
             <div id="button-area">
                 <a href="templates.php?a=new" class="button">New Template</a>
             </div>
@@ -75,11 +75,7 @@
                         break;
 
                     case "saved":
-                        if(isset($_GET["id"])){
-                            include "pages/templates/view-template.php";                           
-                        } else {
-                            include "pages/templates/saved-templates.php";                           
-                        }
+                        include "pages/templates/saved-templates.php";
                         break;
 
                     case "edit":
@@ -93,8 +89,12 @@
                         }
                         break;
 
-                    case "print":
+                    case "view":
                         include "pages/templates/view-template.php";                           
+                        break;
+
+                    case "print":
+                        include "pages/templates/print-template.php";                           
                         break;
 
                     default:

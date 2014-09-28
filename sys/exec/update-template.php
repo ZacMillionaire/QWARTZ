@@ -13,9 +13,9 @@ $System = new System();
 $Database = $System->GetDatabaseSystem();
 $Data = $System->GetDataCollectionSystem();
 
-$templateID = $_POST["templateID"];
+$templateUID = $_POST["templateUID"];
 
-unset($_POST["templateID"]);
+unset($_POST["templateUID"]);
 
 $templateDataString = json_encode($_POST);
 
@@ -23,17 +23,17 @@ $sql = "UPDATE `fitnesstemplates` SET
 		`playerID`= :playerID,
 		`title`= :title,
 		`templateDataString`= :templateDataString
-		WHERE `templateID` = :templateID;";
+		WHERE `templateUID` = :templateUID;";
 
 $params = array(
 	"playerID" => $_POST["playerID"],
-	"title" => null,
+	"title" => $_POST["templateName"],
 	"templateDataString" => $templateDataString,
-	"templateID" => $templateID
+	"templateUID" => $templateUID
 );
 
 $Database->dbInsert($sql,$params);
 
-header("Location: ../../templates.php?a=saved");
+header("Location: ../../templates.php?a=view&id=".$templateUID);
 
 ?>

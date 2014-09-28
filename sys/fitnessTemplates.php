@@ -25,13 +25,13 @@ class FitnessTemplates extends System {
 	} // End GetSavedTemplatesList
 
 
-	public function GetSavedTemplatesByID($templateID){
+	public function GetSavedTemplatesByID($templateUID){
 
 		$sql = "SELECT *
 				FROM `fitnesstemplates`
-				WHERE `templateID` = :templateID;";
+				WHERE `templateUID` = :templateUID;";
 		$params = array(
-			"templateID"=>$templateID
+			"templateUID"=>$templateUID
 		);
 
 		$result = $this->DatabaseSystem->dbQuery($sql,$params);
@@ -51,7 +51,7 @@ class FitnessTemplates extends System {
 		$templateArray["playerID"] = $decodedTemplateData["playerID"];
 		$templateArray["sessions"] = $decodedTemplateData["sessions"];
 		$templateArray["extraNotes"] = $decodedTemplateData["extraNotes"];
-
+		$templateArray["templateName"] = $decodedTemplateData["templateName"];
 
 		foreach ($decodedTemplateData as $key => $value) {
 
