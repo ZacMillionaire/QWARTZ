@@ -3,7 +3,8 @@
 	require_once "database.php";
 	require_once "users.php";
 	require_once "data.php";
-	require_once "FitnessTests.php";
+	require_once "fitnessTests.php";
+	require_once "fitnessTemplates.php";
 	
 	class System {
 
@@ -45,6 +46,13 @@
 			$FitnessTest = new FitnessTests();
 
 			return $FitnessTest;
+
+		}
+		public function GetFitnessTemplateSystem() {
+
+			$FitnessTemplates = new FitnessTemplates();
+
+			return $FitnessTemplates;
 
 		}
 

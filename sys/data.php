@@ -52,6 +52,37 @@ class DataCollection extends System {
 
 	}
 
+	public function GetPlayerDetailsByID($playerID) {
+
+		if(trim($playerID) == ""){
+			return false;
+		}
+
+		$sql = "SELECT * FROM `playerdetails` WHERE `PlayerID` = :playerID";
+		$params = array(
+			"playerID" => $playerID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result[0];
+
+	}
+
+	public function GetRecentPlayerTestData($exerciseID, $playerID) {
+
+		$sql = "SELECT * FROM `playertestinginfo` WHERE `PlayerID` = :playerID AND `ExerciseID` = :exerciseID;";
+		$params = array(
+			"playerID" => $playerID,
+			"exerciseID" => $exerciseID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+
+	}
+
 }
 
 ?>

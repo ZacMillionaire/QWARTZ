@@ -1,7 +1,7 @@
 <?php
     
 
-    $pageTitle = "Tests - Overview";
+    $pageTitle = "Fitness Templates - Overview";
 
 	ob_start();
 
@@ -37,7 +37,7 @@
         <div id="content">
 
             <article id="page-header">
-                <h1>Tests</h1>
+                <h1>Fitness Templates</h1>
 
             <!--
 
@@ -47,8 +47,8 @@
 
             <nav id="sub-nav">
                 <ul>
-                    <li <?php if (@$_GET["a"] == null) echo 'class="active"'; ?>><a href="tests.php">Overview</a></li>
-                    <li <?php if (@$_GET["a"] == "view" && !isset($_GET["id"]) ) echo 'class="active"'; ?>><a href="tests.php?a=view">Previous Tests</a></li>
+                    <li <?php if (@$_GET["a"] == null) echo 'class="active"'; ?>><a href="templates.php">Overview</a></li>
+                    <li <?php if (@$_GET["a"] == "view" && !isset($_GET["id"]) ) echo 'class="active"'; ?>><a href="templates.php?a=saved">Saved Templates</a></li>
                 </ul>  
                          
             </nav>
@@ -56,9 +56,9 @@
         </article>
         <article>
             
-            <?php if(@$_GET["a"] != "new") { ?>
+            <?php if(@$_GET["a"] == "saved" || !isset($_GET["a"])) { ?>
             <div id="button-area">
-                <a href="tests.php?a=new" class="button">New Test</a>
+                <a href="templates.php?a=new" class="button">New Template</a>
             </div>
             <?php } ?>
 
@@ -71,17 +71,34 @@
                 switch(@$_GET["a"]){
 
                     case "new":
-                        include "pages/tests/new-test.php";
+                        include "pages/templates/new-fitness-template.php";
                         break;
-                    case "view":
+
+                    case "saved":
+                        include "pages/templates/saved-templates.php";
+                        break;
+
+                    case "edit":
+
+                        // Take them to edit the template if given an ID
+                        // otherwise take them to the saved templates list
                         if(isset($_GET["id"])){
-                            include "pages/tests/view-test.php";                           
+                            include "pages/templates/edit-template.php";
                         } else {
-                            include "pages/tests/previous-tests.php";                           
+                            include "pages/templates/saved-templates.php";                           
                         }
                         break;
+
+                    case "view":
+                        include "pages/templates/view-template.php";                           
+                        break;
+
+                    case "print":
+                        include "pages/templates/print-template.php";                           
+                        break;
+
                     default:
-                        include "pages/tests/overview.php";
+                        include "pages/templates/overview.php";
                         break;
                         
                 }
