@@ -35,9 +35,10 @@ the user can use later on.
 
 -->
 <?php
-			$players = $System->GetDataCollectionSystem()->GetPlayerList();
 
-			$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
+	$players = $System->GetDataCollectionSystem()->GetPlayerList();
+	$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
+			
 ?>
 <form action="sys/exec/preview-new-template.php" method="POST">
 

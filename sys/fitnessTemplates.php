@@ -52,6 +52,7 @@ class FitnessTemplates extends System {
 		$templateArray["sessions"] = $decodedTemplateData["sessions"];
 		$templateArray["extraNotes"] = $decodedTemplateData["extraNotes"];
 
+
 		foreach ($decodedTemplateData as $key => $value) {
 
 			if(is_array($value)){
@@ -63,8 +64,40 @@ class FitnessTemplates extends System {
 					// echo $svalue;	
 					// echo "\n";
 					$templateArray[$skey][$key] = $svalue;
+					$templateArray[$skey]["superSetSize"] = 0;
 				}
 				// echo "\n";
+			}
+		}
+
+		// pre-processing for superset detection
+		$superSetFlag = false;
+		$firstSuperSetKey = null;
+
+		foreach ($templateArray as $key => $value) {
+			if(is_array($value)){
+
+				// if this exercise has a superset value, and the flag hasn't been set,
+				// flip the flag, then store the first key of the superset
+				if(isset($value["superset"]) && !$superSetFlag){
+					$superSetFlag = true;
+					$firstSuperSetKey = $key;
+				} 
+
+				// if the current exercise has the flag set, get it's set count, and add it to the superSetSize
+				// value of the first exercise of the set
+				if(isset($value["superset"])){
+					$templateArray[$firstSuperSetKey]["superSetSize"] += $templateArray[$key]["sets"];
+				} elseif(!isset($value["superset"]) && $superSetFlag) {
+
+					// if the current exercise isn't part of a superset, but the flag has been set,
+					// toggle and set the key to null for the next pass
+					$templateArray[$firstSuperSetKey]["superSetSize"] += $templateArray[$key]["sets"];
+					
+					$superSetFlag = false;
+					$firstSuperSetKey = null;
+				}
+
 			}
 		}
 
@@ -115,10 +148,36 @@ class FitnessTemplates extends System {
 		/*
 		Table body start
 		*/
-		$tableBody = "";
+		$tableBody = self::GenerateTableBody($templateDataString,$playerData,$exerciseData);
+		/*
+		Table body end
+		*/
+
+		/*
+		Table footer start
+		*/
+		$tableFooter = "<tr>";
+		$tableFooter .= "<th colspan=\"".$fullWidthColSpan."\">Extra Notes</th>";
+		$tableFooter .= "</tr>";
+		$tableFooter .= "<tr>";
+		$tableFooter .= "<td colspan=\"".$fullWidthColSpan."\">".$templateDataString["extraNotes"]."</td>";
+		$tableFooter .= "</tr>";
+		$tableFooter .= "</table>";
+		/*
+		Table footer end
+		*/
+
+		$outputTable = $tableHeader.$tableBody.$tableFooter;
+		return $outputTable;
+
+	} // End GenerateTableFromData
+
+	private function GenerateTableBody($templateDataString,$playerData,$exerciseData){
 
 		// prepare for superset detection
 		$supressNextCell = false;
+
+		$tableBody = "";
 
 		foreach ($templateDataString as $key => $value) {
 
@@ -129,12 +188,6 @@ class FitnessTemplates extends System {
 						$exerciseName = $exerciseData[$ekey]["ExerciseName"];
 					} // end if(exercise key = value key)
 				} // end for(exercise data in exerciseData)
-
-				// Check to see if this exercise is marked as a superset
-				// If it is, we need to supress the generation of the same row following it
-				if(isset($value["superset"])) {
-					$supressNextCell = true;
-				}
 
 				// set variables for this row
 				$tableCellRows = $value["sets"];
@@ -156,20 +209,21 @@ class FitnessTemplates extends System {
 						$tableBody .= "<td rowspan=\"".$tableCellRows."\">".$exerciseName."</td>";
 						$tableBody .= "<td rowspan=\"".$tableCellRows."\">".$exerciseNotes."</td>";
 
-						if(!$supressNextCell){
-
-							$tableBody .= "<td rowspan=\"".$tableCellRows."\">".$restTime."</td>";
-
+						// This is some blackmagic shit I have no idea how it works
+						// I don't know if this is a testiment to my ability to type code
+						// without thinking and it works, or that I'm just really lucky
+						// 60% of the time, all of the time
+						if($value["superSetSize"] != 0){
+							$supressNextCell = true;
+							$tableBody .= "<td rowspan=\"".$value["superSetSize"]."\">".$restTime."</td>";						
 						} else {
+							if(!$supressNextCell){
+								$tableBody .= "<td rowspan=\"".$value["sets"]."\">".$restTime."</td>";		
+							} elseif(!isset($value["superset"])) {
+								$supressNextCell = false;
+							}
+						}
 
-							// TODO: Come back to this section as supersets should be able to span n exercises
-							if(isset($value["superset"])){
-
-								$tableBody .= "<td rowspan=\"".($tableCellRows*2)."\">".$restTime."</td>";
-								$supressNextCell = true;
-
-							} // end if($value[superset])
-						} // end if(!$supressNextCell)
 					} // end if($j == 0)
 
 					$setNumber = $j+1;
@@ -198,36 +252,12 @@ class FitnessTemplates extends System {
 					$tableBody .= "</tr>";
 
 				} // end for(j in value[sets])
-
-				// post check to see if superset is -not- set, and $superSetClass -is- true
-				if(!isset($value["superset"]) && $supressNextCell) {
-					$supressNextCell = false;
-				}
-
 			} // end if(is_array($value))
 		} // end foreach($templateDataString value)
 
-		/*
-		Table body end
-		*/
+		return $tableBody;
 
-		/*
-		Table footer start
-		*/
-		$tableFooter = "<tr>";
-		$tableFooter .= "<th colspan=\"".$fullWidthColSpan."\">Extra Notes</th>";
-		$tableFooter .= "</tr>";
-		$tableFooter .= "<tr>";
-		$tableFooter .= "<td colspan=\"".$fullWidthColSpan."\">".$templateDataString["extraNotes"]."</td>";
-		$tableFooter .= "</tr>";
-		$tableFooter .= "</table>";
-		/*
-		Table footer end
-		*/
-
-		$outputTable = $tableHeader.$tableBody.$tableFooter;
-		return $outputTable;
-	}
+	} // End GenerateTableBody
 
 }
 
