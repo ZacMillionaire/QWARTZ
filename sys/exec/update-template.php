@@ -1,4 +1,3 @@
-<pre>
 <?php
 
 /*
@@ -33,7 +32,7 @@ $params = array(
 	"templateID" => $templateID
 );
 
-echo $Database->dbInsert($sql,$params);
+$Database->dbInsert($sql,$params);
 
 header("Location: ../../templates.php?a=saved");
 
