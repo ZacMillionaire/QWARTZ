@@ -92,6 +92,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<tr>
 				<td colspan="3">
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessions"
 						value="<?php echo $templateDataString["sessions"]; ?>"
@@ -124,12 +125,10 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 ?>
 		<table id="exercise-table">
 			<tr>
-				<th class="table-title" colspan="3">
+				<th class="table-title" colspan="1">
  					Exercise
 				</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<!--
 
 					when changed get last test data from `playertestinginfo` where playerID and
@@ -191,12 +190,10 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</th>
 			</tr>
 			<tr>
-				<th class="table-title" colspan="3">
+				<th class="table-title" colspan="1">
 					Rest (mins)
 				</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<input
 						style="width: 100%"
 						type="text"
@@ -215,11 +212,10 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				[?] tooltip stuff to explain what they do
 
 				-->
-				<th class="table-title" colspan="3">Sets [?]</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<th class="table-title" colspan="1">Sets [?]</th>
+				<td colspan="2">
 					<input
+						style="width: 100%"
 						type="text"
 						name="sets[<?php echo $key; ?>]"
 						value="<?php echo $sets; ?>"
@@ -240,6 +236,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<tr>
 				<td>
 					<input
+						style="width: 100%"
 						type="number"
 						min="1"
 						max="10"
@@ -254,6 +251,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="oneRM[<?php echo $key; ?>]"
 						id="oneRM-input"
@@ -264,6 +262,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="oneRMPercent[<?php echo $key; ?>]"
 						id="oneRMPercent-input"
@@ -284,6 +283,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<tr>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessionEstimated[<?php echo $key; ?>]"
 						id="estimated-session-input"
@@ -294,6 +294,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessionTarget[<?php echo $key; ?>]"
 						id="target-session-input"
@@ -304,6 +305,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessionReps[<?php echo $key; ?>]"
 						id="reps-session-input"
