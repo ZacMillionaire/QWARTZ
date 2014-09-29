@@ -40,6 +40,7 @@ the user can use later on.
 	$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 ?>
+
 <form action="sys/exec/create-template.php" method="POST">
 
 	<div id="new-test-sticky">
@@ -107,6 +108,7 @@ the user can use later on.
 			<tr>
 				<td colspan="3">
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessions"
 						value="1"
@@ -121,12 +123,10 @@ the user can use later on.
 <!-- REPEATING AREA START -->
 		<table id="exercise-table">
 			<tr>
-				<th class="table-title" colspan="3">
+				<th class="table-title" colspan="1">
  					Exercise
 				</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<!--
 
 					when changed get last test data from `playertestinginfo` where playerID and
@@ -181,12 +181,10 @@ the user can use later on.
 				</th>
 			</tr>
 			<tr>
-				<th class="table-title" colspan="3">
+				<th class="table-title" colspan="1">
 					Rest (mins)
 				</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<input
 						style="width: 100%"
 						type="text"
@@ -205,11 +203,10 @@ the user can use later on.
 				[?] tooltip stuff to explain what they do
 
 				-->
-				<th class="table-title" colspan="3">Sets [?]</th>
-			</tr>
-			<tr>
-				<td colspan="3">
+				<th class="table-title" colspan="1">Sets [?]</th>
+				<td colspan="2">
 					<input
+						style="width: 100%"
 						type="text"
 						name="sets[default]"
 						value="1"
@@ -231,6 +228,7 @@ the user can use later on.
 			<tr>
 				<td>
 					<input
+						style="width: 100%"
 						type="number"
 						min="1"
 						max="10"
@@ -245,6 +243,7 @@ the user can use later on.
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="oneRM[default]"
 						id="oneRM-input"
@@ -255,6 +254,7 @@ the user can use later on.
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="oneRMPercent[default]"
 						id="oneRMPercent-input"
@@ -275,6 +275,7 @@ the user can use later on.
 			<tr>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessionEstimated[default]"
 						id="estimated-session-input"
@@ -285,6 +286,7 @@ the user can use later on.
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						value="Target"
 						name="sessionTarget[default]"
@@ -296,6 +298,7 @@ the user can use later on.
 				</td>
 				<td>
 					<input
+						style="width: 100%"
 						type="text"
 						name="sessionReps[default]"
 						id="reps-session-input"
