@@ -59,11 +59,20 @@ class FitnessTests extends System {
 	} // End GetPreviousTestList
 
 
-	public function GetPreviousTestEntries($page = 0, $perpage = 30) {
+	public function GetPreviousTestEntriesByRange($page = 0, $perpage = 30) {
 
-		$sql = "SELECT `fitnessTestGroupID`,`DateEntered`, `ExerciseName`,`ExerciseCategoryName`,`PlayerID`
+		$sql = "SELECT
+					`playerTestID`,
+					`fitnessTestGroupID`,
+					`DateEntered`,
+					`ExerciseName`,
+		 			`ExerciseCategoryName`,
+					`playerdetails`.`FirstName` AS `player_first`,
+					`playerdetails`.`LastName` AS `player_last`,
+					`PlayerID`
 				FROM `playertestinginfo`
 				INNER JOIN `exercises` USING(`ExerciseID`)
+				INNER JOIN `playerdetails` USING(`PlayerID`)
 				ORDER BY `DateEntered` DESC
 				LIMIT :currentPage, :nextPage";
 		$params = array(
@@ -76,26 +85,14 @@ class FitnessTests extends System {
 		$testList = array();
 		foreach ($result as $key => $value) {
 
-			if(isset($testList[$value["fitnessTestGroupID"]])){
-
-				if(!in_array($value["ExerciseName"], $testList[$value["fitnessTestGroupID"]]["exercises"])) {
-					$testList[$value["fitnessTestGroupID"]]["exercises"][] = $value["ExerciseName"];				
-				}
-				if(!in_array($value["ExerciseCategoryName"], $testList[$value["fitnessTestGroupID"]]["categories"])) {
-					$testList[$value["fitnessTestGroupID"]]["categories"][] = $value["ExerciseCategoryName"];
-				}
-				if(!in_array($value["PlayerID"], $testList[$value["fitnessTestGroupID"]]["players"])) {
-					$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];
-				}
-
-			} else {
-
-				$testList[$value["fitnessTestGroupID"]]["DateEntered"] = $value["DateEntered"];
-				$testList[$value["fitnessTestGroupID"]]["exercises"][] = $value["ExerciseName"];
-				$testList[$value["fitnessTestGroupID"]]["categories"][] = $value["ExerciseCategoryName"];
-				$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];
-
-			}
+			$testList[$key]["DateEntered"] = $value["DateEntered"];
+			$testList[$key]["exercises"] = $value["ExerciseName"];
+			$testList[$key]["fitnessTestGroupID"] = $value["fitnessTestGroupID"];
+			$testList[$key]["testID"] = $value["playerTestID"];
+			$testList[$key]["categories"] = $value["ExerciseCategoryName"];
+			$testList[$key]["playerID"] = $value["PlayerID"];
+			$testList[$key]["firstName"] = $value["player_first"];
+			$testList[$key]["lastName"] = $value["player_last"];
 
 		}
 

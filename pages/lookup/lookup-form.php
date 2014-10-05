@@ -103,7 +103,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 					End Date:
 				</th>
 				<td colspan="2">
-					<input style="width: 100%" type="date" class="date-picker" value="<?php echo @$_POST["endDate"]; ?>" name="endDate" placeholder="End Date"/>
+					<input style="width: 100%" type="date" class="date-picker" name="endDate" value="<?php echo @$_POST["endDate"]; ?>" placeholder="End Date"/>
 				</td>
 			</tr>
 			<tr>
@@ -117,24 +117,21 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 <?php
 
-	$dateLimit = strtotime("-1 week",time());
-
-	$previousTests = $System->GetFitnessTestSystem()->GetPreviousTestList($dateLimit);
+	$previousTests = $System->GetFitnessTestSystem()->GetPreviousTestEntriesByRange();
 
 ?>
 
-## change to above to show last entered test data un-grouped, limited to the last idk, 30?
 <div class="previous-test-list">
-	TODO: add some padding for the previous test container
+	## TODO: add some padding for the previous test container
 	<table>
 		<tr>
-			<th colspan="5" class="table-title">Previous Tests</th>
+			<th colspan="5" class="table-title">Previous Tests: Most recent 30</th>
 		</tr>
 		<tr>
 			<th>Date</th>
-			<th>Logged By</th>
+			<th>Player</th>
 			<th>Exercises</th>
-			<th>Actions</th>
+			<th colspan="2">Actions</th>
 		</tr>
 		<?php
 			foreach($previousTests as $key => $value) {
@@ -144,24 +141,25 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
 			<td>
-				NYI
+				<a href="players.php?id=<?php echo $value["playerID"]; ?>">
+					(NYI) 
+					<?php 
+						echo $value["firstName"]." ".$value["lastName"];
+					?>
+				</a>
 			</td>
 			<td>
 				<?php
 
-					foreach ($value["exercises"] as $ekey => $evalue) {
-						
-						echo $evalue;
-						if(($ekey+1) != count($value["exercises"])) {
-							echo ", ";
-						}
-
-					}
+					echo $value["exercises"];
 
 				?>
 			</td>
 			<td>
-				<a class="button" href="tests.php?a=view&amp;id=<?php echo $key; ?>">View Test</a>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>">View Test</a>
+			</td>
+			<td>
+				<a class="button" href="tests.php?a=edit&amp;id=<?php echo $value["testID"]; ?>">(NYI) Edit Data</a>
 			</td>
 		</tr>
 		<?php	

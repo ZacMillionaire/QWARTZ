@@ -36,7 +36,7 @@
         <div id="content">
 
             <article id="page-header">
-                <h1>Player Lookup</h1>
+                <h1>Record Lookup</h1>
 
             <!--
 
