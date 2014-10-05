@@ -12,15 +12,41 @@ class FitnessTests extends System {
 
 	public function GetPreviousTestList() {
 
-		$sql = "SELECT `fitnessTestGroupID`,`DateEntered`
+		$sql = "SELECT `fitnessTestGroupID`,`DateEntered`, `ExerciseName`,`ExerciseCategoryName`,`PlayerID`
 				FROM `playertestinginfo`
-				GROUP BY `fitnessTestGroupID`
+				INNER JOIN `exercises` USING(`ExerciseID`)
 				ORDER BY `DateEntered` DESC";
 		$params = null;
 
 		$result = $this->DatabaseSystem->dbQuery($sql,$params);
 
-		return $result;
+		$testList = array();
+		foreach ($result as $key => $value) {
+
+			if(isset($testList[$value["fitnessTestGroupID"]])){
+
+				if(!in_array($value["ExerciseName"], $testList[$value["fitnessTestGroupID"]]["exercises"])) {
+					$testList[$value["fitnessTestGroupID"]]["exercises"][] = $value["ExerciseName"];				
+				}
+				if(!in_array($value["ExerciseCategoryName"], $testList[$value["fitnessTestGroupID"]]["categories"])) {
+					$testList[$value["fitnessTestGroupID"]]["categories"][] = $value["ExerciseCategoryName"];
+				}
+				if(!in_array($value["PlayerID"], $testList[$value["fitnessTestGroupID"]]["players"])) {
+					$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];
+				}
+
+			} else {
+
+				$testList[$value["fitnessTestGroupID"]]["DateEntered"] = $value["DateEntered"];
+				$testList[$value["fitnessTestGroupID"]]["exercises"][] = $value["ExerciseName"];
+				$testList[$value["fitnessTestGroupID"]]["categories"][] = $value["ExerciseCategoryName"];
+				$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];
+
+			}
+
+		}
+
+		return $testList;
 
 	} // End GetPreviousTestList
 

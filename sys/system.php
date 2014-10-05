@@ -5,6 +5,7 @@
 	require_once "data.php";
 	require_once "fitnessTests.php";
 	require_once "fitnessTemplates.php";
+	require_once "search.php";
 	
 	class System {
 
@@ -38,7 +39,7 @@
 
 			$User = new Users();
 
-			return new Users();
+			return $User;
 		}
 
 		public function GetFitnessTestSystem() {
@@ -61,6 +62,14 @@
 			$DataCollection = new DataCollection();
 
 			return $DataCollection;
+
+		}
+
+		public function GetSearchSystem() {
+
+			$Search = new Search();
+
+			return $Search;
 
 		}
 

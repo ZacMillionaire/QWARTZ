@@ -1,11 +1,11 @@
 <div class="previous-test-list">
 	<table>
+        <pre>
 <?php
 
 	$previousTests = $System->GetFitnessTestSystem()->GetPreviousTestList();
 
-
-	?>
+?>
 
  <tr>
         <th colspan="5" class="table-title">Previous Tests</th>
@@ -13,7 +13,7 @@
     <tr>
         <th>Date</th>
         <th>Logged By</th>
-        <th>Groups</th>
+        <th>Exercises</th>
         <th>Actions</th>
     </tr>
 
@@ -27,13 +27,24 @@
 			<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
         </td>
         <td>
-			Thomas McCarthy
+			NYI
         </td>
         <td>
-			Upper Body, Hammies
+			<?php
+
+                foreach ($value["exercises"] as $ekey => $evalue) {
+                    
+                    echo $evalue;
+                    if(($ekey+1) != count($value["exercises"])) {
+                        echo ", ";
+                    }
+
+                }
+
+            ?>
         </td>
         <td>
-			<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>">View Test</a>
+			<a class="button" href="tests.php?a=view&amp;id=<?php echo $key; ?>">View Test</a>
         </td>
 
     </tr>
