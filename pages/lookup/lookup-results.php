@@ -114,6 +114,10 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 		</table>	
 	</form>
 </div>
+<div id="search-results">
+	<h1>Search Results</h3>
+	some results as a table
+</div>
 
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function(event) {

@@ -103,7 +103,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 					End Date:
 				</th>
 				<td colspan="2">
-					<input style="width: 100%" type="date" class="date-picker" value="<?php echo @$_POST["endDate"]; ?>" name="endDate" placeholder="End Date"/>
+					<input style="width: 100%" type="date" class="date-picker" name="endDate" value="<?php echo @$_POST["endDate"]; ?>" placeholder="End Date"/>
 				</td>
 			</tr>
 			<tr>
@@ -113,6 +113,59 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			</tr>
 		</table>	
 	</form>
+</div>
+
+<?php
+
+	$previousTests = $System->GetFitnessTestSystem()->GetPreviousTestEntriesByRange();
+
+?>
+
+<div class="previous-test-list">
+	## TODO: add some padding for the previous test container
+	<table>
+		<tr>
+			<th colspan="5" class="table-title">Previous Tests: Most recent 30</th>
+		</tr>
+		<tr>
+			<th>Date</th>
+			<th>Player</th>
+			<th>Exercises</th>
+			<th colspan="2">Actions</th>
+		</tr>
+		<?php
+			foreach($previousTests as $key => $value) {
+		?>
+		<tr>
+			<td>
+				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
+			</td>
+			<td>
+				<a href="players.php?id=<?php echo $value["playerID"]; ?>">
+					(NYI) 
+					<?php 
+						echo $value["firstName"]." ".$value["lastName"];
+					?>
+				</a>
+			</td>
+			<td>
+				<?php
+
+					echo $value["exercises"];
+
+				?>
+			</td>
+			<td>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>">View Test</a>
+			</td>
+			<td>
+				<a class="button" href="tests.php?a=edit&amp;id=<?php echo $value["testID"]; ?>">(NYI) Edit Data</a>
+			</td>
+		</tr>
+		<?php	
+			}
+		?>
+	</table>
 </div>
 
 <script type="text/javascript">

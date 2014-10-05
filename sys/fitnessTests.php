@@ -10,13 +10,21 @@ class FitnessTests extends System {
 
 	} // End Class Constructor
 
-	public function GetPreviousTestList() {
+	public function GetPreviousTestList($start = null,$end = null) {
+
+		$dateStart = (isset($start)) ? $start : strtotime("-1 week",time());
+		$dateEnd = (isset($end)) ? $end : time();
 
 		$sql = "SELECT `fitnessTestGroupID`,`DateEntered`, `ExerciseName`,`ExerciseCategoryName`,`PlayerID`
 				FROM `playertestinginfo`
 				INNER JOIN `exercises` USING(`ExerciseID`)
+				WHERE `DateEntered` >= :dateStart AND
+				`DateEntered` <= :dateEnd
 				ORDER BY `DateEntered` DESC";
-		$params = null;
+		$params = array(
+			"dateStart" => date('Y-m-d 00:00:00',$dateStart),
+			"dateEnd" => date('Y-m-d 23:59:59',$dateEnd)
+		);
 
 		$result = $this->DatabaseSystem->dbQuery($sql,$params);
 
@@ -43,6 +51,48 @@ class FitnessTests extends System {
 				$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];
 
 			}
+
+		}
+
+		return $testList;
+
+	} // End GetPreviousTestList
+
+
+	public function GetPreviousTestEntriesByRange($page = 0, $perpage = 30) {
+
+		$sql = "SELECT
+					`playerTestID`,
+					`fitnessTestGroupID`,
+					`DateEntered`,
+					`ExerciseName`,
+		 			`ExerciseCategoryName`,
+					`playerdetails`.`FirstName` AS `player_first`,
+					`playerdetails`.`LastName` AS `player_last`,
+					`PlayerID`
+				FROM `playertestinginfo`
+				INNER JOIN `exercises` USING(`ExerciseID`)
+				INNER JOIN `playerdetails` USING(`PlayerID`)
+				ORDER BY `DateEntered` DESC
+				LIMIT :currentPage, :nextPage";
+		$params = array(
+			"currentPage" => $page * $perpage,
+			"nextPage" => ($page + 1) * $perpage
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		$testList = array();
+		foreach ($result as $key => $value) {
+
+			$testList[$key]["DateEntered"] = $value["DateEntered"];
+			$testList[$key]["exercises"] = $value["ExerciseName"];
+			$testList[$key]["fitnessTestGroupID"] = $value["fitnessTestGroupID"];
+			$testList[$key]["testID"] = $value["playerTestID"];
+			$testList[$key]["categories"] = $value["ExerciseCategoryName"];
+			$testList[$key]["playerID"] = $value["PlayerID"];
+			$testList[$key]["firstName"] = $value["player_first"];
+			$testList[$key]["lastName"] = $value["player_last"];
 
 		}
 
