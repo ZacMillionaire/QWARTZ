@@ -71,25 +71,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		// get the total count of table rows, the index to affect from the button,
 		// and the table row to remove
-		var numberOfTableRows = $(".test-fauxtable-tablerow[data-input-index]").length;
-		var numberOfTables = $(".test-fauxtable").length;
-		console.log(numberOfTables);
-		var rowIndex = this.attributes["data-input-index"].value;
-		var rowToAffect = $(".test-fauxtable-tablerow[data-input-index=\""+rowIndex+"\"]");
+		var numberOfTableRows = $("#table-container table tr[data-input-index]").length;
+		var numberOfTables = $("#table-container table").length;
 
-		// if the number of rows is 1, prevent removal in the case that the button
-		// didn't get disabled previously and disable it
+		var rowIndex = this.attributes["data-input-index"].value;
+		var rowToAffect = $("tr[data-input-index=\""+rowIndex+"\"]");
+
+		// if the number of rows across all tables is 1, prevent removal
+		// in the case that the button didn't get disabled previously
+		// and disable it
 		if((numberOfTableRows/numberOfTables) == 1){
+
 			this.disabled = true;
 			return;
+
 		}
 
-		// remove the selected row if we have more than 1 row
 		$(rowToAffect).remove();
 
 		// check again to see if we only have 1 row, if we do, disable the button
-		if(($(".test-fauxtable-tablerow[data-input-index]").length / numberOfTables) == 1){
-			$("[data-template-row]").last().find("#remove-player")[0].disabled = true;
+		if(($("#table-container table tr[data-input-index]").length / numberOfTables) == 1){
+
+			$("tr[data-input-index]").each(function(){
+				$(this).find("#remove-player")[0].disabled = true;
+			});
+
 		}
 
 	}
@@ -100,19 +106,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		// Prevents the form from submitting
 		e.preventDefault();
 
-		// get the last row of the table
-		$("[data-template-table]").each(function(){
+		$("#table-container table").each(function(){
 
-			var thisCategory = $(this)[0];
-
-			var lastRow = $(thisCategory).find("[data-template-row]").last();
+			// get the last row of the table
+			var lastRow = $(this).find("tr[data-input-index]").last();
 
 			// re-enable remove player button if disabled
 			if(lastRow.find("#remove-player")[0].disabled){
 				lastRow.find("#remove-player")[0].disabled = false;
 			}
 
-			// clone
+			// Deep clone the row with event bindings
 			lastRow = lastRow.clone(true);
 
 			// set default values
@@ -127,10 +131,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			lastRow[0].attributes["data-input-index"].value = newInputIndex;
 			$(lastRow[0]).find("#remove-player")[0].attributes["data-input-index"].value = newInputIndex;
 
-			// append it to the table
-			lastRow.appendTo(this);
+			console.log($(this).find("tr[data-input-index]").last());
 
-		})
+			// append it to the table
+			$(this).find("tr[data-input-index]").last().after(lastRow);
+
+		});
 
 	}
 
@@ -181,10 +187,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             return string;
 		}
 
-		var tableClone = $("[data-template-table]").first().clone(true);
+		var tableClone = $("#table-container table").last().clone(true);
 		var categoryID = randomString(8);
-
-		tableClone[0].attributes["data-category-set"].value = categoryID;
 
 		tableClone.find("[data-category-set]").each(function(){
 
@@ -223,6 +227,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				
 				// sanity check, the table has a data-category value as well, but no name,
 				// without this, the script will break
+				// 
+				// 05/10/2015 Scotch - Not even sure I need this anymore after
+				// changing the layout.
 				if(this.name != undefined) {
 
 					var re = /(.*?)\[(.*?)\](\[\])?/;
@@ -245,9 +252,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		var playerIndex = e.target.selectedIndex;
 
-		var dataIndexToAffect = $(this).parents(".test-fauxtable-tablerow")[0].attributes["data-input-index"].value;
+		var dataIndexToAffect = $(this).parents("tr")[0].attributes["data-input-index"].value;
 
-		var playerSelectionsToAffect = $("body").find(".test-fauxtable-tablerow[data-input-index=\""+dataIndexToAffect+"\"] #player-name-entry");
+		var playerSelectionsToAffect = $("#table-container").find("tr[data-input-index=\""+dataIndexToAffect+"\"] #player-name-entry");
 
 		$(playerSelectionsToAffect).each(function(){
 
@@ -275,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		var dataSet = this.attributes["data-category-set"].value;
 
-		var dataIndexToAffect = $(this).parents(".test-fauxtable-tablerow")[0].attributes["data-input-index"].value;
+		var dataIndexToAffect = $(this).parents("tr")[0].attributes["data-input-index"].value;
 		var inputWeight = $("[data-input-index=\""+dataIndexToAffect+"\"] #weight-input[data-category-set=\""+dataSet+"\"]")[0].value;
 
 		if(!inputWeight || inputWeight == 0) {
