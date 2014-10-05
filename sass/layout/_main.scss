@@ -84,6 +84,7 @@ article {
 	height: 100%;
 	background-color: $dark-blue-bg;
 
+	ul {width: 200px;}
 	a {
 		color: lighten($dark-blue-bg, 30%);
 		text-transform: uppercase;

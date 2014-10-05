@@ -54,7 +54,16 @@ tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even) {
 	display: table-cell;
 }
 
+.spacer-row {
+	height: 30px;
 
+
+	td {
+		background: $container-bg-colour;
+		width: 100%;
+		border-left: none;
+	}
+}
 #table-container input, #table-container select, #date-picker {
 	font-family: 'Open Sans', Arial, sans-serif;
 	padding: 3px;
@@ -102,4 +111,9 @@ input#category-input {
 
 .sorter:hover {
 		color: lighten($main-font-colour, 40%);
+}
+
+
+#exercise-table {
+	margin-top: 70px;
 }

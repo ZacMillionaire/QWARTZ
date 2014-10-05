@@ -3,6 +3,8 @@
 (function($){
 
 	$("#new-test-sticky").sticky({topSpacing:0});
+	$("#main-nav ul").sticky({topSpacing:0});
+
 	
 	$("#test-table").stupidtable();
 

@@ -72,6 +72,7 @@ the user can use later on.
 					/>
 				</td>
 			</tr>
+			<tr class="spacer-row"><td colspan="3"></td></tr>
 			<tr>
 				<th class="table-title" colspan="3">
  					Player
@@ -102,6 +103,7 @@ the user can use later on.
 					</select>
 				</td>
 			</tr>
+			<tr class="spacer-row"><td colspan="3"></td></tr>
 			<tr>
 				<th class="table-title" colspan="3">Sessions [?]</th>
 			</tr>
@@ -217,6 +219,7 @@ the user can use later on.
 					/>
 				</td>
 			</tr>
+			<tr class="spacer-row"><td colspan="3"></td></tr>
 			<tr>
 				<th class="table-title" colspan="3">Set Data</th>
 			</tr>
@@ -264,6 +267,7 @@ the user can use later on.
 					/>
 				</td>
 			</tr>
+			<tr class="spacer-row"><td colspan="3"></td></tr>
 			<tr>
 				<th class="table-title" colspan="3">Session Data</th>
 			</tr>
@@ -308,6 +312,7 @@ the user can use later on.
 					/>
 				</td>
 			</tr>
+			<tr class="spacer-row"><td colspan="3"></td></tr>
 			<tr>
 				<th class="table-title" colspan="3">
 					Notes
