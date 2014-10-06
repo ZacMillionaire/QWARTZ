@@ -44,7 +44,6 @@
 		<?php
 
 			$players = $System->GetDataCollectionSystem()->GetPlayerList();
-
 			$exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 			foreach ($players as $gkey => $gvalue) {

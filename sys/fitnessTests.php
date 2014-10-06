@@ -59,47 +59,6 @@ class FitnessTests extends System {
 	} // End GetPreviousTestList
 
 
-	public function GetPreviousTestEntriesByRange($page = 0, $perpage = 30) {
-
-		$sql = "SELECT
-					`playerTestID`,
-					`fitnessTestGroupID`,
-					`DateEntered`,
-					`ExerciseName`,
-		 			`ExerciseCategoryName`,
-					`playerdetails`.`FirstName` AS `player_first`,
-					`playerdetails`.`LastName` AS `player_last`,
-					`PlayerID`
-				FROM `playertestinginfo`
-				INNER JOIN `exercises` USING(`ExerciseID`)
-				INNER JOIN `playerdetails` USING(`PlayerID`)
-				ORDER BY `DateEntered` DESC
-				LIMIT :currentPage, :nextPage";
-		$params = array(
-			"currentPage" => $page * $perpage,
-			"nextPage" => ($page + 1) * $perpage
-		);
-
-		$result = $this->DatabaseSystem->dbQuery($sql,$params);
-
-		$testList = array();
-		foreach ($result as $key => $value) {
-
-			$testList[$key]["DateEntered"] = $value["DateEntered"];
-			$testList[$key]["exercises"] = $value["ExerciseName"];
-			$testList[$key]["fitnessTestGroupID"] = $value["fitnessTestGroupID"];
-			$testList[$key]["testID"] = $value["playerTestID"];
-			$testList[$key]["categories"] = $value["ExerciseCategoryName"];
-			$testList[$key]["playerID"] = $value["PlayerID"];
-			$testList[$key]["firstName"] = $value["player_first"];
-			$testList[$key]["lastName"] = $value["player_last"];
-
-		}
-
-		return $testList;
-
-	} // End GetPreviousTestList
-
 	public function GetPreviousFitnessTestData($testID){
 
 		$sql = "SELECT *,`playertestinginfo`.`Weight` AS `testWeight`

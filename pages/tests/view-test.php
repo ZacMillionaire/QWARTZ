@@ -1,17 +1,21 @@
-<pre>
 <?php
 
 	$selectedTest = $System->GetFitnessTestSystem()->GetPreviousFitnessTestData($_GET['id']);
 
 ?>
-</pre>
+<style>
+    
+    tr:target {
+        background-color: hsla(50, 100%, 80%, 1);
+    }
+
+</style>
 <h2>Previous Test Data For <?php echo date("d/m/Y",strtotime($selectedTest["testDate"])); ?></h2>
 <table id="test-table">
     <?php
 
     	foreach ($selectedTest["data"] as $key => $value) {
     ?>
-        <thead>
     <tr>
         <th colspan="5" class="table-title"><?php echo $key; ?></th>
     </tr>
@@ -23,14 +27,13 @@
         <th class="sorter" data-sort="int">Reps</th>
         <th class="sorter" data-sort="float">Est 1RM</th>
     </tr>
-</thead>
-    <tbody>
+
     <?php
     		foreach ($value as $skey => $svalue) {
     ?>
-
-    <tr>
-        <td>
+    
+    <tr id="test-row-<?php echo $svalue["playerTestID"]; ?>">
+        <td><a></a>
 			<?php
 				echo $svalue["FirstName"]." ".$svalue["LastName"];
 			?>
@@ -61,5 +64,5 @@
     	}
     }
     ?>
-    </tbody>
+
 </table>
