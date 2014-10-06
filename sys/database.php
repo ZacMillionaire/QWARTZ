@@ -46,8 +46,8 @@
 				$queryExec->execute($params);
 			} catch(PDOException $ex){
 
-				return false;
-				//return "Query Failed. ".$ex->getMessage();
+				// return false;
+				return "Query Failed. ".$ex->getMessage();
 			}
 			return true;
 		}
