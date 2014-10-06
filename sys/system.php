@@ -6,6 +6,7 @@
 	require_once "fitnessTests.php";
 	require_once "fitnessTemplates.php";
 	require_once "search.php";
+	require_once "player.php";
 	
 	class System {
 
@@ -73,6 +74,14 @@
 
 		}
 
+		public function GetPlayerSystem() {
+
+			$Players = new Players();
+
+			return $Players;
+
+		}
+
 		public function GetSystemSettings() {
 
 			$settings = array(
@@ -81,6 +90,26 @@
 			);
 
 			return $settings;
+
+		}
+
+		public function CamelToEnglish($string) {
+
+			$newString = "";
+
+			for ($i=0; $i < strlen($string); $i++) { 
+				if($i == 0){
+					$newString = strtoupper($string[$i]);
+				} else {
+					if(ctype_upper($string[$i])) { // lol
+						$newString .= " ".$string[$i];
+					} else {
+						$newString .= $string[$i];
+					}
+				}
+			}
+
+			return $newString;
 
 		}
 

@@ -12,7 +12,11 @@
     }
 
 </style>
-<h2>Editing Test Data For <?php echo $selectedTest["FirstName"]." ".$selectedTest["LastName"]; ?></h2>
+    <h2>
+        Editing Test Data For <?php echo $selectedTest["FirstName"]." ".$selectedTest["LastName"]; ?>
+         in <?php echo $selectedTest["ExerciseCategoryName"]; ?>
+         on <?php echo date("d/m/Y",strtotime($selectedTest["DateEntered"])); ?>
+    </h2>
     <div id="table-container">
         <form action="sys/exec/update-test-data.php" method="POST">
 
