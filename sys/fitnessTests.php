@@ -92,6 +92,26 @@ class FitnessTests extends System {
 		return $fitnessData;
 
 	} // End GetPreviousFitnessTestData
+
+
+	public function GetSpecificFitnessTestData($testID){
+
+		$sql = "SELECT 
+					*,
+					`playertestinginfo`.`Weight` AS `testWeight`
+				FROM `playertestinginfo`
+				INNER JOIN `playerdetails` USING(`PlayerID`)
+				INNER JOIN `exercises` USING(`ExerciseID`)
+				WHERE `playerTestID` = :testID;";
+		$params = array(
+			"testID" => $testID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result[0];
+
+	} // End GetSpecificFitnessTestData
 }
 
 ?>

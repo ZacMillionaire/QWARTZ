@@ -17,7 +17,7 @@
     	foreach ($selectedTest["data"] as $key => $value) {
     ?>
     <tr>
-        <th colspan="5" class="table-title"><?php echo $key; ?></th>
+        <th colspan="6" class="table-title"><?php echo $key; ?></th>
     </tr>
 
     <tr>
@@ -26,6 +26,7 @@
         <th class="sorter" data-sort="float">Weight</th>
         <th class="sorter" data-sort="int">Reps</th>
         <th class="sorter" data-sort="float">Est 1RM</th>
+        <th>&nbsp;</th>
     </tr>
 
     <?php
@@ -33,7 +34,7 @@
     ?>
     
     <tr id="test-row-<?php echo $svalue["playerTestID"]; ?>">
-        <td><a></a>
+        <td>
 			<?php
 				echo $svalue["FirstName"]." ".$svalue["LastName"];
 			?>
@@ -57,6 +58,9 @@
 			<?php
 				echo $svalue["EST1RM"];
 			?>
+        </td>
+        <td>
+            <a href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $svalue["playerTestID"]; ?>">Edit</a>
         </td>
     </tr>
 

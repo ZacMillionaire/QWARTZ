@@ -55,7 +55,7 @@
         </article>
         <article>
             
-            <?php if(@$_GET["a"] != "new") { ?>
+            <?php if(@$_GET["a"] != "new" && @$_GET["a"] != "edit") { ?>
             <div id="button-area">
                 <a href="tests.php?a=new" class="button">New Test</a>
             </div>
@@ -75,6 +75,13 @@
                     case "view":
                         if(isset($_GET["id"])){
                             include "pages/tests/view-test.php";                           
+                        } else {
+                            include "pages/tests/previous-tests.php";                           
+                        }
+                        break;
+                    case "edit":
+                        if(isset($_GET["tid"])) {
+                            include "pages/tests/edit-test.php";                           
                         } else {
                             include "pages/tests/previous-tests.php";                           
                         }
