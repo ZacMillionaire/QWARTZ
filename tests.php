@@ -8,7 +8,6 @@
 	include "inc/header.php";
 
 	if(!$userLoggedIn){
-        die();
 		header("Location: login.php");
 		die();
 	}
