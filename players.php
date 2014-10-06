@@ -87,7 +87,7 @@
                         include "pages/players/view-players.php";
                         break;
                     case "edit":
-                        if(isset($_GET["id"])) {
+                        if(isset($_GET["id"]) || isset($_GET["playerID"])) {
                             include "pages/players/edit-player.php";
                         } else {
                             include "pages/players/view-players.php";

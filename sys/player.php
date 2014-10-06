@@ -75,6 +75,46 @@ class Players extends System {
 	} // End CreateNewPlayer
 
 
+	public function UpdatePlayer($newPlayerData) {
+
+		foreach ($newPlayerData as $key => $value) {
+			if($value == null){
+				return array(
+					"error" => parent::CamelToEnglish($key)." is missing a value"
+				);
+			}
+		}
+
+		$sql = "UPDATE `playerdetails`
+				SET
+					`FirstName`= :firstName,
+					`LastName`= :lastName,
+					`Position`= :position,
+					`Weight`= :weight,
+					`profilePicture`= :profilePicture
+				WHERE `PlayerID` = :playerID;";
+		$params = array(
+			"playerID" => $newPlayerData["playerID"],
+			"firstName" => ucfirst($newPlayerData["firstName"]),
+			"lastName" => ucfirst($newPlayerData["lastName"]),
+			"position" => ucfirst($newPlayerData["position"]),
+			"weight" => $newPlayerData["weight"],
+			"profilePicture" => null
+		);
+
+		$insert = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		if($insert){
+
+			return array("success" => $newPlayerData["playerID"]);
+
+		} else {
+			return array("error" => "Player not found.");
+		}
+
+	} // End UpdatePlayer
+
+
 	public function GetPlayerData($playerID) {
 
 		$playerDetails = $this->DataCollection->GetPlayerDetailsByID($playerID);

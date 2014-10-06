@@ -1,4 +1,3 @@
-<pre>
 <?php 
 
 include "../system.php";
