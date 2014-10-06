@@ -62,7 +62,6 @@ if(isset($_POST)){
 				</td>
 				<td>
 					<a href="players.php?id=<?php echo $value["PlayerID"]; ?>">
-						(NYI) 
 						<?php 
 							echo $value["FirstName"]." ".$value["LastName"];
 						?>
@@ -79,7 +78,7 @@ if(isset($_POST)){
 					<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
 				</td>
 				<td>
-					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">(NYI) Edit Data</a>
+					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
 				</td>
 			</tr>
 			<?php

@@ -39,7 +39,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			</td>
 			<td>
 				<a href="players.php?id=<?php echo $value["playerID"]; ?>">
-					(NYI) 
 					<?php 
 						echo $value["firstName"]." ".$value["lastName"];
 					?>
@@ -56,7 +55,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["testID"]; ?>">View Test</a>
 			</td>
 			<td>
-				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>">(NYI) Edit Data</a>
+				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>">Edit Data</a>
 			</td>
 		</tr>
 		<?php	

@@ -1,4 +1,3 @@
-<pre>
 <?php
 
 /*
@@ -7,7 +6,7 @@ TODO: I think it's as rewritten as it'll get
 
  */
 
- print_r($_POST);
+//print_r($_POST);
 
 
 	include "../system.php";

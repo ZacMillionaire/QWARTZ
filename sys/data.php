@@ -69,6 +69,31 @@ class DataCollection extends System {
 
 	}
 
+	public function GetPlayerTestData($playerID) {
+
+		$sql = "SELECT 
+					`playerTestID`,
+					`fitnessTestGroupID`,
+					`DateEntered`,
+					`ExerciseName`,
+		 			`ExerciseCategoryName`,
+					`playerdetails`.`FirstName` AS `player_first`,
+					`playerdetails`.`LastName` AS `player_last`,
+					`PlayerID`
+				FROM `playertestinginfo`
+				INNER JOIN `playerdetails` USING(`PlayerID`)
+				INNER JOIN `exercises` USING(`ExerciseID`)
+				WHERE `PlayerID` = :playerID;";
+		$params = array(
+			"playerID" => $playerID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+
+	}
+
 	public function GetRecentPlayerTestData($exerciseID, $playerID) {
 
 		$sql = "SELECT * FROM `playertestinginfo` WHERE `PlayerID` = :playerID AND `ExerciseID` = :exerciseID;";
@@ -81,6 +106,18 @@ class DataCollection extends System {
 
 		return $result;
 
+	}
+
+	public function GetPlayerTemplates($playerID) {
+
+		$sql = "SELECT * FROM `fitnesstemplates` WHERE `playerID` = :playerID;";
+		$params = array(
+			"playerID" => $playerID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
 	}
 
 }
