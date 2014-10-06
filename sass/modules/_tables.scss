@@ -30,7 +30,7 @@ th, .test-fauxtable-header {
 td, .test-fauxtable-tablecell {
 	font-size: 1.4rem;
 }
-tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even) {
+tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even), #new-fitness-template #table-container:nth-child(even) {
     background-color: #f9f9f9;
 }
 
@@ -114,6 +114,37 @@ input#category-input {
 }
 
 
-#exercise-table {
-	margin-top: 70px;
+.superset-prompt {
+	font-size: 1.3rem;
+	text-transform: none;
+	font-weight: normal;
+	letter-spacing: 0;
+	float: right;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+
+#mark-superset {
+	width: 30px !important;
+	float:right;
+}
+
+.exercise-td {
+	padding: 0 !important;
+}
+
+#new-fitness-template #exercise-dropdown {
+	height: 50px;
+	font-size: 2.2rem !important;
+	font-family: 'Questrial', Arial, sans-serif !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 14px !important;
+}
+
+#new-fitness-template #table-container {
+	margin-left: -30px;
+	margin-top: 0;
+	padding: 60px 30px 60px 30px;
+	background-color: white;
+	border-bottom: 5px solid #666677;
 }

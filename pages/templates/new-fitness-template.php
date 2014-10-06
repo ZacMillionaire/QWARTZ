@@ -41,7 +41,7 @@ the user can use later on.
 
 ?>
 
-<form action="sys/exec/create-template.php" method="POST">
+<form id="new-fitness-template" action="sys/exec/create-template.php" method="POST">
 
 	<div id="new-test-sticky">
 
@@ -121,14 +121,25 @@ the user can use later on.
 				</td>
 			</tr>
 		</table>
-		<br/>
+	</div>
+	<div id="table-container">
 <!-- REPEATING AREA START -->
 		<table id="exercise-table">
 			<tr>
 				<th class="table-title" colspan="1">
  					Exercise
+ 					<input
+						type="checkbox"
+						id="mark-superset"
+						name="superset[default]"
+						data-input-index="0"
+						data-category-set="default"
+						disabled
+					/>
+
+					<span class="superset-prompt">Superset?</span>
 				</th>
-				<td colspan="2">
+				<td colspan="2" class="exercise-td">
 					<!--
 
 					when changed get last test data from `playertestinginfo` where playerID and
@@ -170,17 +181,6 @@ the user can use later on.
 				</td>
 			</tr>
 			<tr>
-				<th colspan="3">
-					<input
-						type="checkbox"
-						id="mark-superset"
-						name="superset[default]"
-						data-input-index="0"
-						data-category-set="default"
-						disabled
-					/>
-					Exercise is superset [?] (this could look better)
-				</th>
 			</tr>
 			<tr>
 				<th class="table-title" colspan="1">
@@ -337,7 +337,7 @@ the user can use later on.
 			</tr>
 		</table>
 <!-- REPEATING AREA END -->
-		<br/>
+</div>
 		<table>
 			<tr>
 				<th class="table-title" colspan="3">
@@ -355,7 +355,6 @@ the user can use later on.
 				</td>
 			</tr>
 		</table>
-	</div>
 </form>
 
 <script src="js/fitnessTemplates.js"></script>
