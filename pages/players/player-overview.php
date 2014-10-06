@@ -46,7 +46,7 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
 			<td>
-				<a href="players.php?id=<?php echo $value["PlayerID"]; ?>">
+				<a href="players.php?a=view&amp;id=<?php echo $value["PlayerID"]; ?>">
 					<?php 
 						echo $value["player_first"]." ".$value["player_last"];
 					?>

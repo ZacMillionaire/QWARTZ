@@ -38,7 +38,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
 			<td>
-				<a href="players.php?id=<?php echo $value["playerID"]; ?>">
+				<a href="players.php?a=view&amp;id=<?php echo $value["playerID"]; ?>">
 					<?php 
 						echo $value["firstName"]." ".$value["lastName"];
 					?>
