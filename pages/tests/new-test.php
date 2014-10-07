@@ -5,16 +5,16 @@
 
 		<input type="date" id="date-picker" name="testDate" placeholder="Testing Date" required/>
 
-		<button id="add-row" class="button-small">
+		<button id="add-row" class="button-small grey">
 			Add Player
 		</button>
 
-		<button id="add-category" class="button-small">
+		<button id="add-category" class="button-small grey">
 			Add Category
 		</button>
 
-		<button	id="submit-data"  class="button-small" type="submit">
-			Submit
+		<button	id="submit-data"  class="button right" type="submit">
+			Save Test
 		</button>
 
 	</div>

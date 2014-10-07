@@ -56,7 +56,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button style="width:100%;" type="submit">Update Player</button>
+				<button style="width:100%;" type="submit" class="button">Update Player</button>
 			</td>
 		</tr>
 	</table>

@@ -16,15 +16,15 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 ?>
 
-<form action="sys/exec/update-template.php" method="POST">
+<form id="new-fitness-template" action="sys/exec/update-template.php" method="POST">
 	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateUID" />
 	<div id="new-test-sticky">
 
-		<button id="add-exercise" class="button-small">
+		<button id="add-exercise" class="button-small grey">
 			Add Exercise
 		</button>
 
-		<button id="submit-template-button" type="submit">
+		<button id="submit-template-button" class="button right" type="submit">
 			Update Template
 		</button>
 
@@ -127,6 +127,14 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<tr>
 				<th class="table-title" colspan="1">
  					Exercise
+ 										<input
+						type="checkbox"
+						id="mark-superset"
+						name="superset[<?php echo $key; ?>]"
+						data-input-index="0"
+						data-category-set="<?php echo $key; ?>"
+						<?php echo $superset; ?>
+					/>
 				</th>
 				<td colspan="2">
 					<!--
@@ -178,14 +186,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			</tr>
 			<tr>
 				<th colspan="3">
-					<input
-						type="checkbox"
-						id="mark-superset"
-						name="superset[<?php echo $key; ?>]"
-						data-input-index="0"
-						data-category-set="<?php echo $key; ?>"
-						<?php echo $superset; ?>
-					/>
+
 					Exercise is superset [?] (this could look better)
 				</th>
 			</tr>

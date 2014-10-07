@@ -5,12 +5,11 @@ $Players = $System->GetPlayerSystem();
 $playerData = $Players->GetPlayerData($_GET["id"]);
 
 ?>
-	<div class="player-card">
+	<div class="player-card-single">
 		<div class="player-profile-picture">
 			<img src="<?php echo ($playerData["playerInfo"]["profilePicture"] != null)?$playerData["playerInfo"]["profilePicture"]:"images/default_profile.png"; ?>" alt="" />
 		</div>
 		<div class="player-name">
-			# TODO: pay tribute to the style wizard
 			<h2><?php echo $playerData["playerInfo"]["FirstName"]." ".$playerData["playerInfo"]["LastName"]; ?></h2>
 		</div>
 		<div class="player-position">
@@ -23,7 +22,6 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 		</div>
 	</div>
 <div class="previous-test-list">
-	## TODO: add some padding for the previous test container
 	<!--
 		future TODO: I should make the following a template as
 		it's basically the same across lookup-results and lookup-form.php
@@ -46,7 +44,7 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
 			<td>
-				<a href="players.php?id=<?php echo $value["PlayerID"]; ?>">
+				<a href="players.php?a=view&amp;id=<?php echo $value["PlayerID"]; ?>">
 					<?php 
 						echo $value["player_first"]." ".$value["player_last"];
 					?>
@@ -61,8 +59,6 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			</td>
 			<td>
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
-			</td>
-			<td>
 				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
 			</td>
 		</tr>
@@ -72,7 +68,6 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 	</table>
 </div>
 <div class="player-template-list">
-	## TODO: add some padding for the previous test container
 	<table>
 		<tr>
 			<th colspan="3" class="table-title">Related Templates</th>

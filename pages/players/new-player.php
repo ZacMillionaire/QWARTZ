@@ -46,7 +46,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button style="width:100%;" type="submit">Create Player</button>
+				<button style="width:100%;" class="button" type="submit">Create Player</button>
 			</td>
 		</tr>
 	</table>

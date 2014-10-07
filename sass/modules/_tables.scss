@@ -10,27 +10,28 @@ table {
 	width: 100%;
 		border-collapse: collapse;
 	background-color: white;
+	margin: 20px 0;
 }
 
 
+
 th, td, .test-fauxtable-tablecell, .test-fauxtable-header{
-	padding: 10px 18px 10px 18px;
+	padding: 6px;
 	border: 1px solid #ccc;
+	vertical-align: middle;
 }
 
 th, .test-fauxtable-header {
 	font-weight: bold;
 	background: darken($container-bg-colour, 3%);
-	border-left: none;
-	border-right: none;
 	border-bottom: none;
 
 }
 
 td, .test-fauxtable-tablecell {
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 }
-tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even) {
+tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even), #new-fitness-template #table-container:nth-child(even) {
     background-color: #f9f9f9;
 }
 
@@ -89,10 +90,27 @@ input#category-input {
 
 #new-test-sticky {
 	padding: 15px 10px 20px 18px;
-	width: 940px;
+	width: inherit;
 			border: 1px solid white;
 
 		background: #e7e7e7;
+}
+
+.sticky-wrapper {
+	width: 100%;
+}
+
+#extra-notes {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.template-player-name {
+	font-size: 1.8rem;
+}
+
+.template-exercise-label {
+	padding-right: 55px;
 }
 
 .sorter {
@@ -102,4 +120,93 @@ input#category-input {
 
 .sorter:hover {
 		color: lighten($main-font-colour, 40%);
+}
+
+
+
+
+
+
+
+.superset-prompt {
+	font-size: 1.3rem;
+	text-transform: none;
+	font-weight: normal;
+	letter-spacing: 0;
+	float: right;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+
+#mark-superset {
+	width: 30px !important;
+	float:right;
+}
+
+.exercise-td {
+	padding: 0 !important;
+}
+
+#new-fitness-template #exercise-dropdown {
+	height: 50px;
+	font-size: 2.2rem !important;
+	font-family: 'Questrial', Arial, sans-serif !important;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 14px !important;
+}
+
+#new-fitness-template #table-container {
+	margin-left: -30px;
+	margin-top: 0;
+	padding: 60px 30px 60px 30px;
+	background-color: white;
+	border-bottom: 5px solid #666677;
+}
+
+
+
+
+// PLAYERS
+
+.player-card {
+	float: left;
+	margin-bottom: 2.5%;
+	width: 25%;
+
+	img {
+		float: left;
+		margin-right: 5px;
+	}
+}
+
+
+.player-card-single {
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+
+	h2 {
+		margin-bottom: 5px;
+	}
+}
+.profile-label, .profile-value {
+	display: inline-block;
+	font-size: 1.2rem;
+}
+
+.profile-label:after {
+	content: ":";
+}
+.player-name, .player-profile-picture, .player-position,  {
+	display: block;
+}
+
+.player-name {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.player-card-single {
+
 }

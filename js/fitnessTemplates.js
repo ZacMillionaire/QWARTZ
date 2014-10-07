@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             return string;
 		}
 
-		var tableToClone = $("table#exercise-table").last();
+		var tableToClone = $("table#exercise-table").last().parent();
 		var clonedTable = $(tableToClone[0]).clone(true);
 		var categoryID = randomString(8);
 

@@ -3,6 +3,14 @@
 	padding: 10px 27px 10px 27px;
 	border-radius: 4px;
 	background: $reds;
+	background: -moz-linear-gradient(top,  #e04761 0%, #c90a26 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e04761), color-stop(100%,#c90a26)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #e04761 0%,#c90a26 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #e04761 0%,#c90a26 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #e04761 0%,#c90a26 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #e04761 0%,#c90a26 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e04761', endColorstr='#c90a26',GradientType=0 ); /* IE6-9 */
+
 	font-size: 1.7rem;
 	color: white;
 	text-transform: uppercase;
@@ -10,9 +18,16 @@
 	font-family: 'Questrial', Arial, sans-serif;
 	box-shadow: 0 1px 1px #444;
 	border: none;
+	margin-right: 5px;
 	text-shadow: 0 1px 0 darken($reds, 10%);
 }
 
+
+.button[disabled=disabled], .button:disabled {
+	text-shadow: none;
+	background: #ddd;
+	color: #bbb;
+}
 
 .button-small {
 	display: inline-block;
@@ -28,5 +43,25 @@
 	font-family: 'Questrial', Arial, sans-serif;
 	box-shadow: 0 1px 1px #444;
 	text-shadow: 0 1px 0 darken($reds, 10%);
-	margin: 0 5px;	
+	margin: 0 5px;
+	padding-top: 5px;
+}
+
+.grey {
+	background: #f4f4f4; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f4f4f4 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f4f4f4), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f4f4f4 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f4f4f4 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f4f4f4 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f4f4f4 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+
+	text-shadow: none;
+	color: $main-font-colour;
+}
+
+.right {
+	float: right;
+	margin-top: -5px;
 }

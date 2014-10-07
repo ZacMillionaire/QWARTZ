@@ -7,7 +7,6 @@ $playerList = $Players->GetPlayerList();
 ?>
 
 <div id="player-card-container">
-	## TODO: these should line up in rows and columns with floats or whatever magic it is designers use now days.
 	<?php 
 		foreach ($playerList as $key => $value) {
 	?>

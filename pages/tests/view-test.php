@@ -11,11 +11,12 @@
 
 </style>
 <h2>Previous Test Data For <?php echo date("d/m/Y",strtotime($selectedTest["testDate"])); ?></h2>
-<table id="test-table">
+
     <?php
 
     	foreach ($selectedTest["data"] as $key => $value) {
     ?>
+    <table id="test-table">
     <tr>
         <th colspan="6" class="table-title"><?php echo $key; ?></th>
     </tr>
@@ -66,7 +67,10 @@
 
     <?php
     	}
+    ?>
+
+    </table>
+    <?php
     }
     ?>
 
-</table>

@@ -3,6 +3,7 @@
 
  		<script src="js/jquery.sticky.js"></script>
  		<script src="js/stupidtable.min.js"></script>
+ 		<script src="js/fixto.min.js"></script>
         <script src="js/jQuery.smoothState.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/main.js"></script>
