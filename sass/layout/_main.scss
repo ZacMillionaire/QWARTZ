@@ -22,8 +22,6 @@ article {
 }
 
 #content {
-	float: left;
-	width: 100%;
 	margin-left: 200px;
 	max-width: 1000px;
 	min-height: 700px;
@@ -84,7 +82,6 @@ article {
 	height: 100%;
 	background-color: $dark-blue-bg;
 
-	ul {width: 200px;}
 	a {
 		color: lighten($dark-blue-bg, 30%);
 		text-transform: uppercase;

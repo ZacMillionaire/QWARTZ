@@ -136,7 +136,7 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <button type="submit">Update</button>
+                        <button type="submit" class="button">Update</button>
                     </td>
                 </tr>
             </table>

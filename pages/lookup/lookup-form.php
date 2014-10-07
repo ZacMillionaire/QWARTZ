@@ -19,7 +19,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 ?>
 
 <div class="previous-test-list">
-	## TODO: add some padding for the previous test container
 	<table>
 		<tr>
 			<th colspan="5" class="table-title">Previous Tests: Most recent 30</th>
@@ -53,8 +52,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			</td>
 			<td>
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["testID"]; ?>">View Test</a>
-			</td>
-			<td>
 				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>">Edit Data</a>
 			</td>
 		</tr>

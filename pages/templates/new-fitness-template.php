@@ -45,12 +45,12 @@ the user can use later on.
 
 	<div id="new-test-sticky">
 
-		<button id="add-exercise" class="button-small">
+		<button id="add-exercise" class="button-small grey">
 			Add Exercise
 		</button>
 
-		<button id="submit-template-button" type="submit" disabled>
-			Create Template
+		<button id="submit-template-button" type="submit" class="button right" disabled>
+			Submit Template
 		</button>
 
 	</div>

@@ -117,8 +117,8 @@ class FitnessTemplates extends System {
 		*/
 		$tableHeader = "<table>";
 		$tableHeader .= "<tr class=\"header-columns\">";
-		$tableHeader .= "<th>Player name</th>";
-		$tableHeader .= "<th colspan=\"6\">$playerData[FirstName] $playerData[LastName]</th>";
+		$tableHeader .= "<th>Player name:</th>";
+		$tableHeader .= "<th colspan=\"6\" class='template-player-name'>$playerData[FirstName] $playerData[LastName]</th>";
 
 		for($i = 0; $i < $templateDataString["sessions"]; $i++){
 			$tableHeader .= "<th colspan=\"3\">S".($i+1)."</th>";
@@ -126,7 +126,7 @@ class FitnessTemplates extends System {
 
 		$tableHeader .= "</tr>";
 		$tableHeader .= "<tr class=\"sub-columns\">";
-		$tableHeader .= "<th>Exercise</th>";
+		$tableHeader .= "<th class='template-exercise-label'>Exercise</th>";
 		$tableHeader .= "<th>Notes</th>";
 		$tableHeader .= "<th>Rest (mins)</th>";
 		$tableHeader .= "<th>Sets</th>";
@@ -160,7 +160,7 @@ class FitnessTemplates extends System {
 		$tableFooter .= "<th colspan=\"".$fullWidthColSpan."\">Extra Notes</th>";
 		$tableFooter .= "</tr>";
 		$tableFooter .= "<tr>";
-		$tableFooter .= "<td colspan=\"".$fullWidthColSpan."\">".$templateDataString["extraNotes"]."</td>";
+		$tableFooter .= "<td  id='extra-notes' colspan=\"".$fullWidthColSpan."\">".$templateDataString["extraNotes"]."</td>";
 		$tableFooter .= "</tr>";
 		$tableFooter .= "</table>";
 		/*

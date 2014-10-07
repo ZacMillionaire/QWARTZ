@@ -37,6 +37,8 @@
 					</select>
 				</td>
 			</tr>
+		</table>
+		<table>
 			<tr>
 				<th class="table-title" colspan="4">
  					Exercise Group
@@ -74,6 +76,8 @@
 					</select>
 				</td>
 			</tr>
+		</table>
+		<table>
 			<tr>
 				<th class="table-title" colspan="4">
  					Date Range
@@ -95,10 +99,8 @@
 					<input style="width: 100%" type="date" class="date-picker" value="<?php echo @$_POST["endDate"]; ?>" name="endDate" placeholder="End Date"/>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="4">
-					<button style="width: 100%" type="submit">Lookup</button>
-				</td>
-			</tr>
-		</table>	
+	
+		</table>
+		<button style="width: 100%" class="button" type="submit">Lookup</button>
+	
 	</form>

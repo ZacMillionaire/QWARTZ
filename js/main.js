@@ -2,10 +2,16 @@
 
 (function($){
 
+	// this is so hacky but its the only way to do it with position:fixed!
 	$("#new-test-sticky").sticky({topSpacing:0});
-	$("#main-nav ul").sticky({topSpacing:0});
-
+	var newWidth = $('#content').width() - 90;
+	$('#new-test-sticky').width(newWidth);
 	
+	$( window ).bind("resize", function(){
+    newWidth = $('#content').width() - 90;
+    $("#new-test-sticky").width(newWidth);
+});
+
 	$("#test-table").stupidtable();
 
 	if(document.getElementById("login-action") != null){

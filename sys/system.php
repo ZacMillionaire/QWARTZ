@@ -1,5 +1,12 @@
 <?php 
 
+	// The system spits out quite a few PHP notices which the user can see
+	// depending on the server configuration. This is a hacky way to stop that,
+	// but should probably be disabled whenever debugging.
+	error_reporting(E_ALL ^ E_NOTICE);
+
+
+
 	require_once "database.php";
 	require_once "users.php";
 	require_once "data.php";
