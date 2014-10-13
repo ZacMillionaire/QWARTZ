@@ -7,6 +7,8 @@ class Players extends System {
 		$this->DatabaseSystem = parent::GetDatabaseSystem();
 		$this->SystemSettings = parent::GetSystemSettings();
 		$this->DataCollection = parent::GetDataCollectionSystem();
+		$this->UserSystem = parent::GetUserSystem();
+		$this->DataLockSystem = parent::GetDataLockSystem();
 
 	} // End Class Constructor
 
@@ -103,6 +105,11 @@ class Players extends System {
 		);
 
 		$insert = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		$userID = $this->UserSystem->GetUserIDFromHash($_COOKIE["loginHash"]);
+		$playerID = $newPlayerData["playerID"];
+
+		$this->DataLockSystem->LockPlayerData($playerID,$userID);
 
 		if($insert){
 

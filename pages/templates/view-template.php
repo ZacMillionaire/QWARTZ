@@ -23,6 +23,9 @@ $GeneratedTable = $FitnessTemplateSystem->GenerateTableFromData($templateArray,$
 	<a id="edit-template-button" href="templates.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>">
 		Edit Template
 	</a>
+	<a id="clone-template-button" href="templates.php?a=clone&amp;id=<?php echo $_GET["id"]; ?>">
+		Use Template As Base
+	</a>
 </div>
 
 <div id="template-name">

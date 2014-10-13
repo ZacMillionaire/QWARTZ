@@ -15,34 +15,16 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 
 ?>
-
-<form id="new-fitness-template" action="sys/exec/update-template.php" method="POST">
-	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateUID" />
+<h1>New Template from previous</h1>
+<form id="new-fitness-template" action="sys/exec/clone-template.php" method="POST">
 	<div id="new-test-sticky">
-		TODO: This template call should be wrapped in another div for sticky styling so it doesn't conflict with others
-		<?php
 
-		    $lockData = $System->GetDataLockSystem()->GetTemplateDataLockStatus($_GET['id']);
-		    $rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
-		    $editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
-		    $pageReadOnly =(time() < $rowUnlocks);
-
-		    if($pageReadOnly){
-
-		        $timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
-
-		        include "pages/fragments/lockout.php";
-
-		    }
-
-		?>
-
-		<button id="add-exercise" class="button-small grey" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>
+		<button id="add-exercise" class="button-small grey">
 			Add Exercise
 		</button>
 
-		<button id="submit-template-button" class="button right" type="submit" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>
-			Update Template
+		<button id="submit-template-button" class="button right" type="submit">
+			New Template
 		</button>
 
 	</div>
@@ -62,7 +44,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						value="<?php echo $templateDataString["templateName"]; ?>"
 	 					style="width: 100%"
 						required
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -78,26 +59,17 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 	 					name="playerID"
 	 					id="player-name-selection"
 	 					required
-	 					<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 	 				>
 						<option value=""> --- Select Player --- </option>
 						<?php
 						
 							foreach ($players as $key => $value) {
 
-								if($templateDataString["playerID"] == $value["PlayerID"]){
-									printf(
-										"<option value=\"%s\" selected>%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								} else {
-									printf(
-										"<option value=\"%s\">%s</option>",
-										$value["PlayerID"],
-										$value["FirstName"]." ".$value["LastName"]
-									);
-								}
+								printf(
+									"<option value=\"%s\">%s</option>",
+									$value["PlayerID"],
+									$value["FirstName"]." ".$value["LastName"]
+								);
 
 							}
 
@@ -117,7 +89,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						value="<?php echo $templateDataString["sessions"]; ?>"
 						id="sessions-input"
 						placeholder="Sessions"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -147,14 +118,13 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<tr>
 				<th class="table-title" colspan="1">
  					Exercise
- 					<input
+ 										<input
 						type="checkbox"
 						id="mark-superset"
 						name="superset[<?php echo $key; ?>]"
 						data-input-index="0"
 						data-category-set="<?php echo $key; ?>"
 						<?php echo $superset; ?>
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</th>
 				<td colspan="2">
@@ -179,7 +149,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						id="exercise-dropdown"
 						data-category-set="<?php echo $key; ?>"
 						required
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					>
 						<option value=""> --- Select Exercise --- </option>
 						<?php
@@ -226,7 +195,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="Rest (mins)"
 						data-category-set="<?php echo $key; ?>"
 						required
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -246,7 +214,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						id="sets-input"
 						placeholder="Sets"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -272,7 +239,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="reps"
 						data-category-set="<?php echo $key; ?>"
 						required
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 				<td>
@@ -284,7 +250,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="1RM"
 						value="<?php echo $oneRM; ?>"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 				<td>
@@ -296,7 +261,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="%1RM"
 						value="<?php echo $oneRMPercent; ?>"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -318,7 +282,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="Est"
 						value="<?php echo $sessionEstimated; ?>"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 				<td>
@@ -330,7 +293,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="target"
 						value="<?php echo $sessionTarget; ?>"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 				<td>
@@ -342,7 +304,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						placeholder="Reps"
 						value="<?php echo $sessionReps; ?>"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
 				</td>
 			</tr>
@@ -359,7 +320,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						id="notes-input"
 						name="exerciseNotes[<?php echo $key; ?>]"
 						data-category-set="<?php echo $key; ?>"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 						><?php echo $exerciseNotes; ?></textarea>
 				</td>
 			</tr>
@@ -387,7 +347,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						style="width:100%"
 						id="extra-notes"
 						name="extraNotes"
-						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 						><?php echo $templateDataString["extraNotes"]; ?></textarea>
 				</td>
 			</tr>

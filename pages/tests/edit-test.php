@@ -1,6 +1,7 @@
 <?php
 
-	$selectedTest = $System->GetFitnessTestSystem()->GetSpecificFitnessTestData($_GET['tid']);
+    $TestSystem = $System->GetFitnessTestSystem();
+	$selectedTest = $TestSystem->GetSpecificFitnessTestData($_GET['tid']);
     $players = $System->GetDataCollectionSystem()->GetPlayerList();
     $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
@@ -17,6 +18,23 @@
          in <?php echo $selectedTest["ExerciseCategoryName"]; ?>
          on <?php echo date("d/m/Y",strtotime($selectedTest["DateEntered"])); ?>
     </h2>
+<?php
+
+    $lockData = $System->GetDataLockSystem()->GetTestDataLockStatus($_GET['tid']);
+    $rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
+    $editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
+    $pageReadOnly =(time() < $rowUnlocks);
+
+    if($pageReadOnly){
+
+        $timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
+
+        include "pages/fragments/lockout.php";
+
+    }
+
+?>
+
     <div id="table-container">
         <form action="sys/exec/update-test-data.php" method="POST">
 
@@ -40,6 +58,7 @@
                             name="players[<?php echo $selectedTest["ExerciseCategoryName"]; ?>][]"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
                             id="player-name-entry"
+                            <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
                         >
                             <option value=""> --- Select Player --- </option>
                             <?php
@@ -71,6 +90,7 @@
                             name="exercise[<?php echo $selectedTest["ExerciseCategoryName"]; ?>][]"
                             id="exercise-dropdown"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
+                            <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
                         >
                             <option value=""> --- Select Exercise --- </option>
                             <?php
@@ -105,6 +125,7 @@
                             id="weight-input"
                             placeholder="Weight"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
+                            <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
                         />
                     </td>
                     <td>
@@ -120,6 +141,7 @@
                             placeholder="reps"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
                             required
+                            <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
                         />
                     </td>
                     <td>
@@ -131,12 +153,13 @@
                             id="est-1rm"
                             placeholder="Estimated 1RM"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
+                            <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
                         />
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <button type="submit" class="button">Update</button>
+                        <button type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>Update</button>
                     </td>
                 </tr>
             </table>

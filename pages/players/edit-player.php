@@ -2,8 +2,12 @@
 
 $Data = $System->GetDataCollectionSystem();
 
+// update player row with last edited data
+$Players = $System->GetPlayerSystem();
+
 $playerID = (isset($_GET["playerID"])) ? $_GET["playerID"] : $_GET["id"];
 $playerData = $Data->GetPlayerDetailsByID($playerID);
+
 
 ?>
 
@@ -14,6 +18,34 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 </div>
 
 <?php } ?>
+
+<?php
+
+    $playerLockData = $System->GetDataLockSystem()->GetPlayerDataLockStatus($_GET["id"]);
+	$rowUnlocks = strtotime("+5 minutes", strtotime($playerLockData["lastEditDateTime"]));
+
+	if(time() < $rowUnlocks && $userData["userID"] != $playerLockData["lastEditOwner"]){
+
+		$timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
+
+?>
+
+	<div id="edit-warning">
+		Editing this player is locked for another <?php echo $timeTillUnlock; ?> minute<?php echo ($timeTillUnlock > 1) ? "s" : ""; ?>.
+		<?php 
+			if($userData["userID"] == $playerLockData["lastEditOwner"]) {
+		?>
+			<div id="edit-owner-message">
+				However, you are the owner of this edit and are not restricted by this lockout.
+			</div>
+		<?php
+			}
+		?>
+	</div>
+
+<?php 
+	} else {
+?>
 
 <div id="table-container">
 	<form action="sys/exec/update-player.php" method="POST">
@@ -62,3 +94,8 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 	</table>
 	</form>
 </div>
+<?php
+
+}
+
+?>

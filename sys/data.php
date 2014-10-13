@@ -79,7 +79,9 @@ class DataCollection extends System {
 		 			`ExerciseCategoryName`,
 					`playerdetails`.`FirstName` AS `player_first`,
 					`playerdetails`.`LastName` AS `player_last`,
-					`PlayerID`
+					`PlayerID`,
+					`playertestinginfo`.`lastEditOwner`,
+					`playertestinginfo`.`lastEditDateTime`
 				FROM `playertestinginfo`
 				INNER JOIN `playerdetails` USING(`PlayerID`)
 				INNER JOIN `exercises` USING(`ExerciseID`)

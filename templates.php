@@ -88,6 +88,17 @@
                         }
                         break;
 
+                    case "clone":
+
+                        // Take them to edit the template if given an ID
+                        // otherwise take them to the saved templates list
+                        if(isset($_GET["id"])){
+                            include "pages/templates/clone-template.php";
+                        } else {
+                            include "pages/templates/saved-templates.php";                           
+                        }
+                        break;
+
                     case "view":
                         include "pages/templates/view-template.php";                           
                         break;

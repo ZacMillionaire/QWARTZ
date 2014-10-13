@@ -7,6 +7,8 @@ class FitnessTemplates extends System {
 		$this->DatabaseSystem = parent::GetDatabaseSystem();
 		$this->SystemSettings = parent::GetSystemSettings();
 		$this->DataCollection = parent::GetDataCollectionSystem();
+		$this->UserSystem = parent::GetUserSystem();
+		$this->DataLockSystem = parent::GetDataLockSystem();
 
 	} // End Class Constructor
 
@@ -258,6 +260,36 @@ class FitnessTemplates extends System {
 		return $tableBody;
 
 	} // End GenerateTableBody
+
+	public function UpdateTemplateData($postData){
+
+		$templateUID = $postData["templateUID"];
+
+		unset($postData["templateUID"]);
+
+		$templateDataString = json_encode($postData);
+
+		$sql = "UPDATE `fitnesstemplates` SET
+				`playerID`= :playerID,
+				`title`= :title,
+				`templateDataString`= :templateDataString
+				WHERE `templateUID` = :templateUID;";
+
+		$params = array(
+			"playerID" => $postData["playerID"],
+			"title" => $postData["templateName"],
+			"templateDataString" => $templateDataString,
+			"templateUID" => $templateUID
+		);
+
+		$this->DatabaseSystem->dbInsert($sql,$params);
+
+		$userID = $this->UserSystem->GetUserIDFromHash($_COOKIE["loginHash"]);
+		$this->DataLockSystem->LockTemplateData($templateUID,$userID);
+
+		return $templateUID;
+
+	}
 
 }
 

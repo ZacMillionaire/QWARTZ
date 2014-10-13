@@ -2,9 +2,31 @@
 
 $Players = $System->GetPlayerSystem();
 
+
 $playerData = $Players->GetPlayerData($_GET["id"]);
 
+
+//print_r($playerData);
+
 ?>
+
+<?php
+
+    $lockData = $System->GetDataLockSystem()->GetPlayerDataLockStatus($_GET["id"]);
+	$rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
+	$editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
+    $pageReadOnly =(time() < $rowUnlocks);
+
+    if($pageReadOnly){
+
+		$timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
+
+		include "pages/fragments/lockout.php";
+
+	}
+
+?>
+
 	<div class="player-card-single">
 		<div class="player-profile-picture">
 			<img src="<?php echo ($playerData["playerInfo"]["profilePicture"] != null)?$playerData["playerInfo"]["profilePicture"]:"images/default_profile.png"; ?>" alt="" />
@@ -37,6 +59,8 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			<th colspan="2">Actions</th>
 		</tr>
 		<?php
+			// see line 87
+			//$TestSystem = $System->GetFitnessTestSystem();
 			foreach($playerData["testData"] as $key => $value) {
 		?>
 		<tr>
@@ -59,7 +83,25 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			</td>
 			<td>
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
+				<?php
+					/*
+					this'll probably be a thing next meeting, but I'm commenting it out for now
+					
+					$lockData = $TestSystem->GetTestDataLockStatus($value["playerTestID"]);
+					$rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
+
+					if(time() < $rowUnlocks && $userData["userID"] != $lockData["lastEditOwner"]){
+				?>
+
+                <a class="button disabled">(NYI: disabled state)Edit Player</a>
+
+				<?php
+					} else { */
+				?>
 				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
+				<?php
+					//}
+				?>
 			</td>
 		</tr>
 		<?php	

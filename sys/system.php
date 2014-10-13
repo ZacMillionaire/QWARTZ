@@ -5,8 +5,6 @@
 	// but should probably be disabled whenever debugging.
 	error_reporting(E_ALL ^ E_NOTICE);
 
-
-
 	require_once "database.php";
 	require_once "users.php";
 	require_once "data.php";
@@ -14,6 +12,7 @@
 	require_once "fitnessTemplates.php";
 	require_once "search.php";
 	require_once "player.php";
+	require_once "dataLock.php";
 	
 	class System {
 
@@ -87,6 +86,13 @@
 
 			return $Players;
 
+		}
+
+		public function GetDataLockSystem() {
+
+			$Locks = new DataLockSystem();
+
+			return $Locks;
 		}
 
 		public function GetSystemSettings() {
