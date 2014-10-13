@@ -13,17 +13,23 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 <?php
 
     $lockData = $System->GetDataLockSystem()->GetPlayerDataLockStatus($_GET["id"]);
-	$rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
-	$editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
-    $pageReadOnly =(time() < $rowUnlocks);
+    $lockDuration = $System->GetDataCollectionSystem()->GetReadOnlyDuration();
+    $rowUnlocks = strtotime("+".$lockDuration." minutes", strtotime($lockData["lastEditDateTime"]));
+
+    // hack to make PHP use the right time. Don't even ask.
+    $literallyRightNow =  strtotime(date("g:i:s",time()));
+
+    $editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
+    $pageReadOnly =($literallyRightNow < $rowUnlocks);
+
 
     if($pageReadOnly){
 
-		$timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
+        $timeTillUnlock = number_format(($rowUnlocks - $literallyRightNow)/60,0);
 
-		include "pages/fragments/lockout.php";
+        include "pages/fragments/lockout.php";
 
-	}
+    }
 
 ?>
 

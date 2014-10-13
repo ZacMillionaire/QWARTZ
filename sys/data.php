@@ -122,6 +122,71 @@ class DataCollection extends System {
 		return $result;
 	}
 
+	public function GetRepTable(){
+
+		$sql = "SELECT * FROM `settings` WHERE `settingID` = 2;";
+		$params = null;
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+		$repString = $result[0]["value"];
+
+		$lookupTable = array();
+
+		foreach(explode(",", $repString) as $key => $value) {
+			$exploded = explode(":", $value);
+			$lookupTable[$exploded[0]] = $exploded[1];
+		}
+
+		return $lookupTable;
+
+	}
+
+	public function UpdateRepTable($postData){
+
+		$repString = "";
+
+		foreach ($postData["reps"] as $key => $value) {
+			$repString .= "$key:$value";
+			if(count($postData["reps"]) != $key){
+				$repString .= ",";
+			}
+		}
+
+		$sql = "UPDATE `settings`
+				SET `value` = :repString
+				WHERE `settingID` =2;";
+		$params = array(
+			"repString" => $repString
+		);
+
+		$result = $this->DatabaseSystem->dbInsert($sql,$params);
+
+	}
+
+	public function GetReadOnlyDuration() {
+
+		$sql = "SELECT * FROM `settings` WHERE `settingID` = 1;";
+		$params = null;
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result[0]["value"];
+
+	}
+
+	public function UpdateReadOnlyDuration($postData) {
+
+		$sql = "UPDATE `settings`
+				SET `value` = :duration
+				WHERE `settingID` = 1;";
+		$params = array(
+			"duration" => $postData["duration"]
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+	}
+
 }
 
 ?>

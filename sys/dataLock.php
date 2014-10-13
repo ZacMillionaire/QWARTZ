@@ -83,6 +83,7 @@ class DataLockSystem extends System {
 
 	public function GetTestDataLockStatus($testID) {
 
+
 		$sql = "SELECT `lastEditOwner`,`lastEditDateTime` FROM `playertestinginfo` WHERE `playerTestID` = :testID;";
 		$params = array(
 			"testID" => $testID

@@ -21,30 +21,24 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 
 <?php
 
-    $playerLockData = $System->GetDataLockSystem()->GetPlayerDataLockStatus($_GET["id"]);
-	$rowUnlocks = strtotime("+5 minutes", strtotime($playerLockData["lastEditDateTime"]));
+    $lockData = $System->GetDataLockSystem()->GetPlayerDataLockStatus($_GET['id']);
+    $lockDuration = $System->GetDataCollectionSystem()->GetReadOnlyDuration();
+    $rowUnlocks = strtotime("+".$lockDuration." minutes", strtotime($lockData["lastEditDateTime"]));
 
-	if(time() < $rowUnlocks && $userData["userID"] != $playerLockData["lastEditOwner"]){
+    // hack to make PHP use the right time. Don't even ask.
+    $literallyRightNow =  strtotime(date("g:i:s",time()));
 
-		$timeTillUnlock = number_format(($rowUnlocks - time())/60,0);
+    $editOwner = ($userData["userID"] == $lockData["lastEditOwner"]);
+    $pageReadOnly =($literallyRightNow < $rowUnlocks);
 
-?>
 
-	<div id="edit-warning">
-		Editing this player is locked for another <?php echo $timeTillUnlock; ?> minute<?php echo ($timeTillUnlock > 1) ? "s" : ""; ?>.
-		<?php 
-			if($userData["userID"] == $playerLockData["lastEditOwner"]) {
-		?>
-			<div id="edit-owner-message">
-				However, you are the owner of this edit and are not restricted by this lockout.
-			</div>
-		<?php
-			}
-		?>
-	</div>
+    if($pageReadOnly){
 
-<?php 
-	} else {
+        $timeTillUnlock = number_format(($rowUnlocks - $literallyRightNow)/60,0);
+
+        include "pages/fragments/lockout.php";
+
+    }
 ?>
 
 <div id="table-container">
@@ -59,7 +53,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				First Name
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["FirstName"])) ? $_GET["FirstName"] : $playerData["FirstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name"/>
+				<input value="<?php echo (isset($_GET["FirstName"])) ? $_GET["FirstName"] : $playerData["FirstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
@@ -67,7 +61,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				Last Name
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["LastName"])) ? $_GET["LastName"] : $playerData["LastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" required/>
+				<input value="<?php echo (isset($_GET["LastName"])) ? $_GET["LastName"] : $playerData["LastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" required <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
@@ -75,7 +69,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				Position
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["Position"])) ? $_GET["Position"] : $playerData["Position"]; ?>" style="width:100%;" type="text" name="position" placeholder="Position" required/>
+				<input value="<?php echo (isset($_GET["Position"])) ? $_GET["Position"] : $playerData["Position"]; ?>" style="width:100%;" type="text" name="position" placeholder="Position" required <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
@@ -83,19 +77,14 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				Weight
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["Weight"])) ? $_GET["Weight"] : $playerData["Weight"]; ?>" style="width:100%;" type="number" name="weight" placeholder="Weight" required/>
+				<input value="<?php echo (isset($_GET["Weight"])) ? $_GET["Weight"] : $playerData["Weight"]; ?>" style="width:100%;" type="number" name="weight" placeholder="Weight" required <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button style="width:100%;" type="submit" class="button">Update Player</button>
+				<button style="width:100%;" type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>Update Player</button>
 			</td>
 		</tr>
 	</table>
 	</form>
 </div>
-<?php
-
-}
-
-?>

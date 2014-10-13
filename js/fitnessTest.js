@@ -2,15 +2,15 @@
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-	var playerJSON;
+	var lookUpTable;
 
 	$("#date-picker").datepicker();
 	
-	$.get("data/player_data.php", function(data){
+	$.get("data/rep_data.php", function(data){
 
-		playerJSON = data;
+		lookUpTable = data;
 
-		console.log(playerJSON);
+	//	console.log(lookUpTable);
 
 	});
 
@@ -266,19 +266,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 	function update1RM(e){
-
-		var lookUpTable = {
-			1 : 1,
-			2 : 1.05,
-			3 : 1.08,
-			4 : 1.12,
-			5 : 1.16,
-			6 : 1.2,
-			7 : 1.23,
-			8 : 1.26,
-			9 : 1.29,
-			10 : 1.33
-		};
 
 		var dataSet = this.attributes["data-category-set"].value;
 

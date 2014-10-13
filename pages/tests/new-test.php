@@ -135,7 +135,8 @@
 				<td>
 					<input
 						style="width:100%"
-						type="number"
+						type="text"
+						pattern="[0-9.]*"
 						value="1"
 						name="est1rm[default][]"
 						id="est-1rm"
