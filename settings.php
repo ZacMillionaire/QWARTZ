@@ -57,7 +57,7 @@
             
             <?php if(@$_GET["a"] == "users") { ?>
             <div id="button-area">
-                <a href="templates.php?a=new" class="button">New User</a>
+                <a href="settings.php?a=users&amp;m=c" class="button">New User</a>
             </div>
             <?php } ?>
 
@@ -70,7 +70,7 @@
                 switch(@$_GET["a"]){
 
                     case "users":
-                        include "pages/settings/user-management.php";
+            			include "pages/users/user-management.php";
                         break;
 
                     default:

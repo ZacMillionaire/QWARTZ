@@ -315,17 +315,179 @@ class Users extends System {
 		return $loggedInUsers;
 
 
-		/*
+	} // end GetLoggedInUserList
+
+	public function GetUserList() {
+		$sql = "SELECT * FROM `users`;";
+		$params = null;
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+	}
+
+	public function GetUserByID($userID){
+
+		$sql = "SELECT * FROM `users` WHERE `userID` = :userID";
+		$params = array(
+			"userID" => $userID
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
 		if($result){
-
-			// profile picture is nullable, so if it is, set the value to the default
-			$result[0]["profilePicture"] = ($result[0]["profilePicture"] == null) ? "default_profile.png" : $result[0]["profilePicture"];
-
 			return $result[0];		
 		}
-		*/
+	}
 
-	} // end GetLoggedInUserList
+	public function CreateNewUser($postData) {
+		
+		if(!self::CheckPasswords($postData["password1"],$postData["password2"])) {
+			return array("error"=>"Passwords do not match");
+		}
+
+		if(self::UsernameExists($postData["username"])){
+			return array("error"=>"Username already exists");
+		}
+
+		$password = self::FormatPassword($postData["password1"]);
+
+		if(self::InsertUserIntoDatabase($postData["username"],$password)) {
+			return true;
+		} else {
+			return array("error"=>"System error");
+		}
+
+	}
+
+	private function CheckPasswords($p1, $p2) {
+		return $p1 === $p2;
+	}
+
+	private function FormatPassword($password){
+
+		$password = hash("sha512", $password);
+		$passwordSalt = hash("sha512",mt_rand());
+		$passwordHash = hash("sha512",$password.$passwordSalt);
+
+		return array("salt" => $passwordSalt,"hashed" => $passwordHash);
+
+	}
+
+	private function InsertUserIntoDatabase($username,$passwordArray) {
+
+		$sql = "INSERT INTO `users`(
+					`username`,
+					`password`,
+					`passwordSalt`
+				) VALUES (
+					:username,
+					:password,
+					:passwordSalt
+				);";
+		$params = array(
+			"username"=>$username,
+			"password"=>$passwordArray["hashed"],
+			"passwordSalt"=>$passwordArray["salt"]
+		);
+
+		$insert = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		if($insert){
+			return true;
+		}
+
+		return false;
+	}
+
+	private function UpdateExistingUserData($userID, $newData, $withPassword) {
+
+		if($withPassword) {
+
+			$sql = "UPDATE `users`
+					SET
+						`username` = :username,
+						`password` = :password,
+						`passwordSalt` = :passwordSalt
+					WHERE `userID` = :userID;";	
+			$params = array(
+				"userID" => $userID,
+				"username" => $newData["username"],
+				"password" => $newData["hashed"],
+				"passwordSalt" => $newData["salt"]
+			);
+
+		} else {
+
+			$sql = "UPDATE `users`
+					SET
+						`username` = :username
+					WHERE `userID` = :userID;";	
+			$params = array(
+				"userID" => $userID,
+				"username" => $newData["username"]
+			);
+
+		}
+
+		$update = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		if($update){
+			return true;
+		}
+
+		return false;
+
+	}
+
+	public function DeleteUser($userID){
+
+		$sql = "DELETE FROM `users` WHERE `userID` = :userID;";
+		$params = array("userID" => $userID);
+
+		$query = $this->DatabaseSystem->dbQuery($sql,$params);
+
+	}
+
+	public function UpdateUser($postData) {
+
+		$withPassword = false;
+
+		if($postData["password1"] != null && $postData["password2"] != null) {
+			if(!self::CheckPasswords($postData["password1"],$postData["password2"])) {
+				return array("error"=>"Passwords do not match.");
+			} else {
+				$withPassword = true;
+			}
+		}
+
+		if($postData["oldUsername"] != $postData["username"]){
+			if(self::UsernameExists($postData["username"])){
+				return array("error"=>"Username already in use.");
+			}
+		}
+
+		if($withPassword){
+			$password = self::FormatPassword($postData["password1"]);
+
+			$updateData = array(
+				"username"=>$postData["username"],
+				"hashed" => $password["hashed"],
+				"salt" => $password["salt"]
+			);
+		} else {
+			$updateData = array(
+				"username"=>$postData["username"]
+			);
+		}
+
+		if(self::UpdateExistingUserData($postData["userID"],$updateData,$withPassword)) {
+			return true;
+		} else {
+			return array("error"=>"System error");
+		}
+
+	}
 
 } // End Class Users
 
