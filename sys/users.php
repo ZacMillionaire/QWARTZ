@@ -136,7 +136,7 @@ class Users extends System {
 	 */
 	private function UsernameExists($username){
 
-		$sql = "SELECT `username` FROM `users` WHERE `username` = :username";
+		$sql = "SELECT `username` FROM `users` WHERE BINARY `username` = :username";
 		$params = array(
 			"username" => $username
 		);
@@ -162,7 +162,7 @@ class Users extends System {
 
 		// Get the stored hash values for the password and passwordSalt associated 
 		// with a given username
-		$query = "SELECT `password`,`passwordSalt` FROM `users` WHERE `username` = :username";
+		$query = "SELECT `password`,`passwordSalt` FROM `users` WHERE BINARY `username` = :username";
 		$params = array(
 			"username" => trim($username)
 		);
@@ -207,7 +207,7 @@ class Users extends System {
 					(
 						SELECT `userID`
 						FROM `users`
-						WHERE `username` = :username
+						WHERE BINARY `username` = :username
 					),
 					:cookieHash,
 					NOW()

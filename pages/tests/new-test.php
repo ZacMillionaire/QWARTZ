@@ -30,6 +30,7 @@
 						name="categoryName[default]"
 						placeholder="Category Name"
 						data-category-set="default"
+						pattern="[a-zA-Z\s-/]*"
 						required
 					/>
 				</th>
@@ -108,7 +109,7 @@
 				<td>
 					<input
 						style="width:100%"
-						type="text"
+						type="number"
 						name="weight[default][]"
 						value="0"
 						id="weight-input"
@@ -134,7 +135,7 @@
 				<td>
 					<input
 						style="width:100%"
-						type="text"
+						type="number"
 						value="1"
 						name="est1rm[default][]"
 						id="est-1rm"

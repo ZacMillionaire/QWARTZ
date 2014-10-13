@@ -20,14 +20,9 @@ $GeneratedTable = $FitnessTemplateSystem->GenerateTableFromData($templateArray,$
 
 ?>
 <div id="new-test-sticky">
-
 	<a id="edit-template-button" href="templates.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>">
 		Edit Template
 	</a>
-	<a id="print-template-button" href="templates.php?a=print&amp;id=<?php echo $_GET["id"]; ?>">
-		Print Template
-	</a>
-
 </div>
 
 <div id="template-name">

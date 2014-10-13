@@ -17,7 +17,7 @@
 				First Name
 			</td>
 			<td>
-				<input value="<?php echo @$_GET["firstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name" required/>
+				<input value="<?php echo @$_GET["firstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name" pattern="[a-zA-Z\s-]*" required/>
 			</td>
 		</tr>
 		<tr>
@@ -25,7 +25,7 @@
 				Last Name
 			</td>
 			<td>
-				<input value="<?php echo @$_GET["lastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" required/>
+				<input value="<?php echo @$_GET["lastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" pattern="[a-zA-Z\s-]*" required/>
 			</td>
 		</tr>
 		<tr>
@@ -33,7 +33,7 @@
 				Position
 			</td>
 			<td>
-				<input value="<?php echo @$_GET["position"]; ?>" style="width:100%;" type="text" name="position" placeholder="Position" required/>
+				<input value="<?php echo @$_GET["position"]; ?>" style="width:100%;" type="text" name="position" placeholder="Position" pattern="[a-zA-Z\s-/()]*" required/>
 			</td>
 		</tr>
 		<tr>

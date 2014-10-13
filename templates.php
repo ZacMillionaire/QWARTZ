@@ -92,10 +92,6 @@
                         include "pages/templates/view-template.php";                           
                         break;
 
-                    case "print":
-                        include "pages/templates/print-template.php";                           
-                        break;
-
                     default:
                         include "pages/templates/overview.php";
                         break;
