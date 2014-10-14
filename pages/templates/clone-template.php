@@ -15,7 +15,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 
 
 ?>
-<h1>New Template from previous</h1>
+<h2>New Template from previous</h2>
 <form id="new-fitness-template" action="sys/exec/clone-template.php" method="POST">
 	<div id="new-test-sticky">
 
@@ -93,7 +93,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 			</tr>
 		</table>
-		<br/>
+		</div>
 <!-- REPEATING AREA START -->
 
 <?php
@@ -114,6 +114,8 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 		$exerciseNotes = $value["exerciseNotes"];
 
 ?>
+<div id="table-container">
+
 		<table id="exercise-table">
 			<tr>
 				<th class="table-title" colspan="1">
@@ -323,14 +325,10 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						><?php echo $exerciseNotes; ?></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3">
-					need to add padding around these exercise tables, they're too hard to distinguish apart currently
-				</td>
-			</tr>
 		</table>
+	</div>
 <!-- REPEATING AREA END -->
-		<br/>
+
 <?php
 	}
 }

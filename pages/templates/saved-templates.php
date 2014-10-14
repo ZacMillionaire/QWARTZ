@@ -4,29 +4,35 @@ $savedTemplates = $System->GetFitnessTemplateSystem()->GetSavedTemplatesList();
 
 ?>
 
-<div class="template-list-container">
+<table>
+			<tr>
+			<th>Template Name</th>
+			<th>Created On</th>
+			<th>Author</th>
+			<th>Actions</th>
+		</tr>
 
 <?php
 	// This could probably be done as a table as well, for sorting reasons and etc
     foreach($savedTemplates as $key => $value) {
 ?>
-	<div class="saved-template-item">
+	<tr>
 
-		<div class="saved-template-details">
-			<div class="template-name"><?php echo $value["title"]; ?></div>
-			<div class="template-date">Date Created: <?php echo $value["dateAdded"]; ?></div>
-		</div>
+		<td class="saved-template-name">
+			<?php echo $value["title"]; ?>
+			
+		</td>
+		<td><?php echo $value["dateAdded"]; ?></td>
+		<td>#CREATOR</td>
 
-		<div class="saved-template-actions">
-			<ul>
-				<li><a href="templates.php?a=view&amp;id=<?php echo $value["templateUID"]; ?>">View this template</a></li>
-				<li><a href="templates.php?a=edit&amp;id=<?php echo $value["templateUID"]; ?>">(partial NYI) Edit this template (with ID)</a></li>
-			</ul>
-		</div>
+		<td class="saved-template-actions">
+		<a class="button" href="templates.php?a=view&amp;id=<?php echo $value["templateUID"]; ?>">View Template</a>
+		<a class="button"href="templates.php?a=edit&amp;id=<?php echo $value["templateUID"]; ?>">(NYI) Edit Template (with ID)</a>
+		</td>
 
-	</div>
+	</tr>
 <?php
 	}
 ?>
 
-</div>
+</table>

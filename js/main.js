@@ -1,5 +1,9 @@
 'use strict';
 
+if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+  $("select").addClass("mac-select");
+}
+
 (function($){
 
 	// this is so hacky but its the only way to do it with position:fixed!

@@ -20,10 +20,10 @@ $GeneratedTable = $FitnessTemplateSystem->GenerateTableFromData($templateArray,$
 
 ?>
 <div id="new-test-sticky">
-	<a id="edit-template-button" href="templates.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>">
+	<a class="button" id="edit-template-button" href="templates.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>">
 		Edit Template
 	</a>
-	<a id="clone-template-button" href="templates.php?a=clone&amp;id=<?php echo $_GET["id"]; ?>">
+	<a class="button" id="clone-template-button" href="templates.php?a=clone&amp;id=<?php echo $_GET["id"]; ?>">
 		Use Template As Base
 	</a>
 </div>

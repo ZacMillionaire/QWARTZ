@@ -1,6 +1,5 @@
 .table-box {
 	width: 500px;  // TODO remove, just a test value
-	border-radius: 8px;
 	margin: 20px;
 	float: left;
 	overflow: hidden;
@@ -42,7 +41,7 @@ tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even), #new-fitness-templ
 
 
 // PSEUDO TABLES FOR TESTS
-.test-fauxtable {
+.test-fauxtable, .template-list-container {
 	    display: table;
     border-collapse: collapse;
     width: 100%;
@@ -51,7 +50,7 @@ tr:nth-child(even), .test-fauxtable-tablerow:nth-child(even), #new-fitness-templ
 	display: table-row;
 }
 
-.test-fauxtable-tablecell, .test-fauxtable-header{
+.test-fauxtable-tablecell, .test-fauxtable-header {
 	display: table-cell;
 }
 
@@ -122,6 +121,9 @@ input#category-input {
 		color: lighten($main-font-colour, 40%);
 }
 
+.settings-form {
+	max-width: 550px;
+}
 
 
 
@@ -160,6 +162,7 @@ input#category-input {
 	margin-top: 0;
 	padding: 60px 30px 60px 30px;
 	background-color: white;
+	border: 1px solid #ccc;
 	border-bottom: 5px solid #666677;
 }
 
@@ -209,4 +212,15 @@ input#category-input {
 
 .player-card-single {
 
+}
+
+.mac-select {
+	-webkit-appearance: none;
+	background-image: url(images/mac-arrow.png);
+	background-position: right;
+	border-radius: none;
+}
+
+#search-results-container {
+	margin-top: 30px;
 }

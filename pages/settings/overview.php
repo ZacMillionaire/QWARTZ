@@ -7,7 +7,7 @@ $readOnlyDuration = $Data->GetReadOnlyDuration();
 
 ?>
 <div id="table-container">
-	<form action="sys/exec/update-rep-table.php" method="POST">
+	<form action="sys/exec/update-rep-table.php" method="POST" class="settings-form" >
 		<table>
 			<tr>
 				<th colspan="2">Change Rep Lookup Table</th>
@@ -30,11 +30,11 @@ $readOnlyDuration = $Data->GetReadOnlyDuration();
 				}
 			?>
 			<tr>
-				<td colspan="2"><button class="button" style="width:100%" type="submit">Update Rep Table Values</button></td>
+				<td colspan="2"><button class="button" type="submit">Update Rep Table Values</button></td>
 			</tr>
 		</table>
 	</form>
-	<form action="sys/exec/update-readonly-duration.php" method="POST">
+	<form action="sys/exec/update-readonly-duration.php" method="POST" class="settings-form">
 		<table>
 			<tr>
 				<th colspan="2">Change Read-Only Duration</th>
@@ -47,7 +47,7 @@ $readOnlyDuration = $Data->GetReadOnlyDuration();
 				<td><input style="width:100%" type="text" name="duration" pattern="[0-9]{1,}" value="<?php echo $readOnlyDuration; ?>" required/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><button class="button" style="width:100%" type="submit">Update Read Only Duration</button></td>
+				<td colspan="2"><button class="button" type="submit">Update Read Only Duration</button></td>
 			</tr>
 		</table>
 	</form>

@@ -17,7 +17,7 @@ $userList = $Users->GetUserList();
 	<?php
 		}
 	?>
-	<form action="sys/exec/create-new-user.php" method="POST">
+	<form class="settings-form" action="sys/exec/create-new-user.php" method="POST">
 	<div id="table-container">
 		<table>
 			<tr>
@@ -43,7 +43,8 @@ $userList = $Users->GetUserList();
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button style="width:100%" class="button" type="submit">Create User</button>
+					<button class="button" type="submit">Create User</button>
+					<a class="cancel" href="settings.php?a=users">Cancel</a>
 				</td>
 			</tr>
 		</table>

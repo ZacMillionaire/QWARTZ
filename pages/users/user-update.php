@@ -17,7 +17,7 @@ $userData = $Users->GetUserByID($_GET["id"]);
 	<?php
 		}
 	?>
-	<form action="sys/exec/update-user.php" method="POST">
+	<form action="sys/exec/update-user.php" class="settings-form" method="POST">
 	<div id="table-container">
 		<input type="hidden" name="userID" value="<?php echo $_GET["id"]; ?>">
 		<input type="hidden" name="oldUsername" value="<?php echo $userData["username"]; ?>">
@@ -45,7 +45,8 @@ $userData = $Users->GetUserByID($_GET["id"]);
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button style="width:100%" class="button" type="submit">Update User</button>
+					<button class="button" type="submit">Update User</button>
+					<a class="cancel" href="settings.php?a=users">Cancel</a>
 				</td>
 			</tr>
 		</table>
