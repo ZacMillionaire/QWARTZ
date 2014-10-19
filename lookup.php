@@ -51,7 +51,9 @@
                     case "lookup":
                         include "pages/lookup/lookup-results.php";
                         break;
-
+                    case "search":
+                        include "pages/lookup/search-database.php";
+                        break;
                     default:
                         include "pages/lookup/lookup-form.php";
                         break;

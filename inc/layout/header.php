@@ -1,6 +1,8 @@
             <div id="logo"><img src="images/logo.png" alt="Queensland Reds" /></div>
             <div id="search">
-                <input type="text" placeholder="Search" />
+            	<form action="lookup.php?a=search" method="POST">
+	                <input type="text" name="search" placeholder="Search" />
+	            </form>
             </div>
             <div id="profile">
                 <img src="images/<?php echo $userData["profilePicture"] ?>" />

@@ -236,6 +236,89 @@ class DataCollection extends System {
 		return $result;
 	}
 
+	public function GetExerciseCount($startDate = null,$endDate = null) {
+
+		$start = ($startDate) ? $startDate : strtotime("first day of this month");
+		$end = ($endDate) ? $endDate : strtotime("last day of this month");
+
+		$sql = "SELECT
+					`exercises`.`ExerciseName`,
+					COUNT(ExerciseID)
+				FROM `playertestinginfo`
+				INNER JOIN `exercises` USING(`ExerciseID`)
+				WHERE 
+					`dateEntered` >= :startDate AND
+					`dateEntered` <= :endDate
+				GROUP BY `ExerciseID`;";
+		$params = array(
+			"startDate" => date('Y-m-d 00:00:00',$start),
+			"endDate" => date('Y-m-d 23:59:59',$end)
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+	}
+
+	public function GetMonthlyExerciseAggregate($startDate = null,$endDate = null) {
+
+		$start = ($startDate) ? $startDate : strtotime("first day of this month");
+		$end = ($endDate) ? $endDate : strtotime("last day of this month");
+
+		$sql = "SELECT
+					UNIX_TIMESTAMP(`dateEntered`) AS `dateEntered`,
+					SUM(`reps`) AS `totalReps`,
+					SUM(`weight`) AS `totalWeight`,
+					AVG(`reps`) AS `avgReps`,
+					AVG(`weight`) AS `avgWeight`,
+					COUNT(`fitnessTestGroupID`) AS `participants`,
+					COUNT(DISTINCT `exerciseID`) AS `uniqueExerciseCount`
+					FROM `playertestinginfo`
+					WHERE 
+						`dateEntered` >= :startDate AND
+						`dateEntered` <= :endDate
+					GROUP BY DAY(`dateEntered`)";
+		$params = array(
+			"startDate" => date('Y-m-d 00:00:00',$start),
+			"endDate" => date('Y-m-d 23:59:59',$end)
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+	}
+
+	public function GetPlayerLeaderBoard($startDate = null,$endDate = null) {
+
+		$start = ($startDate) ? $startDate : strtotime("first day of this month");
+		$end = ($endDate) ? $endDate : strtotime("last day of this month");
+
+		$sql = "SELECT
+					CONCAT(
+						`playerdetails`.`FirstName`,
+						' ',
+						`playerdetails`.`LastName`
+					) AS `playerName`,
+					COUNT(`PlayerID`) AS `playerTestCount`,
+					SUM(`playertestinginfo`.`weight`) AS `totalWeightLifted`,
+					COUNT(DISTINCT `ExerciseID`) AS `uniqueExerciseCount`
+				FROM `playertestinginfo`
+				INNER JOIN `playerdetails` USING(`playerID`)
+				WHERE 
+					`dateEntered` >= :startDate AND
+					`dateEntered` <= :endDate
+				GROUP BY `PlayerID`
+				ORDER BY `playerTestCount` DESC";
+		$params = array(
+			"startDate" => date('Y-m-d 00:00:00',$start),
+			"endDate" => date('Y-m-d 23:59:59',$end)
+		);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+	}
+
 }
 
 ?>

@@ -105,7 +105,45 @@ class Search extends System {
 	} // End GetFilteredSearchResults
 
 
+	public function GeneralSearch($postData) {
 
+		if(!$postData["search"]){
+			return null;
+		}
+
+		$sql = "SELECT
+					CONCAT(`FirstName`,' ',`LastName`) AS `result`,
+					`playerID` as `ID`
+				FROM `playerDetails`
+				WHERE CONCAT(`FirstName`,' ',`LastName`) LIKE :search";
+		$params = array("search" => $postData["search"]."%");
+
+		$playerResult = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		// $sql = "SELECT *
+		// 		FROM `exercises`
+		// 		WHERE `ExerciseName` LIKE :search";
+
+		// $exerciseResult = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		$sql = "SELECT 
+					`title` AS `result`,
+					`templateUID` AS `ID`
+				FROM `fitnesstemplates`
+				WHERE `title` LIKE :search";
+
+		$templateResult = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		if(!$playerResult && !$exerciseResult && !$templateResult) {
+			return null;
+		}
+		return array(
+			"Player" => $playerResult,
+			// "Exercise" => $exerciseResult,
+			"Template" => $templateResult,
+		);
+
+	}
 }
 
 
