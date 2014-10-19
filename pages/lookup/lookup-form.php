@@ -24,33 +24,33 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 			<th colspan="5" class="table-title">Previous Tests: Most recent 30</th>
 		</tr>
 		<tr>
-			<th>Date</th>
-			<th>Player</th>
-			<th>Exercises</th>
-			<th colspan="2">Actions</th>
+			<th style="text-align:center;">Date</th>
+			<th style="text-align:center;">Player</th>
+			<th style="text-align:center;">Exercises</th>
+			<th style="text-align:center;" colspan="2">Actions</th>
 		</tr>
 		<?php
 			foreach($pastTestData as $key => $value) {
 		?>
 		<tr>
-			<td>
+			<td style="text-align:center;">
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
-			<td>
+			<td style="text-align:center;">
 				<a href="players.php?a=view&amp;id=<?php echo $value["playerID"]; ?>">
 					<?php 
 						echo $value["firstName"]." ".$value["lastName"];
 					?>
 				</a>
 			</td>
-			<td>
+			<td style="text-align:center;">
 				<?php
 
 					echo $value["exercises"];
 
 				?>
 			</td>
-			<td>
+			<td style="text-align:center;">
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["testID"]; ?>">View Test</a>
 				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>">Edit Data</a>
 			</td>

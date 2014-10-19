@@ -27,8 +27,6 @@ if(isset($_POST)){
 </div>
 <div id="search-results-container">
 
-	<h1>Search Results</h3>
-
 	<div class="search-results-table">
 		<?php 
 			if(!isset($searchResults)){
@@ -47,37 +45,40 @@ if(isset($_POST)){
 		?>
 		<table>
 			<tr>
-				<th>Date</th>
-				<th>Player</th>
-				<th>Exercises</th>
-				<th colspan="2">Actions</th>
+				<th colspan="5" class="table-title">Search Results</th>
+			</tr>
+			<tr>
+				<th style="text-align:center;">Date</th>
+				<th style="text-align:center;">Player</th>
+				<th style="text-align:center;">Exercises</th>
+				<th style="text-align:center;" colspan="2">Actions</th>
 			</tr>
 
 			<?php
 				foreach($searchResults as $key => $value) {
 			?>
 			<tr>
-				<td>
+				<td style="text-align:center;">
 					<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 				</td>
-				<td>
+				<td style="text-align:center;">
 					<a href="players.php?a=view&amp;id=<?php echo $value["PlayerID"]; ?>">
 						<?php 
 							echo $value["FirstName"]." ".$value["LastName"];
 						?>
 					</a>
 				</td>
-				<td>
+				<td style="text-align:center;">
 					<?php
 
 						echo $value["ExerciseName"];
 
 					?>
 				</td>
-				<td>
+				<td style="text-align:center;">
 					<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
 				</td>
-				<td>
+				<td style="text-align:center;">
 					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
 				</td>
 			</tr>

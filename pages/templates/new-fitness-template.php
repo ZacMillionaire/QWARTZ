@@ -42,7 +42,7 @@ the user can use later on.
 ?>
 
 <form id="new-fitness-template" action="sys/exec/create-template.php" method="POST">
-
+	
 	<div id="new-test-sticky">
 
 		<button id="add-exercise" class="button-small grey">
@@ -328,11 +328,6 @@ the user can use later on.
 						data-category-set="default"
 						disabled
 						></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					need to add padding around these exercise tables, they're too hard to distinguish apart currently
 				</td>
 			</tr>
 		</table>

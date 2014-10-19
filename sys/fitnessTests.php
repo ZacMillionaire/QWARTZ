@@ -17,11 +17,26 @@ class FitnessTests extends System {
 		$dateStart = (isset($start)) ? $start : strtotime("-1 week",time());
 		$dateEnd = (isset($end)) ? $end : time();
 
-		$sql = "SELECT `fitnessTestGroupID`,`DateEntered`, `ExerciseName`,`ExerciseCategoryName`,`PlayerID`
+		$sql = "SELECT
+					`fitnessTestGroupID`,
+					`DateEntered`,
+					`ExerciseName`,
+					`ExerciseCategoryName`,
+					`PlayerID`,
+					CONCAT(
+						`profiles`.`firstName`,
+						' ',
+						`profiles`.`lastName`
+					) AS `author`
 				FROM `playertestinginfo`
 				INNER JOIN `exercises` USING(`ExerciseID`)
-				WHERE `DateEntered` >= :dateStart AND
-				`DateEntered` <= :dateEnd
+
+				INNER JOIN `users` ON `authorID` = `userID`
+				INNER JOIN `profiles` USING(`userID`)
+
+				WHERE 
+					`DateEntered` >= :dateStart AND
+					`DateEntered` <= :dateEnd
 				ORDER BY `DateEntered` DESC";
 		$params = array(
 			"dateStart" => date('Y-m-d 00:00:00',$dateStart),
@@ -48,6 +63,7 @@ class FitnessTests extends System {
 			} else {
 
 				$testList[$value["fitnessTestGroupID"]]["DateEntered"] = $value["DateEntered"];
+				$testList[$value["fitnessTestGroupID"]]["author"] = $value["author"];
 				$testList[$value["fitnessTestGroupID"]]["exercises"][] = $value["ExerciseName"];
 				$testList[$value["fitnessTestGroupID"]]["categories"][] = $value["ExerciseCategoryName"];
 				$testList[$value["fitnessTestGroupID"]]["players"][] = $value["PlayerID"];

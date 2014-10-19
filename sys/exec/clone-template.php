@@ -13,6 +13,10 @@ $System = new System();
 $Database = $System->GetDatabaseSystem();
 $Data = $System->GetDataCollectionSystem();
 
+$Users = $System->GetUserSystem();
+
+$userData = $Users->GetUserProfile($Users->GetUserIDFromHash($_COOKIE["loginHash"]));
+
 function stringRand($len) {
 
 	$string = "";
@@ -57,6 +61,12 @@ $params = array(
 );
 
 $Database->dbInsert($sql,$params);
+
+$Data->AddHistoryItem(
+	$userData["userID"],
+	"Created Template: ".$_POST["templateName"],
+	"templates.php?a=view&id=".$templateUID
+);
 
 header("Location: ../../templates.php?a=view&id=".$templateUID);
 

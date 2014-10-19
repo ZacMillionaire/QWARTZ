@@ -19,7 +19,7 @@ class DataLockSystem extends System {
 		$params = array(
 			"userID" => $userID,
 			"playerID" => $playerID,
-			"editDate" => date("Y-m-d g:i:s",time())
+			"editDate" =>date("Y-m-d g:i:s",time())
 		);
 
 		$update = $this->DatabaseSystem->dbQuery($sql,$params);

@@ -15,8 +15,16 @@ class FitnessTemplates extends System {
 
 	public function GetSavedTemplatesList(){
 
-		$sql = "SELECT *
+		$sql = "SELECT 
+					`fitnesstemplates`.*,
+					CONCAT(
+						`profiles`.`firstName`,
+						' ',
+						`profiles`.`lastName`
+					) AS `author`
 				FROM `fitnesstemplates`
+				INNER JOIN `users` ON `authorID` = `userID`
+				INNER JOIN `profiles` USING(`userID`)
 				ORDER BY `dateAdded` DESC";
 		$params = null;
 
@@ -123,7 +131,7 @@ class FitnessTemplates extends System {
 		$tableHeader .= "<th colspan=\"6\" class='template-player-name'>$playerData[FirstName] $playerData[LastName]</th>";
 
 		for($i = 0; $i < $templateDataString["sessions"]; $i++){
-			$tableHeader .= "<th colspan=\"3\">S".($i+1)."</th>";
+			$tableHeader .= "<th style=\"text-align:center;\" colspan=\"3\">S".($i+1)."</th>";
 		} // end for(i in templateDataString[sessions])
 
 		$tableHeader .= "</tr>";
@@ -208,8 +216,8 @@ class FitnessTemplates extends System {
 
 					if($j == 0) { 
 
-						$tableBody .= "<td rowspan=\"".$tableCellRows."\">".$exerciseName."</td>";
-						$tableBody .= "<td rowspan=\"".$tableCellRows."\">".$exerciseNotes."</td>";
+						$tableBody .= "<td style=\"text-align:center;\" rowspan=\"".$tableCellRows."\">".$exerciseName."</td>";
+						$tableBody .= "<td style=\"text-align:center;\" rowspan=\"".$tableCellRows."\">".$exerciseNotes."</td>";
 
 						// This is some blackmagic shit I have no idea how it works
 						// I don't know if this is a testiment to my ability to type code
@@ -217,10 +225,10 @@ class FitnessTemplates extends System {
 						// 60% of the time, all of the time
 						if($value["superSetSize"] != 0){
 							$supressNextCell = true;
-							$tableBody .= "<td rowspan=\"".$value["superSetSize"]."\">".$restTime."</td>";						
+							$tableBody .= "<td style=\"text-align:center;\" rowspan=\"".$value["superSetSize"]."\">".$restTime."</td>";						
 						} else {
 							if(!$supressNextCell){
-								$tableBody .= "<td rowspan=\"".$value["sets"]."\">".$restTime."</td>";		
+								$tableBody .= "<td style=\"text-align:center;\" rowspan=\"".$value["sets"]."\">".$restTime."</td>";		
 							} elseif(!isset($value["superset"])) {
 								$supressNextCell = false;
 							}
@@ -231,10 +239,10 @@ class FitnessTemplates extends System {
 					$setNumber = $j+1;
 
 					// generate table cells and fill with data
-					$tableBody .= "<td>".$setNumber."</td>";
-					$tableBody .= "<td>".$numberOfReps."</td>";
-					$tableBody .= "<td>".$oneRMPercent."</td>";
-					$tableBody .= "<td>".$oneRM."</td>";
+					$tableBody .= "<td style=\"text-align:center;\">".$setNumber."</td>";
+					$tableBody .= "<td style=\"text-align:center;\">".$numberOfReps."</td>";
+					$tableBody .= "<td style=\"text-align:center;\">".$oneRMPercent."</td>";
+					$tableBody .= "<td style=\"text-align:center;\">".$oneRM."</td>";
 
 					for($k = 0; $k < $templateDataString["sessions"]; $k++){
 
@@ -244,9 +252,9 @@ class FitnessTemplates extends System {
 						$sessionReps = ($value["sessionReps"] == null) ? "&nbsp;" : $value["sessionReps"];
 
 						// generate table cells and fill with data
-						$tableBody .= "<td>".$sessionEstimated."</td>";
-						$tableBody .= "<td>".$sessionTarget."</td>";
-						$tableBody .= "<td>".$sessionReps."</td>";
+						$tableBody .= "<td style=\"text-align:center;\">".$sessionEstimated."</td>";
+						$tableBody .= "<td style=\"text-align:center;\">".$sessionTarget."</td>";
+						$tableBody .= "<td style=\"text-align:center;\">".$sessionReps."</td>";
 
 					} // end for(k in templateDataString[sessions])
 
@@ -286,6 +294,12 @@ class FitnessTemplates extends System {
 
 		$userID = $this->UserSystem->GetUserIDFromHash($_COOKIE["loginHash"]);
 		$this->DataLockSystem->LockTemplateData($templateUID,$userID);
+
+		$this->DataCollection->AddHistoryItem(
+			$userID,
+			"Edited Template: ".$postData["templateName"],
+			"templates.php?a=view&id=".$templateUID
+		);
 
 		return $templateUID;
 

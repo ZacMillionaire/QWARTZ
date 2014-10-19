@@ -1,7 +1,7 @@
 <?php
     
 
-    $pageTitle = "Tests - Overview";
+    $pageTitle = "Tests";
 
 	ob_start();
 
@@ -38,20 +38,6 @@
             <article id="page-header">
                 <h1>Tests</h1>
 
-            <!--
-
-                TODO: Style this sub navigation element
-
-            -->
-
-            <nav id="sub-nav">
-                <ul>
-                    <li <?php if (@$_GET["a"] == null) echo 'class="active"'; ?>><a href="tests.php">Overview</a></li>
-                    <li <?php if (@$_GET["a"] == "view" && !isset($_GET["id"]) ) echo 'class="active"'; ?>><a href="tests.php?a=view">Previous Tests</a></li>
-                </ul>  
-                         
-            </nav>
-
         </article>
         <article>
             
@@ -87,7 +73,7 @@
                         }
                         break;
                     default:
-                        include "pages/tests/overview.php";
+                        include "pages/tests/previous-tests.php";
                         break;
                         
                 }

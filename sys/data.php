@@ -187,6 +187,55 @@ class DataCollection extends System {
 
 	}
 
+	public function AddHistoryItem($userID,$actionString,$actionURL) {
+
+		$sql = "INSERT INTO `history`
+				(
+					`actorID`,
+					`action`,
+					`actionURL`,
+					`datePerformed`
+				)
+				VALUES
+				(
+					:actorID,
+					:action,
+					:actionURL,
+					NOW()
+				);";
+		$params = array(
+			"actorID" => $userID,
+			"action" => $actionString,
+			"actionURL" => $actionURL
+		);
+
+		$insert = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		return $insert;
+
+	}
+
+	public function GetHistoryTable($maxResults = 10) {
+
+		$sql = "SELECT
+					`history`.*,
+					CONCAT(
+						`profiles`.`firstName`,
+						' ',
+						`profiles`.`lastName`
+					) AS `actor`
+				FROM `history`
+				INNER JOIN `users` ON `actorID` = `userID`
+				INNER JOIN `profiles` USING(`userID`)
+				ORDER BY `datePerformed` DESC
+				LIMIT 0,:maxResults;";
+		$params = array("maxResults"=>$maxResults);
+
+		$result = $this->DatabaseSystem->dbQuery($sql,$params);
+
+		return $result;
+	}
+
 }
 
 ?>

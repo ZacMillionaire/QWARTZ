@@ -36,22 +36,33 @@
 			<th colspan="5" class="table-title">Previous Tests: <?php echo date('d/m/Y',$dateStart); ?> - <?php echo date('d/m/Y',$dateEnd); ?></th>
 		</tr>
 		<tr>
-			<th>Date</th>
-			<th>Logged By</th>
-			<th>Exercises</th>
-			<th>Actions</th>
+			<th style="text-align:center;">Date</th>
+			<th style="text-align:center;">Logged By</th>
+			<th style="text-align:center;">Exercises</th>
+			<th style="text-align:center;">Actions</th>
 		</tr>
+		<?php 
+			if($previousTests == null){
+		?>
+		<tr>
+			<td style="text-align:center;" colspan="4">
+				No test results to display for this period
+			</td>
+		</tr>
+		<?php
+			}
+		?>
 		<?php
 			foreach($previousTests as $key => $value) {
 		?>
 		<tr>
-			<td>
+			<td style="text-align:center;">
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
-			<td>
-				NYI
+			<td style="text-align:center;">
+				<?php echo $value["author"]; ?>
 			</td>
-			<td>
+			<td style="text-align:center;">
 				<?php
 
 					foreach ($value["exercises"] as $ekey => $evalue) {
@@ -65,7 +76,7 @@
 
 				?>
 			</td>
-			<td>
+			<td style="text-align:center;">
 				<a class="button" href="tests.php?a=view&amp;id=<?php echo $key; ?>">View Test</a>
 			</td>
 		</tr>

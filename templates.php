@@ -1,7 +1,7 @@
 <?php
     
 
-    $pageTitle = "Fitness Templates - Overview";
+    $pageTitle = "Templates";
 
 	ob_start();
 
@@ -37,20 +37,6 @@
 
             <article id="page-header">
                 <h1>Fitness Templates</h1>
-
-            <!--
-
-                TODO: Style this sub navigation element
-
-            -->
-
-            <nav id="sub-nav">
-                <ul>
-                    <li <?php if (@$_GET["a"] == null) echo 'class="active"'; ?>><a href="templates.php">Overview</a></li>
-                    <li <?php if (@$_GET["a"] == "view" && !isset($_GET["id"]) ) echo 'class="active"'; ?>><a href="templates.php?a=saved">Saved Templates</a></li>
-                </ul>  
-                         
-            </nav>
 
         </article>
         <article>
@@ -104,7 +90,7 @@
                         break;
 
                     default:
-                        include "pages/templates/overview.php";
+                        include "pages/templates/saved-templates.php";
                         break;
                         
                 }

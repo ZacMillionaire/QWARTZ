@@ -1,7 +1,7 @@
 <?php
     
 
-    $pageTitle = "Fitness Templates - Overview";
+    $pageTitle = "Lookup";
 
 	ob_start();
 
@@ -37,19 +37,6 @@
 
             <article id="page-header">
                 <h1>Record Lookup</h1>
-
-            <!--
-
-                TODO: Style this sub navigation element
-
-            -->
-
-            <nav id="sub-nav">
-                <ul>
-                    <li><a href="#">Sub Nav Link 1</a></li>
-                </ul>  
-                         
-            </nav>
 
         </article>
         <article>

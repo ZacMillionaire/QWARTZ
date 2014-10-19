@@ -1,7 +1,6 @@
-	<!-- TODO: style this -->
 	<div id="edit-warning">
-		<h3>Read Only Message (needs styling > pages/fragments/lockout.php)</h3>
-		This Page is readonly for another <?php echo ($timeTillUnlock > 1) ? $timeTillUnlock." minutes" : "minute"; ?>.
+		<h3>Read Only - Data Recently Edited</h3>
+		This Page is read-only for another <?php echo ($timeTillUnlock > 1) ? $timeTillUnlock." minutes" : "minute"; ?>.
 		<?php 
 			if($editOwner) {
 		?>
