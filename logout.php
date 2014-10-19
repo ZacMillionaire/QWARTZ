@@ -5,8 +5,12 @@
 	
     require "inc/header.php";
 
-    if(!$userLoggedIn){
-        header("Location: index.php");
+    if($userLoggedIn){
+    	$Users->LogUserOut();
+        header("Location: login.php");
+        die();
+    } else {
+        header("Location: login.php");
         die();
     }
 
