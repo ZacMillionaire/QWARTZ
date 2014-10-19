@@ -5,8 +5,6 @@ $Search = $System->GetSearchSystem();
 
 $searchResults = $Search->GeneralSearch($_POST);
 
-print_r($searchResults);
-
 ?>
 
 <div id="table-container">
@@ -45,6 +43,13 @@ print_r($searchResults);
 			<tr>
 				<th colspan="5" class="table-title"><?php echo $key; ?> Results</th>
 			</tr>
+			<?php if(!$value) { ?>
+			<tr>
+				<td style="text-align:center;">
+					No <?php echo $key; ?> Results Found
+				</td>
+			</tr>
+			<?php } ?>
 			<?php foreach($value as $skey => $svalue){ ?>
 			<tr>
 				<td style="text-align:center;">

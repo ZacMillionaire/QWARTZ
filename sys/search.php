@@ -113,8 +113,8 @@ class Search extends System {
 
 		$sql = "SELECT
 					CONCAT(`FirstName`,' ',`LastName`) AS `result`,
-					`playerID` as `ID`
-				FROM `playerDetails`
+					`PlayerID` as `ID`
+				FROM `playerdetails`
 				WHERE CONCAT(`FirstName`,' ',`LastName`) LIKE :search";
 		$params = array("search" => $postData["search"]."%");
 
