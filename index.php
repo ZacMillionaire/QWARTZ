@@ -65,7 +65,46 @@
 					</tr>
 				</table>
 			</article>
+			<article class="graph-container">
+				<div class="graph-header">
+					<h3>Test Data Breakdown</h3>
+				</div>
+<!--
+	TODO: needs to moved to own location in style sheet
+	container needs to be made to fit in
+-->
+<style>
 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+.tooltip {   
+  position: absolute;           
+  text-align: left;           
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  pointer-events: none;         
+}
+.tooltip > .tooltip-header {
+	font-weight: bold;
+}
+.tooltip > .tooltip-row {
+}
+</style>
+
+				<?php include "data/monthlyGraph.php"; ?>
+			</article>
 			<div id="dashboard-2">
 				<article class="table-box">
 					<table>

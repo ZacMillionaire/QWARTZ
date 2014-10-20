@@ -243,7 +243,7 @@ class DataCollection extends System {
 
 		$sql = "SELECT
 					`exercises`.`ExerciseName`,
-					COUNT(ExerciseID)
+					COUNT(ExerciseID) AS `ExerciseCount`
 				FROM `playertestinginfo`
 				INNER JOIN `exercises` USING(`ExerciseID`)
 				WHERE 
@@ -266,7 +266,7 @@ class DataCollection extends System {
 		$end = ($endDate) ? $endDate : strtotime("last day of this month");
 
 		$sql = "SELECT
-					UNIX_TIMESTAMP(`dateEntered`) AS `dateEntered`,
+					DATE_FORMAT(`dateEntered`,'%d-%m-%Y') AS `dateEntered`,
 					SUM(`reps`) AS `totalReps`,
 					SUM(`weight`) AS `totalWeight`,
 					AVG(`reps`) AS `avgReps`,
