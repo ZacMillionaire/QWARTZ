@@ -76,6 +76,9 @@
 }
 .tooltip > .tooltip-row {
 }
+#monthlyGraphContainer {
+	position: relative;
+}
 </style>
 
 				<?php include "data/monthlyGraph.php"; ?>

@@ -92,15 +92,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						.style("stroke-width",5);
 
 					d3.selectAll("circle#"+d)
-						.transition()
 						.attr("r",10);
 				})
 				.on("mouseout",function(d){
 					d3.selectAll("#"+d)
-						.transition()
 						.style("stroke-width",1.5);
 					d3.selectAll("circle#"+d)
-						.transition()
 						.attr("r",5);
 				});
 
@@ -147,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				.attr('fill', colorList[i])
 				.attr("id",keyList[i])
 				.on('mouseover', function(d,i) {
+					d3.select(this).transition().attr("r",10);
 					div.transition()        
 		                .duration(200)      
 		                .style("opacity", 1);      
@@ -163,6 +161,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	                .style("top", (d3.event.pageY) + "px");    
 				})
 				.on("mouseout", function(d) {
+					d3.select(this).transition().attr("r",5);
 					div.transition()
 						.duration(200)
 						.style("opacity", 0);
