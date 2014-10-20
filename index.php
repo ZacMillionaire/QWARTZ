@@ -40,34 +40,9 @@
 				<h1>Dashboard</h1>
 			</article>
 
-			<article class="table-box">
-				<table>
-					<tr>
-						<th colspan="3" class="table-title">Latest Test Results</th>
-					</tr>
-					<tr>
-						<th>Player</th><th>Weight</th><th>Action</th>
-					</tr>
-					<tr>
-						<td>231</td><td>123</td><td>123123</td>
-					</tr>
-					<tr>
-						<td>231</td><td>123</td><td>123123</td>
-					</tr>
-					<tr>
-						<td>231</td><td>123</td><td>123123</td>
-					</tr>
-					<tr>
-						<td>231</td><td>123</td><td>123123</td>
-					</tr>
-					<tr>
-						<td>231</td><td>123</td><td>123123</td>
-					</tr>
-				</table>
-			</article>
 			<article class="graph-container">
 				<div class="graph-header">
-					<h3>Test Data Breakdown</h3>
+					<h3>Monthly Exercise Data</h3>
 				</div>
 <!--
 	TODO: needs to moved to own location in style sheet
@@ -157,15 +132,6 @@
 
 				</article>
 			</div>
-
-			<article>
-				<a class="button">Button</a>
-			</article>
-
-			<article>
-				<p>Pellentesque hendrerit et nisi quis pretium. Nam lacinia libero dui. Curabitur dapibus diam sit amet neque euismod egestas. Nam mattis dignissim ipsum, in bibendum lectus. Mauris vestibulum luctus est. Pellentesque tristique congue enim, at vehicula lorem convallis suscipit. Nullam ut tempor diam. Phasellus pharetra ligula ultricies congue ultrices. Integer eget arcu congue, placerat nulla vel, sodales ligula. Suspendisse in metus ut diam auctor scelerisque nec in eros. Donec ipsum orci, efficitur sed sollicitudin in, efficitur non elit.</p>
-			</article>
-
 		</div>
 	</div>
 <?php 
