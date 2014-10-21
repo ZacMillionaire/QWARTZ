@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		  });
 
 		var margin = {top: 20, right: 20, bottom: 30, left: 50},
-			width = 1024 - margin.left - margin.right,
+			width = 900 - margin.left - margin.right,
 			height = 400 - margin.top - margin.bottom;
 
 		var xMin = data[0].dateEntered;
@@ -92,13 +92,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						.style("stroke-width",5);
 
 					d3.selectAll("circle#"+d)
-						.attr("r",10);
+						.attr("r",13);
 				})
 				.on("mouseout",function(d){
 					d3.selectAll("#"+d)
 						.style("stroke-width",1.5);
 					d3.selectAll("circle#"+d)
-						.attr("r",5);
+						.attr("r",8);
 				});
 
         legend.append("rect")
@@ -140,11 +140,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				.enter().append("circle")
 				.attr('cx', function(d) { return x(d.dateEntered); })
 				.attr('cy', function(d) { return y(d[keyList[i]]); })
-				.attr('r', 5)
+				.attr('r', 8)
 				.attr('fill', colorList[i])
 				.attr("id",keyList[i])
 				.on('mouseover', function(d,i) {
-					d3.select(this).transition().attr("r",10);
+					d3.select(this).transition().attr("r",13);
 					div.transition()        
 		                .duration(200)      
 		                .style("opacity", 1);      
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	                .style("top", (d3.event.pageY) + "px");    
 				})
 				.on("mouseout", function(d) {
-					d3.select(this).transition().attr("r",5);
+					d3.select(this).transition().attr("r",8);
 					div.transition()
 						.duration(200)
 						.style("opacity", 0);

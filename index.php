@@ -48,38 +48,6 @@
 	TODO: needs to moved to own location in style sheet
 	container needs to be made to fit in
 -->
-<style>
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.line {
-  fill: none;
-  stroke-width: 1.5px;
-}
-
-.tooltip {   
-  position: absolute;           
-  text-align: left;           
-  padding: 2px;             
-  font: 12px sans-serif;        
-  background: lightsteelblue;   
-  border: 0px;      
-  pointer-events: none;         
-}
-.tooltip > .tooltip-header {
-	font-weight: bold;
-}
-.tooltip > .tooltip-row {
-}
-#monthlyGraphContainer {
-	position: relative;
-}
-</style>
 
 				<?php include "data/monthlyGraph.php"; ?>
 			</article>
