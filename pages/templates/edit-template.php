@@ -19,7 +19,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 <form id="new-fitness-template" action="sys/exec/update-template.php" method="POST">
 	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateUID" />
 	<div id="new-test-sticky">
-		TODO: This template call should be wrapped in another div for sticky styling so it doesn't conflict with others
 		<?php
 
 		    $lockData = $System->GetDataLockSystem()->GetTemplateDataLockStatus($_GET['id']);
