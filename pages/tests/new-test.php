@@ -3,7 +3,7 @@
 <form action="sys/exec/submit_test_results.php" method="POST">
 	<div id="new-test-sticky">
 
-		<input type="date" id="date-picker" name="testDate" placeholder="Testing Date" required/>
+		<input type="text" id="date-picker" name="testDate" placeholder="Testing Date" required/>
 
 		<button id="add-row" class="button-small grey">
 			Add Player

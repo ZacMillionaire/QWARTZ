@@ -88,7 +88,7 @@
 					Start Date:
 				</th>
 				<td colspan="2">
-					<input style="width: 100%" type="date" class="date-picker" name="startDate" value="<?php echo @$_POST["startDate"]; ?>" placeholder="Start Date"/>
+					<input style="width: 100%" type="text" class="date-picker" name="startDate" value="<?php echo @$_POST["startDate"]; ?>" placeholder="Start Date - DD/MM/YYYY"/>
 				</td>
 			</tr>
 			<tr>
@@ -96,7 +96,7 @@
 					End Date:
 				</th>
 				<td colspan="2">
-					<input style="width: 100%" type="date" class="date-picker" value="<?php echo @$_POST["endDate"]; ?>" name="endDate" placeholder="End Date"/>
+					<input style="width: 100%" type="text" class="date-picker" value="<?php echo @$_POST["endDate"]; ?>" name="endDate" placeholder="End Date - DD/MM/YYYY"/>
 				</td>
 			</tr>
 	

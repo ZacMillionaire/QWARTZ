@@ -53,7 +53,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				First Name
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["FirstName"])) ? $_GET["FirstName"] : $playerData["FirstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
+				<input pattern="[a-zA-Z\s-]*" value="<?php echo (isset($_GET["FirstName"])) ? $_GET["FirstName"] : $playerData["FirstName"]; ?>" style="width:100%;" type="text" name="firstName" placeholder="First Name" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
@@ -61,7 +61,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 				Last Name
 			</td>
 			<td>
-				<input value="<?php echo (isset($_GET["LastName"])) ? $_GET["LastName"] : $playerData["LastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" required <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
+				<input pattern="[a-zA-Z\s-]*" value="<?php echo (isset($_GET["LastName"])) ? $_GET["LastName"] : $playerData["LastName"]; ?>" style="width:100%;" type="text" name="lastName" placeholder="Last Name" required <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>/>
 			</td>
 		</tr>
 		<tr>
