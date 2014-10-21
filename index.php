@@ -118,7 +118,7 @@
 					</table>
 				</article>
 
-
+<!--
 				<article id="currently-logged">
 					<h2>Currently Online</h2>
 
@@ -132,7 +132,7 @@
 
 					?>
 					</ul>
-
+-->
 				</article>
 			</div>
 		</div>

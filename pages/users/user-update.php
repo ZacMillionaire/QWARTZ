@@ -23,6 +23,14 @@ $userData = $Users->GetUserByID($_GET["id"]);
 		<input type="hidden" name="oldUsername" value="<?php echo $userData["username"]; ?>">
 		<table>
 			<tr>
+				<th>First Name*</th>
+				<td><input style="width:100%" type="text" name="firstName" pattern="[a-zA-Z\s-]*" placeholder="First Name"value="<?php echo $userData["firstName"]; ?>" required/></td>
+			</tr>
+			<tr>
+				<th>Last Name*</th>
+				<td><input style="width:100%" type="text" name="lastName" pattern="[a-zA-Z\s-]*" placeholder="Last Name"value="<?php echo $userData["lastName"]; ?>" required/></td>
+			</tr>
+			<tr>
 				<th>Username*</th>
 				<td><input style="width:100%" type="text" name="username" pattern="[a-zA-Z.-_0-9]{5,}" placeholder="Username" required title="adsfdas" value="<?php echo $userData["username"]; ?>"/></td>
 			</tr>

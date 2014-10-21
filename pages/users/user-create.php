@@ -21,8 +21,16 @@ $userList = $Users->GetUserList();
 	<div id="table-container">
 		<table>
 			<tr>
+				<th>First Name*</th>
+				<td><input style="width:100%" type="text" name="firstName" pattern="[a-zA-Z\s-]*" placeholder="First Name" required/></td>
+			</tr>
+			<tr>
+				<th>Last Name*</th>
+				<td><input style="width:100%" type="text" name="lastName" pattern="[a-zA-Z\s-]*" placeholder="Last Name" required/></td>
+			</tr>
+			<tr>
 				<th>Username*</th>
-				<td><input style="width:100%" type="text" name="username" pattern="[a-zA-Z.-_0-9]{5,}" placeholder="Username" required title="adsfdas"/></td>
+				<td><input style="width:100%" type="text" name="username" pattern="[a-zA-Z.-_0-9]{5,}" placeholder="Username" required/></td>
 			</tr>
 			<tr>
 				<td colspan="2">Any combination of letters, numbers, - (dash), . (period), or _ (underscore), with a minimum length of 5</td>

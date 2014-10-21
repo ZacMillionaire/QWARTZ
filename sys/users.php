@@ -328,7 +328,10 @@ class Users extends System {
 
 	public function GetUserByID($userID){
 
-		$sql = "SELECT * FROM `users` WHERE `userID` = :userID";
+		$sql = "SELECT *
+				FROM `users`
+				INNER JOIN `profiles` USING(`userID`)
+				WHERE `userID` = :userID";
 		$params = array(
 			"userID" => $userID
 		);
@@ -342,20 +345,27 @@ class Users extends System {
 
 	public function CreateNewUser($postData) {
 		
-		if(!self::CheckPasswords($postData["password1"],$postData["password2"])) {
-			return array("error"=>"Passwords do not match");
-		}
+		if($postData["firstName"] && $postData["lastName"]) {
+			if(!self::CheckPasswords($postData["password1"],$postData["password2"])) {
+				return array("error"=>"Passwords do not match");
+			}
 
-		if(self::UsernameExists($postData["username"])){
-			return array("error"=>"Username already exists");
-		}
+			if(self::UsernameExists($postData["username"])){
+				return array("error"=>"Username already exists");
+			}
 
-		$password = self::FormatPassword($postData["password1"]);
+			$password = self::FormatPassword($postData["password1"]);
 
-		if(self::InsertUserIntoDatabase($postData["username"],$password)) {
-			return true;
-		} else {
+			if(self::InsertUserIntoDatabase($postData["username"],$password)) {
+				if(self::CreateUserProfile($postData)){
+					return true;
+				}
+			}
+
 			return array("error"=>"System error");
+
+		} else {
+			return array("error"=>"Name missing");
 		}
 
 	}
@@ -372,6 +382,36 @@ class Users extends System {
 
 		return array("salt" => $passwordSalt,"hashed" => $passwordHash);
 
+	}
+
+
+	private function CreateUserProfile($postData){
+		$sql = "INSERT INTO `profiles` (
+				`userID`,
+				`firstName`,
+				`lastName`
+			) VALUES (
+				(
+					SELECT `userID`
+					FROM `users`
+					WHERE `username` = :username
+				),
+				:first,
+				:last
+			);";
+		$params = array(
+			"username" => $postData["username"],
+			"first" => $postData["firstName"],
+			"last" => $postData["lastName"]
+		);
+
+		$insert = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		if($insert){
+			return true;
+		}
+
+		return false;
 	}
 
 	private function InsertUserIntoDatabase($username,$passwordArray) {
@@ -482,11 +522,35 @@ class Users extends System {
 		}
 
 		if(self::UpdateExistingUserData($postData["userID"],$updateData,$withPassword)) {
+			if(self::UpdateUserProfile($postData)){
+				return true;
+			}
+		}
+		
+		return array("error"=>"System error");
+
+	}
+
+	private function UpdateUserProfile($postData) {
+
+		$sql = "UPDATE `profiles`
+				SET 
+					`firstName`= :first,
+					`lastName`= :last
+				WHERE `userID` = :userID";
+		$params = array(
+			"userID" => $postData["userID"],
+			"first" => $postData["firstName"],
+			"last" => $postData["lastName"]
+		);
+
+		$update = $this->DatabaseSystem->dbInsert($sql,$params);
+
+		if($update){
 			return true;
-		} else {
-			return array("error"=>"System error");
 		}
 
+		return false;
 	}
 
 } // End Class Users
