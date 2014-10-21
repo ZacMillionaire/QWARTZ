@@ -1,0 +1,56 @@
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+.tooltip {   
+  position: absolute;           
+  text-align: left;           
+  padding: 12px;
+  font-family: 'Open Sans';
+  color: white;
+  font-size: 1.3rem;                 
+  background: $dark-blue-bg;
+  border-radius: 3px; 
+  border: 0px;      
+  pointer-events: none;         
+}
+.tooltip > .tooltip-header {
+	font-weight: bold;
+  font-size: 1.4rem;
+  padding-bottom: 5px;
+}
+.tooltip > .tooltip-row {
+}
+#monthlyGraphContainer {
+	position: relative;
+}
+
+
+.graph-container {
+  margin-top: -20px;
+}
+
+.graph-header {
+  margin-bottom: 20px;
+}
+#monthlyGraphContainer {
+  background: white;
+  padding: 20px 0;
+  border: 1px solid #ccc;
+}
+#monthlyGraphContainer text {
+  font-size: 1.3rem;
+  color: #777;
+}
+
+#avgWeight {
+  pointer:  cursor;
+}

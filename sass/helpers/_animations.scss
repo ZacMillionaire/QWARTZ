@@ -1,0 +1,57 @@
+/*
+ * CSS Animations
+ * Don't forget to add vendor prefixes!
+ */
+.m-scene .scene_element{
+/*animation-duration*/
+-webkit-animation-duration:0.25s;
+   -moz-animation-duration:0.25s;
+    -ms-animation-duration:0.25s;
+     -o-animation-duration:0.25s;
+        animation-duration:0.25s;
+/*transition-timing-function*/
+-webkit-transition-timing-function:ease-in;
+   -moz-transition-timing-function:ease-in;
+     -o-transition-timing-function:ease-in;
+        transition-timing-function:ease-in;
+-webkit-animation-fill-mode:both;
+-moz-animation-fill-mode:both;
+-o-animation-fill-mode:both;
+animation-fill-mode:both;
+}
+.m-scene .scene_element--fadein{
+/*animation-name*/
+-webkit-animation-name:fadeIn;
+   -moz-animation-name:fadeIn;
+    -ms-animation-name:fadeIn;
+     -o-animation-name:fadeIn;
+        animation-name:fadeIn;
+}
+.m-scene.is-exiting .scene_element{
+/*animation-direction*/
+-webkit-animation-direction:alternate-reverse;
+   -moz-animation-direction:alternate-reverse;
+    -ms-animation-direction:alternate-reverse;
+     -o-animation-direction:alternate-reverse;
+        animation-direction:alternate-reverse;
+}
+/*
+ * Keyframes
+ */
+@keyframes fadeIn{
+0% { opacity:0;
+}
+100%{
+opacity:1;
+}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}

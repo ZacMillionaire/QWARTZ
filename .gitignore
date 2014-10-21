@@ -1,6 +1,5 @@
 
-_*
-_*.*
+
 
 #sass fix hopefully
 !_*.sass
@@ -13,6 +12,8 @@ system_live.php
 *.zip
 qldredsdb.sql
 *.ai
+
+.sass-cache/
 
 
 
