@@ -318,7 +318,7 @@ class Users extends System {
 	} // end GetLoggedInUserList
 
 	public function GetUserList() {
-		$sql = "SELECT * FROM `users`;";
+		$sql = "SELECT * FROM `users` WHERE `deleted` = 0;";
 		$params = null;
 
 		$result = $this->DatabaseSystem->dbQuery($sql,$params);
@@ -480,9 +480,9 @@ class Users extends System {
 
 	}
 
-	public function DeleteUser($userID){
+	public function DeactivateUser($userID){
 
-		$sql = "DELETE FROM `users` WHERE `userID` = :userID;";
+		$sql = "UPDATE `users` SET `deleted` = 1 WHERE `userID` = :userID;";
 		$params = array("userID" => $userID);
 
 		$query = $this->DatabaseSystem->dbQuery($sql,$params);

@@ -4,7 +4,7 @@ require "../system.php";
 
 $Users = new Users();
 
-$createUser = $Users->DeleteUser($_POST["userID"]);
+$createUser = $Users->DeactivateUser($_POST["userID"]);
 
 header("Location: ../../settings.php?a=users");
 
