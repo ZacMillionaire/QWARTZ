@@ -28,7 +28,7 @@ class DataLockSystem extends System {
 
 	public function GetPlayerDataLockStatus($playerID) {
 
-		$sql = "SELECT `lastEditOwner`,`lastEditDateTime` FROM `playerDetails` WHERE `playerID` = :playerID;";
+		$sql = "SELECT `lastEditOwner`,`lastEditDateTime` FROM `playerdetails` WHERE `PlayerID` = :playerID;";
 		$params = array(
 			"playerID" => $playerID
 		);
