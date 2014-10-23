@@ -20,15 +20,7 @@ if(isset($_POST)){
 	}
 }
 
-?>
 
-<div id="table-container">
-	<?php include "search-form.php"; ?>
-</div>
-<div id="search-results-container">
-
-	<div class="search-results-table">
-		<?php 
 			if(!isset($searchResults)){
 		?>
 		<div class="search-error">
@@ -41,44 +33,52 @@ if(isset($_POST)){
 			<h2>No data was found matching your query.</h2>
 		</div>
 		<?php
-			} else {
+			}
 		?>
+<div id="table-container">
+	<?php include "search-form.php"; ?>
+</div>
+<?php if(isset($searchResults) || ($searchResults)) { ?> 
+<div id="search-results-container">
+
+	<div class="search-results-table">
+
 		<table>
 			<tr>
 				<th colspan="5" class="table-title">Search Results</th>
 			</tr>
 			<tr>
-				<th style="text-align:center;">Date</th>
-				<th style="text-align:center;">Player</th>
-				<th style="text-align:center;">Exercises</th>
-				<th style="text-align:center;" colspan="2">Actions</th>
+				<th>Date</th>
+				<th>Player</th>
+				<th>Exercises</th>
+				<th colspan="2">Actions</th>
 			</tr>
 
 			<?php
 				foreach($searchResults as $key => $value) {
 			?>
 			<tr>
-				<td style="text-align:center;">
+				<td>
 					<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 				</td>
-				<td style="text-align:center;">
+				<td>
 					<a href="players.php?a=view&amp;id=<?php echo $value["PlayerID"]; ?>">
 						<?php 
 							echo $value["FirstName"]." ".$value["LastName"];
 						?>
 					</a>
 				</td>
-				<td style="text-align:center;">
+				<td>
 					<?php
 
 						echo $value["ExerciseName"];
 
 					?>
 				</td>
-				<td style="text-align:center;">
+				<td>
 					<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
 				</td>
-				<td style="text-align:center;">
+				<td>
 					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
 				</td>
 			</tr>

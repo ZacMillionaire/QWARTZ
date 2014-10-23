@@ -88,7 +88,7 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 				?>
 			</td>
 			<td style="text-align:center;">
-				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-play"></span>View Test</a>
 				<?php
 					/*
 					this'll probably be a thing next meeting, but I'm commenting it out for now
@@ -104,7 +104,7 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 				<?php
 					} else { */
 				?>
-				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
+				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit Data</a>
 				<?php
 					//}
 				?>

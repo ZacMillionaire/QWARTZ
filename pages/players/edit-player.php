@@ -82,7 +82,7 @@ $playerData = $Data->GetPlayerDetailsByID($playerID);
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button style="width:100%;" type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>Update Player</button>
+				<button style="width:100%;" type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>><span aria-hidden="true" class="icon-checkmark"></span>Update Player</button>
 			</td>
 		</tr>
 	</table>

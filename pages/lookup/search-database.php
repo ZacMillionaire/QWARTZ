@@ -7,23 +7,6 @@ $searchResults = $Search->GeneralSearch($_POST);
 
 ?>
 
-<div id="table-container">
-	<form action="lookup.php?a=search" method="POST">
-	<table>
-		<tr>
-			<th class="table-title" colspan="4">
-				Player Search
-			</th>
-		</tr>
-		<tr>
-			<td>
-				<input style="width: 100%" type="text" name="search" placeholder="Search" />
-			</td>
-		</tr>
-	</table>
-	<button style="width: 100%" class="button" type="submit">Search</button>
-	</form>
-</div>
 <div id="search-results-container">
 
 	<div class="search-results-table">
@@ -45,14 +28,14 @@ $searchResults = $Search->GeneralSearch($_POST);
 			</tr>
 			<?php if(!$value) { ?>
 			<tr>
-				<td style="text-align:center;">
+				<td>
 					No <?php echo $key; ?> Results Found
 				</td>
 			</tr>
 			<?php } ?>
 			<?php foreach($value as $skey => $svalue){ ?>
 			<tr>
-				<td style="text-align:center;">
+				<td>
 					<?php 
 					
 						switch ($key) {
@@ -78,6 +61,23 @@ $searchResults = $Search->GeneralSearch($_POST);
 		?>
 	</div>
 	
+	<div id="search-result-form">
+	<form action="lookup.php?a=search" method="POST">
+	<table>
+		<tr>
+			<th class="table-title" colspan="4">
+				Player Search
+			</th>
+		</tr>
+		<tr>
+			<td>
+				<input style="width: 100%" type="text" name="search" placeholder="Search" />
+			</td>
+		</tr>
+	</table>
+	<button style="width: 100%" class="button" type="submit">Search</button>
+	</form>
+</div>
 </div>
 
 <script type="text/javascript">

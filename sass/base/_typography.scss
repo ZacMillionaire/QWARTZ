@@ -27,6 +27,7 @@ p {
 
 a {
 	text-decoration: none;
+	position: relative;
 	color: $reds;
 }
 
@@ -73,21 +74,4 @@ th, .test-fauxtable-header {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-users:before {
-	content: "\e605";
-}
-.icon-search:before {
-	content: "\e600";
-}
-.icon-cog:before {
-	content: "\e601";
-}
-.icon-dashboard:before {
-	content: "\e604";
-}
-.icon-accessibility:before {
-	content: "\e602";
-}
-.icon-table:before {
-	content: "\e603";
-}
+

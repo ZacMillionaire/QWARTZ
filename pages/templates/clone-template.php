@@ -20,11 +20,11 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 	<div id="new-test-sticky">
 
 		<button id="add-exercise" class="button-small grey">
-			Add Exercise
+			<span aria-hidden="true" class="icon-plus"></span>Add Exercise
 		</button>
 
 		<button id="submit-template-button" class="button right" type="submit">
-			New Template
+			<span aria-hidden="true" class="icon-plus"></span>New Template
 		</button>
 
 	</div>

@@ -5,3 +5,58 @@
 	font-size: 1.8rem;
 	padding: 19px 20px 0 0;
 }
+
+.button span {
+	position: relative;
+	top: 2px;
+	left: 0px;
+	margin-right: -10px;
+	//font-size: 1.3rem;
+	line-height: 0;
+	padding: 19px 20px 0 0;
+}
+
+.button-small span {
+	top: -1px;
+	margin-right: 5px;
+}
+
+.icon-users:before {
+	content: "\e605";
+}
+.icon-search:before {
+	content: "\e600";
+}
+.icon-cog:before {
+	content: "\e601";
+}
+.icon-dashboard:before {
+	content: "\e604";
+}
+.icon-accessibility:before {
+	content: "\e602";
+}
+.icon-table:before {
+	content: "\e603";
+}
+
+.icon-close:before {
+	content: "\e606";
+}
+.icon-checkmark:before {
+	content: "\e607";
+}
+.icon-plus:before {
+	content: "\e608";
+}
+
+.icon-compose:before {
+	content: "\e609";
+}
+
+.icon-pencil:before {
+	content: "\e60a";
+}
+.icon-play:before {
+	content: "\e60b";
+}

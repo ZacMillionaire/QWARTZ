@@ -46,11 +46,11 @@ the user can use later on.
 	<div id="new-test-sticky">
 
 		<button id="add-exercise" class="button-small grey">
-			Add Exercise
+			<span aria-hidden="true" class="icon-plus"></span>Add Exercise
 		</button>
 
 		<button id="submit-template-button" type="submit" class="button right" disabled>
-			Submit Template
+			<span aria-hidden="true" class="icon-checkmark"></span>Submit Template
 		</button>
 
 	</div>

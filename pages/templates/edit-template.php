@@ -19,8 +19,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 <form id="new-fitness-template" action="sys/exec/update-template.php" method="POST">
 	<input type="hidden" value="<?php echo $_GET["id"]; ?>" name="templateUID" />
 	<div id="new-test-sticky">
-		TODO: This template call should be wrapped in another div for sticky styling so it doesn't conflict with others
-		<?php
+				<?php
 
 		    $lockData = $System->GetDataLockSystem()->GetTemplateDataLockStatus($_GET['id']);
 		    $rowUnlocks = strtotime("+5 minutes", strtotime($lockData["lastEditDateTime"]));
@@ -38,11 +37,11 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 		?>
 
 		<button id="add-exercise" class="button-small grey" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>
-			Add Exercise
+			<span aria-hidden="true" class="icon-plus"></span>Add Exercise
 		</button>
 
 		<button id="submit-template-button" class="button right" type="submit" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>
-			Update Template
+			<span aria-hidden="true" class="icon-checkmark"></span>Update Template
 		</button>
 
 	</div>
