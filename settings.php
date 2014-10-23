@@ -57,7 +57,7 @@
             
             <?php if(@$_GET["a"] == "users") { ?>
             <div id="button-area">
-                <a href="settings.php?a=users&amp;m=c" class="button">New User</a>
+                <a href="settings.php?a=users&amp;m=c" class="button"><span aria-hidden="true" class="icon-compose"></span>New User</a>
             </div>
             <?php } ?>
 

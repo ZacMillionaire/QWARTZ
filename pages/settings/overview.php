@@ -10,7 +10,7 @@ $readOnlyDuration = $Data->GetReadOnlyDuration();
 	<form action="sys/exec/update-rep-table.php" method="POST" class="settings-form" >
 		<table>
 			<tr>
-				<th colspan="2">Change Rep Lookup Table</th>
+				<th class="table-title" colspan="2">Change Rep Lookup Table</th>
 			</tr>
 			<tr>
 				<th>Rep Count</th>
@@ -37,7 +37,7 @@ $readOnlyDuration = $Data->GetReadOnlyDuration();
 	<form action="sys/exec/update-readonly-duration.php" method="POST" class="settings-form">
 		<table>
 			<tr>
-				<th colspan="2">Change Read-Only Duration</th>
+				<th colspan="2"  class="table-title">Change Read-Only Duration</th>
 			</tr>
 			<tr>
 				<td colspan="2">Value represents how long a page is marked as read only after being edited be a user. Number indicates the number of minutes required.</td>

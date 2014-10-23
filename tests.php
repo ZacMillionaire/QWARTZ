@@ -43,7 +43,7 @@
             
             <?php if(@$_GET["a"] != "new" && @$_GET["a"] != "edit") { ?>
             <div id="button-area">
-                <a href="tests.php?a=new" class="button">New Test</a>
+                <a href="tests.php?a=new" class="button"><span aria-hidden="true" class="icon-compose"></span>New Test</a>
             </div>
             <?php } ?>
 

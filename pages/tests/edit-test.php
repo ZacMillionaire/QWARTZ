@@ -60,7 +60,7 @@
                 <tr data-input-index="0">
                     <td>
                         <select
-                            style="width:100%"
+                            style="width:100%;"
                             name="players[<?php echo $selectedTest["ExerciseCategoryName"]; ?>][]"
                             data-category-set="<?php echo $selectedTest["ExerciseCategoryName"]; ?>"
                             id="player-name-entry"
@@ -165,7 +165,7 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <button type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>>Update</button>
+                        <button type="submit" class="button" <?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>><span aria-hidden="true" class="icon-checkmark"></span>Update</button>
                     </td>
                 </tr>
             </table>

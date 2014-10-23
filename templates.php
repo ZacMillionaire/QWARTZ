@@ -43,7 +43,7 @@
             
             <?php if(@$_GET["a"] == "saved" || !isset($_GET["a"])) { ?>
             <div id="button-area">
-                <a href="templates.php?a=new" class="button">New Template</a>
+                <a href="templates.php?a=new" class="button"><span aria-hidden="true" class="icon-compose"></span>New Template</a>
             </div>
             <?php } ?>
 

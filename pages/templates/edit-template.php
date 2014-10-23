@@ -155,6 +155,8 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						<?php echo $superset; ?>
 						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
+
+					<span class="superset-prompt">Superset?</span>
 				</th>
 				<td colspan="2">
 					<!--
@@ -360,11 +362,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						data-category-set="<?php echo $key; ?>"
 						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 						><?php echo $exerciseNotes; ?></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					need to add padding around these exercise tables, they're too hard to distinguish apart currently
 				</td>
 			</tr>
 		</table>

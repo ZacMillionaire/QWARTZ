@@ -55,7 +55,6 @@
                 <button class="button" id="login-action" type="submit">Login</button>
     	
             </form>
-            <a href="#" id="login-forgot">Forgot Password?</a>
         </div>
         </div>
 <?php 

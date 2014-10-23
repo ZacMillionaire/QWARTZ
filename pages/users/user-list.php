@@ -19,15 +19,15 @@ $userList = $Users->GetUserList();
 		<table>
 			<tr>
 				<th>Username</th>
-				<th colspan="2">Action</th>
+				<th colspan="2">Actions</th>
 			</tr>
 			<?php
 				foreach($userList as $key => $value){
 			?>
 			<tr id="user-<?php echo $value["username"]; ?>">
-				<td><?php echo $value["username"]; ?></td>
-				<td><a href="settings.php?a=users&amp;m=u&amp;id=<?php echo $value["userID"]; ?>">Edit User</a></td>
-				<td><a href="settings.php?a=users&amp;m=d&amp;id=<?php echo $value["userID"]; ?>">Remove User</a></td>
+				<td class="username"><?php echo $value["username"]; ?></td>
+				<td><a class="button" href="settings.php?a=users&amp;m=u&amp;id=<?php echo $value["userID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit</a>
+					<a class="button" href="settings.php?a=users&amp;m=d&amp;id=<?php echo $value["userID"]; ?>"><span aria-hidden="true" class="icon-close"></span>Remove</a></td>
 			</tr>
 			<?php
 				}

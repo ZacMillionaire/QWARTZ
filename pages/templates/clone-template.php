@@ -128,6 +128,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						data-category-set="<?php echo $key; ?>"
 						<?php echo $superset; ?>
 					/>
+					<span class="superset-prompt">Superset?</span>
 				</th>
 				<td colspan="2">
 					<!--

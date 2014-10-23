@@ -92,6 +92,7 @@ input#category-input {
 #new-test-sticky {
 	padding: 15px 10px 20px 18px;
 	width: inherit;
+	z-index: 5;
 			border: 1px solid white;
 
 		background: #e7e7e7;
@@ -233,4 +234,13 @@ input#category-input {
 
 .search-results-table a {
 	font-size: 1.5rem;
+}
+
+.username {
+	font-size: 1.6rem;
+}
+
+#new-test-sticky #date-picker {
+	display: block;
+	float: left;
 }

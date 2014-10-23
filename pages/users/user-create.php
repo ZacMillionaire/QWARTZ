@@ -51,7 +51,7 @@ $userList = $Users->GetUserList();
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button class="button" type="submit">Create User</button>
+					<button class="button" type="submit"><span aria-hidden="true" class="icon-checkmark"></span>Create User</button>
 					<a class="cancel" href="settings.php?a=users">Cancel</a>
 				</td>
 			</tr>
