@@ -53,7 +53,7 @@ $userData = $Users->GetUserByID($_GET["id"]);
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button class="button" type="submit">Update User</button>
+					<button class="button" type="submit"><span aria-hidden="true" class="icon-checkmark"></span>Update User</button>
 					<a class="cancel" href="settings.php?a=users">Cancel</a>
 				</td>
 			</tr>

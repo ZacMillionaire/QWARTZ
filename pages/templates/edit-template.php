@@ -121,7 +121,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 			</tr>
 		</table>
-		<br/>
+		</div>
 <!-- REPEATING AREA START -->
 
 <?php
@@ -142,6 +142,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 		$exerciseNotes = $value["exerciseNotes"];
 
 ?>
+<div id="table-container">
 		<table id="exercise-table">
 			<tr>
 				<th class="table-title" colspan="1">
@@ -155,6 +156,8 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						<?php echo $superset; ?>
 						<?php echo ($pageReadOnly && !$editOwner) ? "disabled" : ""; ?>
 					/>
+
+					<span class="superset-prompt">Superset?</span>
 				</th>
 				<td colspan="2">
 					<!--
@@ -204,12 +207,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						?>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<th colspan="3">
-
-					Exercise is superset [?] (this could look better)
-				</th>
 			</tr>
 			<tr>
 				<th class="table-title" colspan="1">
@@ -362,14 +359,9 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						><?php echo $exerciseNotes; ?></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3">
-					need to add padding around these exercise tables, they're too hard to distinguish apart currently
-				</td>
-			</tr>
 		</table>
 <!-- REPEATING AREA END -->
-		<br/>
+			</div>
 <?php
 	}
 }
@@ -391,7 +383,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				</td>
 			</tr>
 		</table>
-	</div>
 </form>
 
 <script src="js/fitnessTemplates.js"></script>

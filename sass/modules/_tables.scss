@@ -92,6 +92,7 @@ input#category-input {
 #new-test-sticky {
 	padding: 15px 10px 20px 18px;
 	width: inherit;
+	z-index: 5;
 			border: 1px solid white;
 
 		background: #e7e7e7;
@@ -163,8 +164,7 @@ input#category-input {
 	margin-left: -30px;
 	margin-top: 0;
 	padding: 60px 30px 60px 30px;
-	background-color: white;
-	border: 1px solid #ccc;
+	background-color: #e7e7e7;
 	border-bottom: 5px solid #666677;
 }
 
@@ -233,4 +233,13 @@ input#category-input {
 
 .search-results-table a {
 	font-size: 1.5rem;
+}
+
+.username {
+	font-size: 1.6rem;
+}
+
+#new-test-sticky #date-picker {
+	display: block;
+	float: left;
 }

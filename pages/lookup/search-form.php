@@ -101,6 +101,6 @@
 			</tr>
 	
 		</table>
-		<button style="width: 100%" class="button" type="submit">Lookup</button>
+		<button style="width: 100%" class="button" type="submit"><span aria-hidden="true" class="icon-search"></span>Lookup</button>
 	
 	</form>

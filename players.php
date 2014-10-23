@@ -43,7 +43,7 @@
             
             <?php if(@$_GET["a"] != "new" && @$_GET["a"] != "edit") { ?>
             <div id="button-area">
-                <a href="players.php?a=new" class="button">New Player</a>
+                <a href="players.php?a=new" class="button"><span aria-hidden="true" class="icon-compose"></span>New Player</a>
 
                 <?php
                     if(@$_GET["a"] == "view" && isset($_GET["id"])) {
@@ -61,17 +61,17 @@
                         if($pageReadOnly){
                             if($editOwner){
                 ?>
-                <a href="players.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>" class="button">Edit Player</a>
+                <a href="players.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>" class="button"><span aria-hidden="true" class="icon-pencil"></span>Edit Player</a>
                 <?php
                             } else {
                 ?>
-                <a class="button disabled" style="background:#aaa !important; text-shadow: none;">Edit Player</a>
+                <a class="button disabled" style="background:#aaa !important; text-shadow: none;"><span aria-hidden="true" class="icon-pencil"></span>Edit Player</a>
                 <?php 
                             } // end if owner
                         } else { // page isn't read only
                 ?>
 
-                <a href="players.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>" class="button">Edit Player</a>
+                <a href="players.php?a=edit&amp;id=<?php echo $_GET["id"]; ?>" class="button"><span aria-hidden="true" class="icon-pencil"></span>Edit Player</a>
 
                 <?php
                         } // end if page read only

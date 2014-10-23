@@ -59,10 +59,10 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			<th colspan="5" class="table-title">Previous Tests</th>
 		</tr>
 		<tr>
-			<th style="text-align:center;">Date</th>
-			<th style="text-align:center;">Player</th>
-			<th style="text-align:center;">Exercises</th>
-			<th style="text-align:center;" colspan="2">Actions</th>
+			<th>Date</th>
+			<th>Player</th>
+			<th>Exercises</th>
+			<th colspan="2">Actions</th>
 		</tr>
 		<?php
 			// see line 87
@@ -70,25 +70,25 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			foreach($playerData["testData"] as $key => $value) {
 		?>
 		<tr>
-			<td style="text-align:center;">
+			<td>
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<a href="players.php?a=view&amp;id=<?php echo $value["PlayerID"]; ?>">
 					<?php 
 						echo $value["player_first"]." ".$value["player_last"];
 					?>
 				</a>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<?php
 
 					echo $value["ExerciseName"];
 
 				?>
 			</td>
-			<td style="text-align:center;">
-				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-play"></span>View Test</a>
+			<td>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-eye"></span>View Test</a>
 				<?php
 					/*
 					this'll probably be a thing next meeting, but I'm commenting it out for now
@@ -121,25 +121,25 @@ $playerData = $Players->GetPlayerData($_GET["id"]);
 			<th colspan="3" class="table-title">Related Templates</th>
 		</tr>
 		<tr>
-			<th style="text-align:center;">Title</th>
-			<th style="text-align:center;">Date</th>
-			<th style="text-align:center;">&nbsp;</th>
+			<th>Title</th>
+			<th>Date</th>
+			<th>&nbsp;</th>
 		</tr>
 		<?php
 			foreach($playerData["templateData"] as $key => $value) {
 		?>
 		<tr>
-			<td style="text-align:center;">
+			<td>
 				<?php
 
 					echo $value["title"];
 
 				?>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<?php echo date("d/m/Y",strtotime($value["dateAdded"])); ?>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<a class="button" href="templates.php?a=view&amp;id=<?php echo $value["templateUID"]; ?>">View Template</a>
 			</td>
 		</tr>

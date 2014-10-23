@@ -36,16 +36,16 @@
 			<th colspan="5" class="table-title">Previous Tests: <?php echo date('d/m/Y',$dateStart); ?> - <?php echo date('d/m/Y',$dateEnd); ?></th>
 		</tr>
 		<tr>
-			<th style="text-align:center;">Date</th>
-			<th style="text-align:center;">Logged By</th>
-			<th style="text-align:center;">Exercises</th>
-			<th style="text-align:center;">Actions</th>
+			<th>Date</th>
+			<th>Logged By</th>
+			<th>Exercises</th>
+			<th>Actions</th>
 		</tr>
 		<?php 
 			if($previousTests == null){
 		?>
 		<tr>
-			<td style="text-align:center;" colspan="4">
+			<td colspan="4">
 				No test results to display for this period
 			</td>
 		</tr>
@@ -56,13 +56,13 @@
 			foreach($previousTests as $key => $value) {
 		?>
 		<tr>
-			<td style="text-align:center;">
+			<td>
 				<?php echo date("d/m/Y",strtotime($value["DateEntered"])); ?>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<?php echo $value["author"]; ?>
 			</td>
-			<td style="text-align:center;">
+			<td>
 				<?php
 
 					foreach ($value["exercises"] as $ekey => $evalue) {
@@ -76,8 +76,8 @@
 
 				?>
 			</td>
-			<td style="text-align:center;">
-				<a class="button" href="tests.php?a=view&amp;id=<?php echo $key; ?>">View Test</a>
+			<td>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $key; ?>"><span aria-hidden="true" class="icon-eye"></span>View</a>
 			</td>
 		</tr>
 		<?php	

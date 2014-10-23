@@ -61,7 +61,7 @@
 			?>
         </td>
         <td>
-            <a href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $svalue["playerTestID"]; ?>">Edit</a>
+            <a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $svalue["playerTestID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit</a>
         </td>
     </tr>
 

@@ -76,10 +76,10 @@ if(isset($_POST)){
 					?>
 				</td>
 				<td>
-					<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>">View Test</a>
+					<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-eye"></span>View Test</a>
 				</td>
 				<td>
-					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>">Edit Data</a>
+					<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["playerTestID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit Data</a>
 				</td>
 			</tr>
 			<?php

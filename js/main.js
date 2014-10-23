@@ -8,6 +8,7 @@ if (navigator.userAgent.indexOf('Mac OS X') != -1) {
 
 	// this is so hacky but its the only way to do it with position:fixed!
 	$("#new-test-sticky").sticky({topSpacing:0});
+	$("#main-nav ul").sticky({topSpacing:0});
 	var newWidth = $('#content').width() - 90;
 	$('#new-test-sticky').width(newWidth);
 	

@@ -6,15 +6,15 @@
 		<input type="text" id="date-picker" name="testDate" placeholder="Testing Date" required/>
 
 		<button id="add-row" class="button-small grey">
-			Add Player
+			<span aria-hidden="true" class="icon-plus"></span>Add Player
 		</button>
 
 		<button id="add-category" class="button-small grey">
-			Add Category
+			<span aria-hidden="true" class="icon-plus"></span>Add Category
 		</button>
 
 		<button	id="submit-data"  class="button right" type="submit">
-			Save Test
+			<span aria-hidden="true" class="icon-checkmark"></span>Save Test
 		</button>
 
 	</div>
@@ -22,7 +22,7 @@
 	<div id="table-container">
 		<table>
 			<tr>
-				<th class="table-title" colspan="5">
+				<th class="table-title" colspan="6">
 					<input
 						style="width:100%"
 						type="text"
@@ -36,11 +36,12 @@
 				</th>
 			</tr>
 			<tr>
-				<td>Player</td>
-				<td>Exercise</td>
-				<td>Weight</td>
-				<td>reps</td>
-				<td>Estimated 1RM</td>
+				<th>Player</th>
+				<th>Exercise</th>
+				<th>Weight</th>
+				<th>Reps</th>
+				<th>Est 1RM</th>
+				<th></th>
 			</tr>
 		<?php
 
@@ -51,7 +52,7 @@
 
 		?>
 			<tr data-input-index="<?php echo $gkey; ?>">
-				<td>
+				<td style="width: 25%;">
 					<select
 						style="width:100%"
 						name="players[default][]"
@@ -81,9 +82,8 @@
 
 						?>
 					</select>
-					<button style="width:100%" id="remove-player" data-input-index="<?php echo $gkey; ?>">remove player</button>
 				</td>
-				<td>
+				<td style="width: 30%;">
 					<select
 						style="width:100%"
 						name="exercise[default][]"
@@ -144,6 +144,9 @@
 						data-category-set="default"
 					/>
 				</td>
+				<td>
+					<button class="button" style="width:100%" id="remove-player" data-input-index="<?php echo $gkey; ?>"><span aria-hidden="true" class="icon-close"></span></button>
+
 			</tr>
 		<?php
 			}

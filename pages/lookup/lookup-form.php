@@ -51,8 +51,8 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 				?>
 			</td>
 			<td>
-				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["testID"]; ?>">View Test</a>
-				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>">Edit Data</a>
+				<a class="button" href="tests.php?a=view&amp;id=<?php echo $value["fitnessTestGroupID"]; ?>#test-row-<?php echo $value["testID"]; ?>"><span aria-hidden="true" class="icon-eye"></span>View Test</a>
+				<a class="button" href="tests.php?a=edit&amp;m=single&amp;tid=<?php echo $value["testID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit Data</a>
 			</td>
 		</tr>
 		<?php	

@@ -75,7 +75,7 @@ $searchResults = $Search->GeneralSearch($_POST);
 			</td>
 		</tr>
 	</table>
-	<button style="width: 100%" class="button" type="submit">Search</button>
+	<button style="width: 100%" class="button" type="submit"><span aria-hidden="true" class="icon-search"></span>Search</button>
 	</form>
 </div>
 </div>

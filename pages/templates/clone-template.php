@@ -24,7 +24,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 		</button>
 
 		<button id="submit-template-button" class="button right" type="submit">
-			<span aria-hidden="true" class="icon-plus"></span>New Template
+			<span aria-hidden="true" class="icon-checkmark"></span>Submit Template
 		</button>
 
 	</div>
@@ -128,6 +128,7 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						data-category-set="<?php echo $key; ?>"
 						<?php echo $superset; ?>
 					/>
+					<span class="superset-prompt">Superset?</span>
 				</th>
 				<td colspan="2">
 					<!--
@@ -176,12 +177,6 @@ $exercises = $System->GetDataCollectionSystem()->GetExerciseList();
 						?>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<th colspan="3">
-
-					Exercise is superset [?] (this could look better)
-				</th>
 			</tr>
 			<tr>
 				<th class="table-title" colspan="1">

@@ -6,10 +6,10 @@ $savedTemplates = $System->GetFitnessTemplateSystem()->GetSavedTemplatesList();
 
 <table>
 	<tr>
-		<th style="text-align:center;">Template Name</th>
-		<th style="text-align:center;">Created On</th>
-		<th style="text-align:center;">Author</th>
-		<th style="text-align:center;">Actions</th>
+		<th>Template Name</th>
+		<th>Created On</th>
+		<th>Author</th>
+		<th>Actions</th>
 	</tr>
 
 <?php
@@ -18,19 +18,19 @@ $savedTemplates = $System->GetFitnessTemplateSystem()->GetSavedTemplatesList();
 ?>
 	<tr>
 
-		<td style="text-align:center;" class="saved-template-name">
+		<td class="saved-template-name">
 			<?php echo $value["title"]; ?>
 		</td>
-		<td style="text-align:center;">
+		<td>
 			<?php echo date('d/m/Y',strtotime($value["dateAdded"])); ?>
 		</td>
-		<td style="text-align:center;">
+		<td>
 			<?php echo $value["author"]; ?>
 		</td>
 
-		<td style="text-align:center;" class="saved-template-actions">
-			<a class="button" href="templates.php?a=view&amp;id=<?php echo $value["templateUID"]; ?>">View</a>
-			<a class="button"href="templates.php?a=edit&amp;id=<?php echo $value["templateUID"]; ?>">Edit</a>
+		<td class="saved-template-actions">
+			<a class="button" href="templates.php?a=view&amp;id=<?php echo $value["templateUID"]; ?>"><span aria-hidden="true" class="icon-eye"></span>View</a>
+			<a class="button"href="templates.php?a=edit&amp;id=<?php echo $value["templateUID"]; ?>"><span aria-hidden="true" class="icon-pencil"></span>Edit</a>
 		</td>
 
 	</tr>
